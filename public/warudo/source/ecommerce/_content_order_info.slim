@@ -1,0 +1,138 @@
+.row
+  .col-md-8
+    .order-box
+      .order-details-box
+        .order-main-info
+          span Order #
+          strong KHD8374
+        .order-sub-info
+          span Placed On
+          strong January 14th, 2019
+      .order-controls
+        form.form-inline
+          .form-group
+            label for="" Order Status
+            select.form-control.form-control-sm
+              option Shipped
+              option Pending
+          .form-group
+            label for="" Payment Status
+            select.form-control.form-control-sm
+              option Paid
+              option Pending
+          .form-group
+            button.btn.btn-primary Save Changes
+      .order-items-table
+        .table-responsive
+          table.table.table-lightborder
+            thead
+              tr
+                th colspan="2" Product Info
+                th width="135px" Quantity
+                th colspan="2" Price
+            tbody
+              tr
+                td
+                  .product-image style="background-image: url(img/product7.jpg)"
+                td
+                  .product-name Palissade Cone Chair
+                  .product-details
+                    span Color: 
+                    strong  Gold Coral
+                    .color-box style="background-color: #D4C1A2"
+                td
+                  .quantity-selector
+                    .quantity-input
+                      .input-group
+                        .input-group-prepend.input-group-sm
+                          .input-group-text
+                            .os-icon.os-icon-minus2
+                        input.form-control.form-control-sm type="text" value="2"/
+                        .input-group-append.input-group-sm
+                          .input-group-text
+                            .os-icon.os-icon-plus
+                td.text-md-right
+                  .product-price $329
+                td
+                  a.product-remove-btn href="#"
+                    .os-icon.os-icon-x
+              tr
+                td
+                  .product-image style="background-image: url(img/product8.jpg)"
+                td
+                  .product-name Serassi Living Room Sofa
+                  .product-details
+                    span Designed by Nord Architects
+                td
+                  .quantity-selector
+                    .quantity-input
+                      .input-group
+                        .input-group-prepend.input-group-sm
+                          .input-group-text
+                            .os-icon.os-icon-minus2
+                        input.form-control.form-control-sm type="text" value="1"/
+                        .input-group-append.input-group-sm
+                          .input-group-text
+                            .os-icon.os-icon-plus
+                td.text-md-right
+                  .product-price $1,499
+                td
+                  a.product-remove-btn href="#"
+                    .os-icon.os-icon-x
+      .order-foot
+        .row
+          .col-md-6.mb-4
+            h5 Notes
+            .form-group
+              textarea.form-control placeholder="Enter your notes here..."
+            button.btn.btn-primary Save Notes
+          .col-md-5.offset-md-1
+            h5.order-section-heading Order Summary
+            .order-summary-row
+              .order-summary-label 
+                span Subtotal
+              .order-summary-value $1,568
+            .order-summary-row
+              .order-summary-label 
+                span Shipping
+                strong Next Day Air
+              .order-summary-value $29
+            .order-summary-row
+              .order-summary-label 
+                span Taxes
+                strong VAT 20%
+              .order-summary-value $320
+            .order-summary-row.as-total
+              .order-summary-label 
+                span Total
+              .order-summary-value $2,187
+  .col-md-4
+    .ecommerce-customer-info
+      .ecommerce-customer-main-info
+        .ecc-avatar style="background-image: url(img/avatar1.jpg)"
+        .ecc-name Michael Collins
+      .ecommerce-customer-sub-info
+        .ecc-sub-info-row
+          .sub-info-label Email
+          .sub-info-value
+            a href="#" michael.collins@gmail.com
+        .ecc-sub-info-row
+          .sub-info-label Phone
+          .sub-info-value 839.938.3944
+      .os-tabs-controls
+        ul.nav.nav-tabs
+          li.nav-item
+            a.nav-link.active data-toggle="tab" href="#tab_overview"  Billing
+          li.nav-item
+            a.nav-link data-toggle="tab" href="#tab_sales"  Shipping
+          li.nav-item
+            a.nav-link data-toggle="tab" href="#tab_sales"  Order History
+      .tab-content
+        .ecc-sub-info-row
+          .sub-info-label Address
+          .sub-info-value 1726 Pasadena Drive, apt 726<br/>Los Angeles, CA 97263
+        .ecc-sub-info-row
+          .sub-info-label Payment Method
+          .sub-info-value
+            img src="img/mastercard.png" style="width: auto; height: 40px;" alt=""/
+            span ending 8374

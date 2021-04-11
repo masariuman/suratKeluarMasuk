@@ -1,0 +1,136 @@
+/* height */
+.masariuman-height103px {
+    height: 103px !important;
+}
+
+
+/* background color */
+.masariuman-bgcolorffffff {
+    background-color: #ffffff !important;
+}
+
+/* margin left */
+.masariuman-marginleft30px {
+    margin-left: 30px !important;
+}
+
+/* font size */
+.masariuman-titlecontent {
+    margin: 0 1rem 0 0 !important;
+    font-size: 50px !important;
+}
+
+
+.masariuman-bold {
+    font-weight: bold;
+}
+
+.masariuman-textleft {
+    text-align: left !important;
+}
+
+.masariuman-active {
+    background-color: #1b55e2;
+}
+.masariuman-active .icon-w{
+    color: #ffffff !important;
+}
+
+
+.masariuman-footer {
+    height: 70px;
+    justify-content: center;
+}
+
+.masariuman-minheight100vh {
+    min-height: 100vh;
+}
+
+
+.masariuman-deleteRuangan {
+    font-weight: bold;
+    color: red;
+    font-size: xx-large;
+}
+
+
+.masariuman-width50percent{
+    width: 50%;
+}
+
+
+.masariuman-width30percent{
+    width: 30%;
+}
+.masariuman-width40percent{
+    width: 40%;
+}
+
+.masariuman-width100percent{
+    width: 100%;
+}
+
+
+.masariuman-photoProfile {
+    border: 12px ridge #1C6EA4;
+    border-radius: 36px;
+    margin: auto;
+    height: 500px;
+    width: 300px;
+    background-size: cover;
+}
+
+
+.masariuman-nameNip {
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    /* color: #000000; */
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.masariuman-tdBgBlack{
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    width: 40%;
+}
+
+.masariuman-verticalAlignBaseline{
+    vertical-align: baseline;
+}
+
+.masariuman-titleTable {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 40px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    /* color: #000000; */
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: capitalize;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.masariuman-width1000px {
+    width: 1000px;
+}
+
+@media (min-width: 992px) {
+    .masariuman-maxWidth1300px {
+        max-width: 1300px;
+    }
+}
+
+
+body.color-scheme-dark .table th, body.color-scheme-dark .table td, .content-panel.color-scheme-dark .table th, .content-panel.color-scheme-dark .table td { color: #fff; }
+

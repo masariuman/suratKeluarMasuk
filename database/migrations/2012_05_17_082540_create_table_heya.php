@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserRolesTable extends Migration
+class CreateTableHeya extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class UserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('userRoles', function (Blueprint $table) {
+        Schema::create('heya', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('desc')->nullable();
+            $table->string('rinku')->nullable();
+            $table->string('heyaMei')->nullable();
+            $table->enum('sutattsu', ['1', '0'])->default('1');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class UserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userRoles');
+        Schema::dropIfExists('heya');
     }
 }

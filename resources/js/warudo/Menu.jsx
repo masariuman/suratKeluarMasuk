@@ -81,7 +81,29 @@ class Menu extends Component {
                     <li className="sub-header">
                         <span>Layouts</span>
                     </li>
-                    <li id="menu">
+                    <li className=" has-sub-menu">
+                        <NavLink
+                            activeClassName="masariuman-active"
+                            to={`/`}
+                        >
+                            <div className="icon-w">
+                                <div className="os-icon os-icon-layout"></div>
+                            </div>
+                            <span>Dashboard</span>
+                        </NavLink>
+                        <div className="sub-menu-w">
+                            <div className="sub-menu-header masariuman_colorWhite">
+                                DASHBOARD
+                            </div>
+                            <div className="sub-menu-icon">
+                                <i className="os-icon os-icon-layout"></i>
+                            </div>
+                            <div className="sub-menu-i masariuman_menuDescription">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                        </div>
+                    </li>
+                    {/* <li id="menu">
                         <NavLink
                             exact
                             activeClassName="masariuman-active"
@@ -91,7 +113,7 @@ class Menu extends Component {
                                 <div className="os-icon os-icon-layout"></div>
                             </div>
                             <span>Dashboard</span>
-                        </NavLink>
+                        </NavLink> */}
                         {/* <div className="sub-menu-w">
                             <div className="sub-menu-header">
                                 Dashboard
@@ -110,17 +132,28 @@ class Menu extends Component {
                                 </ul>
                             </div>
                         </div> */}
-                    </li>
+                    {/* </li> */}
                     <li className=" has-sub-menu">
                         <NavLink
                             activeClassName="masariuman-active"
                             to={`/surat-masuk`}
                         >
                             <div className="icon-w">
-                                <div className="os-icon os-icon-book"></div>
+                                <div className="os-icon os-icon-mail"></div>
                             </div>
                             <span>Surat Masuk</span>
                         </NavLink>
+                        <div className="sub-menu-w">
+                            <div className="sub-menu-header masariuman_colorWhite">
+                                SURAT MASUK
+                            </div>
+                            <div className="sub-menu-icon">
+                                <i className="os-icon os-icon-mail"></i>
+                            </div>
+                            <div className="sub-menu-i masariuman_menuDescription">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                        </div>
                     </li>
                     <li className=" has-sub-menu">
                         <NavLink
@@ -128,10 +161,43 @@ class Menu extends Component {
                             to={`/surat-keluar`}
                         >
                             <div className="icon-w">
-                                <div className="os-icon os-icon-book"></div>
+                                <div className="os-icon os-icon-email-forward"></div>
                             </div>
                             <span>Surat Keluar</span>
                         </NavLink>
+                        <div className="sub-menu-w">
+                            <div className="sub-menu-header masariuman_colorWhite">
+                                SURAT KELUAR
+                            </div>
+                            <div className="sub-menu-icon">
+                                <i className="os-icon os-icon-email-forward"></i>
+                            </div>
+                            <div className="sub-menu-i masariuman_menuDescription">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                        </div>
+                    </li>
+                    <li className=" has-sub-menu">
+                        <NavLink
+                            activeClassName="masariuman-active"
+                            to={`/user`}
+                        >
+                            <div className="icon-w">
+                                <div className="os-icon os-icon-users"></div>
+                            </div>
+                            <span>User</span>
+                        </NavLink>
+                        <div className="sub-menu-w">
+                            <div className="sub-menu-header masariuman_colorWhite">
+                                USER
+                            </div>
+                            <div className="sub-menu-icon">
+                                <i className="os-icon os-icon-users"></i>
+                            </div>
+                            <div className="sub-menu-i masariuman_menuDescription">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

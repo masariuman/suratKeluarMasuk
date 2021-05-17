@@ -31,97 +31,97 @@ class DashboardIndex extends Component {
         };
     }
 
-    getData() {
-        this.setState({
-            loading: true
-        });
-        axios
-            .get("/translation/data")
-            .then(response => {
-                // console.log(response);
-                this.setState({
-                    total: response.data.data.total,
-                    data: response.data.data.dataPerDay,
-                    date: response.data.data.visitor,
-                    totalVisitors: response.data.data.totalVisitors,
-                    totalNovels: response.data.data.totalNovels,
-                    totalPosts: response.data.data.totalPosts,
-                    totalGenres: response.data.data.totalGenres,
-                    totalTags: response.data.data.totalTags,
-                    totalFollowers: response.data.data.totalFollowers,
-                    loading: false
-                });
-                // console.log(this.state);
-                if ($("#translationChart").length) {
-                    var translationChart = $("#translationChart"); // line chart data
+    // getData() {
+    //     this.setState({
+    //         loading: true
+    //     });
+    //     axios
+    //         .get("/translation/data")
+    //         .then(response => {
+    //             // console.log(response);
+    //             this.setState({
+    //                 total: response.data.data.total,
+    //                 data: response.data.data.dataPerDay,
+    //                 date: response.data.data.visitor,
+    //                 totalVisitors: response.data.data.totalVisitors,
+    //                 totalNovels: response.data.data.totalNovels,
+    //                 totalPosts: response.data.data.totalPosts,
+    //                 totalGenres: response.data.data.totalGenres,
+    //                 totalTags: response.data.data.totalTags,
+    //                 totalFollowers: response.data.data.totalFollowers,
+    //                 loading: false
+    //             });
+    //             // console.log(this.state);
+    //             if ($("#translationChart").length) {
+    //                 var translationChart = $("#translationChart"); // line chart data
 
-                    var lineData = {
-                      labels: this.state.date,
-                      datasets: [{
-                        label: "Total Pengunjung",
-                        fill: false,
-                        lineTension: 0.3,
-                        backgroundColor: "#fff",
-                        borderColor: "#047bf8",
-                        borderCapStyle: 'butt',
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor: "#141E41",
-                        pointBorderWidth: 3,
-                        pointHoverRadius: 10,
-                        pointHoverBackgroundColor: "#FC2055",
-                        pointHoverBorderColor: "#fff",
-                        pointHoverBorderWidth: 3,
-                        pointRadius: 5,
-                        pointHitRadius: 10,
-                        data: this.state.data,
-                        spanGaps: false,
-                        responsive: true
-                      }]
-                    }; // line chart init
+    //                 var lineData = {
+    //                   labels: this.state.date,
+    //                   datasets: [{
+    //                     label: "Total Pengunjung",
+    //                     fill: false,
+    //                     lineTension: 0.3,
+    //                     backgroundColor: "#fff",
+    //                     borderColor: "#047bf8",
+    //                     borderCapStyle: 'butt',
+    //                     borderDash: [],
+    //                     borderDashOffset: 0.0,
+    //                     borderJoinStyle: 'miter',
+    //                     pointBorderColor: "#fff",
+    //                     pointBackgroundColor: "#141E41",
+    //                     pointBorderWidth: 3,
+    //                     pointHoverRadius: 10,
+    //                     pointHoverBackgroundColor: "#FC2055",
+    //                     pointHoverBorderColor: "#fff",
+    //                     pointHoverBorderWidth: 3,
+    //                     pointRadius: 5,
+    //                     pointHitRadius: 10,
+    //                     data: this.state.data,
+    //                     spanGaps: false,
+    //                     responsive: true
+    //                   }]
+    //                 }; // line chart init
 
-                    var mytranslationChart = new Chart(translationChart, {
-                      type: 'line',
-                      data: lineData,
-                      options: {
-                        legend: {
-                          display: false
-                        },
-                        scales: {
-                          xAxes: [{
-                            ticks: {
-                              fontSize: '11',
-                              fontColor: '#969da5'
-                            },
-                            gridLines: {
-                              color: 'rgba(0,0,0,0.05)',
-                              zeroLineColor: 'rgba(0,0,0,0.05)'
-                            }
-                          }],
-                          yAxes: [{
-                            display: false,
-                            ticks: {
-                              beginAtZero: true
-                            }
-                          }]
-                        }
-                      }
-                    });
-                  } // init donut chart if element exists
-                  $('#petunjuk').on('click',function() {
-                    var enjoyhint_instance = new EnjoyHint({});
-                    var enjoyhint_script_steps = [
-                    {
-                        'next #test' : 'Click the "New" button to start creating your project'
-                    }
-                    ];
-                    enjoyhint_instance.set(enjoyhint_script_steps);
-                    enjoyhint_instance.run();
-                });
-            });
-    }
+    //                 var mytranslationChart = new Chart(translationChart, {
+    //                   type: 'line',
+    //                   data: lineData,
+    //                   options: {
+    //                     legend: {
+    //                       display: false
+    //                     },
+    //                     scales: {
+    //                       xAxes: [{
+    //                         ticks: {
+    //                           fontSize: '11',
+    //                           fontColor: '#969da5'
+    //                         },
+    //                         gridLines: {
+    //                           color: 'rgba(0,0,0,0.05)',
+    //                           zeroLineColor: 'rgba(0,0,0,0.05)'
+    //                         }
+    //                       }],
+    //                       yAxes: [{
+    //                         display: false,
+    //                         ticks: {
+    //                           beginAtZero: true
+    //                         }
+    //                       }]
+    //                     }
+    //                   }
+    //                 });
+    //               } // init donut chart if element exists
+    //               $('#petunjuk').on('click',function() {
+    //                 var enjoyhint_instance = new EnjoyHint({});
+    //                 var enjoyhint_script_steps = [
+    //                 {
+    //                     'next #test' : 'Click the "New" button to start creating your project'
+    //                 }
+    //                 ];
+    //                 enjoyhint_instance.set(enjoyhint_script_steps);
+    //                 enjoyhint_instance.run();
+    //             });
+    //         });
+    // }
 
     changeGetData(e) {
         axios
@@ -200,7 +200,10 @@ class DashboardIndex extends Component {
     }
 
     componentDidMount() {
-        this.getData();
+        // this.getData();
+        this.setState({
+            loading: false
+        });
     }
 
     render() {

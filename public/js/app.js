@@ -2129,29 +2129,110 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
       loading: true
     };
     return _this;
-  }
+  } // getData() {
+  //     this.setState({
+  //         loading: true
+  //     });
+  //     axios
+  //         .get("/translation/data")
+  //         .then(response => {
+  //             // console.log(response);
+  //             this.setState({
+  //                 total: response.data.data.total,
+  //                 data: response.data.data.dataPerDay,
+  //                 date: response.data.data.visitor,
+  //                 totalVisitors: response.data.data.totalVisitors,
+  //                 totalNovels: response.data.data.totalNovels,
+  //                 totalPosts: response.data.data.totalPosts,
+  //                 totalGenres: response.data.data.totalGenres,
+  //                 totalTags: response.data.data.totalTags,
+  //                 totalFollowers: response.data.data.totalFollowers,
+  //                 loading: false
+  //             });
+  //             // console.log(this.state);
+  //             if ($("#translationChart").length) {
+  //                 var translationChart = $("#translationChart"); // line chart data
+  //                 var lineData = {
+  //                   labels: this.state.date,
+  //                   datasets: [{
+  //                     label: "Total Pengunjung",
+  //                     fill: false,
+  //                     lineTension: 0.3,
+  //                     backgroundColor: "#fff",
+  //                     borderColor: "#047bf8",
+  //                     borderCapStyle: 'butt',
+  //                     borderDash: [],
+  //                     borderDashOffset: 0.0,
+  //                     borderJoinStyle: 'miter',
+  //                     pointBorderColor: "#fff",
+  //                     pointBackgroundColor: "#141E41",
+  //                     pointBorderWidth: 3,
+  //                     pointHoverRadius: 10,
+  //                     pointHoverBackgroundColor: "#FC2055",
+  //                     pointHoverBorderColor: "#fff",
+  //                     pointHoverBorderWidth: 3,
+  //                     pointRadius: 5,
+  //                     pointHitRadius: 10,
+  //                     data: this.state.data,
+  //                     spanGaps: false,
+  //                     responsive: true
+  //                   }]
+  //                 }; // line chart init
+  //                 var mytranslationChart = new Chart(translationChart, {
+  //                   type: 'line',
+  //                   data: lineData,
+  //                   options: {
+  //                     legend: {
+  //                       display: false
+  //                     },
+  //                     scales: {
+  //                       xAxes: [{
+  //                         ticks: {
+  //                           fontSize: '11',
+  //                           fontColor: '#969da5'
+  //                         },
+  //                         gridLines: {
+  //                           color: 'rgba(0,0,0,0.05)',
+  //                           zeroLineColor: 'rgba(0,0,0,0.05)'
+  //                         }
+  //                       }],
+  //                       yAxes: [{
+  //                         display: false,
+  //                         ticks: {
+  //                           beginAtZero: true
+  //                         }
+  //                       }]
+  //                     }
+  //                   }
+  //                 });
+  //               } // init donut chart if element exists
+  //               $('#petunjuk').on('click',function() {
+  //                 var enjoyhint_instance = new EnjoyHint({});
+  //                 var enjoyhint_script_steps = [
+  //                 {
+  //                     'next #test' : 'Click the "New" button to start creating your project'
+  //                 }
+  //                 ];
+  //                 enjoyhint_instance.set(enjoyhint_script_steps);
+  //                 enjoyhint_instance.run();
+  //             });
+  //         });
+  // }
+
 
   _createClass(DashboardIndex, [{
-    key: "getData",
-    value: function getData() {
+    key: "changeGetData",
+    value: function changeGetData(e) {
       var _this2 = this;
 
-      this.setState({
-        loading: true
-      });
-      axios.get("/translation/data").then(function (response) {
+      axios.post("/translation/data", {
+        day: e
+      }).then(function (response) {
         // console.log(response);
         _this2.setState({
           total: response.data.data.total,
           data: response.data.data.dataPerDay,
-          date: response.data.data.visitor,
-          totalVisitors: response.data.data.totalVisitors,
-          totalNovels: response.data.data.totalNovels,
-          totalPosts: response.data.data.totalPosts,
-          totalGenres: response.data.data.totalGenres,
-          totalTags: response.data.data.totalTags,
-          totalFollowers: response.data.data.totalFollowers,
-          loading: false
+          date: response.data.data.visitor
         }); // console.log(this.state);
 
 
@@ -2180,92 +2261,6 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
               pointRadius: 5,
               pointHitRadius: 10,
               data: _this2.state.data,
-              spanGaps: false,
-              responsive: true
-            }]
-          }; // line chart init
-
-          var mytranslationChart = new Chart(translationChart, {
-            type: 'line',
-            data: lineData,
-            options: {
-              legend: {
-                display: false
-              },
-              scales: {
-                xAxes: [{
-                  ticks: {
-                    fontSize: '11',
-                    fontColor: '#969da5'
-                  },
-                  gridLines: {
-                    color: 'rgba(0,0,0,0.05)',
-                    zeroLineColor: 'rgba(0,0,0,0.05)'
-                  }
-                }],
-                yAxes: [{
-                  display: false,
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }]
-              }
-            }
-          });
-        } // init donut chart if element exists
-
-
-        $('#petunjuk').on('click', function () {
-          var enjoyhint_instance = new EnjoyHint({});
-          var enjoyhint_script_steps = [{
-            'next #test': 'Click the "New" button to start creating your project'
-          }];
-          enjoyhint_instance.set(enjoyhint_script_steps);
-          enjoyhint_instance.run();
-        });
-      });
-    }
-  }, {
-    key: "changeGetData",
-    value: function changeGetData(e) {
-      var _this3 = this;
-
-      axios.post("/translation/data", {
-        day: e
-      }).then(function (response) {
-        // console.log(response);
-        _this3.setState({
-          total: response.data.data.total,
-          data: response.data.data.dataPerDay,
-          date: response.data.data.visitor
-        }); // console.log(this.state);
-
-
-        if ($("#translationChart").length) {
-          var translationChart = $("#translationChart"); // line chart data
-
-          var lineData = {
-            labels: _this3.state.date,
-            datasets: [{
-              label: "Total Pengunjung",
-              fill: false,
-              lineTension: 0.3,
-              backgroundColor: "#fff",
-              borderColor: "#047bf8",
-              borderCapStyle: 'butt',
-              borderDash: [],
-              borderDashOffset: 0.0,
-              borderJoinStyle: 'miter',
-              pointBorderColor: "#fff",
-              pointBackgroundColor: "#141E41",
-              pointBorderWidth: 3,
-              pointHoverRadius: 10,
-              pointHoverBackgroundColor: "#FC2055",
-              pointHoverBorderColor: "#fff",
-              pointHoverBorderWidth: 3,
-              pointRadius: 5,
-              pointHitRadius: 10,
-              data: _this3.state.data,
               spanGaps: false
             }]
           }; // line chart init
@@ -2306,7 +2301,10 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.getData();
+      // this.getData();
+      this.setState({
+        loading: false
+      });
     }
   }, {
     key: "render",
@@ -4351,10 +4349,9 @@ var Menu = /*#__PURE__*/function (_Component) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
               children: "Layouts"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-            id: "menu",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
-              exact: true,
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+            className: " has-sub-menu",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
               activeClassName: "masariuman-active",
               to: "/",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -4365,35 +4362,105 @@ var Menu = /*#__PURE__*/function (_Component) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
                 children: "Dashboard"
               })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "sub-menu-w",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-header masariuman_colorWhite",
+                children: "DASHBOARD"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-icon",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                  className: "os-icon os-icon-layout"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-i masariuman_menuDescription",
+                children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
             className: " has-sub-menu",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
               activeClassName: "masariuman-active",
               to: "/surat-masuk",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
                 className: "icon-w",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-                  className: "os-icon os-icon-book"
+                  className: "os-icon os-icon-mail"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
                 children: "Surat Masuk"
               })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "sub-menu-w",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-header masariuman_colorWhite",
+                children: "SURAT MASUK"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-icon",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                  className: "os-icon os-icon-mail"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-i masariuman_menuDescription",
+                children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
             className: " has-sub-menu",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
               activeClassName: "masariuman-active",
               to: "/surat-keluar",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
                 className: "icon-w",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-                  className: "os-icon os-icon-book"
+                  className: "os-icon os-icon-email-forward"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
                 children: "Surat Keluar"
               })]
-            })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "sub-menu-w",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-header masariuman_colorWhite",
+                children: "SURAT KELUAR"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-icon",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                  className: "os-icon os-icon-email-forward"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-i masariuman_menuDescription",
+                children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+            className: " has-sub-menu",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+              activeClassName: "masariuman-active",
+              to: "/user",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "icon-w",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                  className: "os-icon os-icon-users"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                children: "User"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "sub-menu-w",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-header masariuman_colorWhite",
+                children: "USER"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-icon",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                  className: "os-icon os-icon-users"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "sub-menu-i masariuman_menuDescription",
+                children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              })]
+            })]
           })]
         })]
       });

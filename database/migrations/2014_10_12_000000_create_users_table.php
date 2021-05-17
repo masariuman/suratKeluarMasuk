@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('juugyouinBangou')->nullable();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('yuubaaMei')->nullable();
+            $table->string('yuuzaaMei')->nullable();
             $table->string('sashin')->nullable();
             $table->enum('reberu', ['2', '1', '0'])->default('2')->comment('2 = bkn pengurus, 1 = admin ruangan, 0 = super admin');
             $table->unsignedBigInteger('heya_id');

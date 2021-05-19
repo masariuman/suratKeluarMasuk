@@ -19,15 +19,15 @@ class UuzaaController extends Controller
     {
         //
         $pagination = 5;
-        $novel = Uuzaa::where("status", "1")->orderBy("id", "DESC")->paginate($pagination);
-        $count = $novel->CurrentPage() * $pagination - ($pagination - 1);
-        foreach ($novel as $novels) {
-            $novels['nomor'] = $count;
+        $data = Uuzaa::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
             $count++;
         }
         // dd($gets);
         return response()->json([
-            'data' => $novel
+            'data' => $data
         ]);
     }
 

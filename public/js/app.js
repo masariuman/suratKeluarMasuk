@@ -4589,6 +4589,8 @@ var User = /*#__PURE__*/function (_Component) {
     _this.modalUbah = _this.modalUbah.bind(_assertThisInitialized(_this));
     _this.handleChangeCari = _this.handleChangeCari.bind(_assertThisInitialized(_this));
     _this.handleChangeHeya = _this.handleChangeHeya.bind(_assertThisInitialized(_this));
+    _this.handleChangeName = _this.handleChangeName.bind(_assertThisInitialized(_this));
+    _this.handleChangeNip = _this.handleChangeNip.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -4794,14 +4796,16 @@ var User = /*#__PURE__*/function (_Component) {
       this.setState({
         loading: true
       });
-      axios.get("/uuzaa").then(function (response) {
-        _this8.setState({
-          // data: response.data.deeta_data.data,
-          loading: false // activePage: response.data.deeta_data.current_page,
-          // itemsCountPerPage: response.data.deeta_data.per_page,
-          // totalItemsCount: response.data.deeta_data.total,
-          // pageRangeDisplayed: 10
+      axios.get("/kanrisha/uuzaa/deeta").then(function (response) {
+        console.log(response.data.data.data);
 
+        _this8.setState({
+          data: response.data.data.data,
+          loading: false,
+          activePage: response.data.deeta_data.current_page,
+          itemsCountPerPage: response.data.deeta_data.per_page,
+          totalItemsCount: response.data.deeta_data.total,
+          pageRangeDisplayed: 10
         });
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
@@ -4880,13 +4884,13 @@ var User = /*#__PURE__*/function (_Component) {
             scope: "row",
             children: data.nomor
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: "a"
+            children: data.juugyouinBangou
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: "b"
+            children: data.name
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: "c"
+            children: data.heya_id
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: "d"
+            children: data.reberu
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               "data-target": "#editModal",
@@ -4902,7 +4906,7 @@ var User = /*#__PURE__*/function (_Component) {
               children: "Delete"
             })]
           })]
-        }, data.id);
+        }, data.rinku);
       });
     }
   }, {

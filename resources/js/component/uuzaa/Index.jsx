@@ -32,6 +32,8 @@ class User extends Component {
         this.modalUbah = this.modalUbah.bind(this);
         this.handleChangeCari = this.handleChangeCari.bind(this);
         this.handleChangeHeya = this.handleChangeHeya.bind(this);
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChangeNip = this.handleChangeNip.bind(this);
     }
 
     handleChangeHeya(e) {
@@ -228,15 +230,16 @@ class User extends Component {
             loading: true
         });
         axios
-            .get("/uuzaa")
+            .get("/kanrisha/uuzaa/deeta")
             .then(response => {
+                console.log(response.data.data.data);
                 this.setState({
-                    // data: response.data.deeta_data.data,
+                    data: response.data.data.data,
                     loading: false,
-                    // activePage: response.data.deeta_data.current_page,
-                    // itemsCountPerPage: response.data.deeta_data.per_page,
-                    // totalItemsCount: response.data.deeta_data.total,
-                    // pageRangeDisplayed: 10
+                    activePage: response.data.deeta_data.current_page,
+                    itemsCountPerPage: response.data.deeta_data.per_page,
+                    totalItemsCount: response.data.deeta_data.total,
+                    pageRangeDisplayed: 10
                 });
             })
             .catch(error => {
@@ -294,12 +297,12 @@ class User extends Component {
     renderData() {
         return !this.state.data.length ? <tr><td colSpan="6" className="text-center">Data Tidak Ditemukan</td></tr> :
             this.state.data.map(data => (
-                <tr key={data.id}>
+                <tr key={data.rinku}>
                     <th scope="row">{data.nomor}</th>
-                    <td>a</td>
-                    <td>b</td>
-                    <td>c</td>
-                    <td>d</td>
+                    <td>{data.juugyouinBangou}</td>
+                    <td>{data.name}</td>
+                    <td>{data.heya_id}</td>
+                    <td>{data.reberu}</td>
                     <td>
                         <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.url)}>Edit</button>
                         <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.url)}>Delete</button>

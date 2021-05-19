@@ -198,7 +198,7 @@ class Menu extends Component {
                             <div className="sub-menu-i">
                                 <ul className="sub-menu">
                                     <li>
-                                        <Link to={`/kanrisha/uuzaa `}>
+                                        <Link to={`/kanrisha/uuzaa`}>
                                             <i className="os-icon os-icon-users"></i> &nbsp;&nbsp;&nbsp;User
                                         </Link>
                                     </li>

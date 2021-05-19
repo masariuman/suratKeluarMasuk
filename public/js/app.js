@@ -4570,6 +4570,10 @@ var User = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       data: [],
+      heya: [],
+      heyaMei: "",
+      nip: "",
+      name: "",
       dataEditInput: "",
       cari: "",
       url: null,
@@ -4584,10 +4588,32 @@ var User = /*#__PURE__*/function (_Component) {
     _this.modalTambah = _this.modalTambah.bind(_assertThisInitialized(_this));
     _this.modalUbah = _this.modalUbah.bind(_assertThisInitialized(_this));
     _this.handleChangeCari = _this.handleChangeCari.bind(_assertThisInitialized(_this));
+    _this.handleChangeHeya = _this.handleChangeHeya.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(User, [{
+    key: "handleChangeHeya",
+    value: function handleChangeHeya(e) {
+      this.setState({
+        heyaMei: e.target.value
+      });
+    }
+  }, {
+    key: "handleChangeName",
+    value: function handleChangeName(e) {
+      this.setState({
+        name: e.target.value
+      });
+    }
+  }, {
+    key: "handleChangeNip",
+    value: function handleChangeNip(e) {
+      this.setState({
+        nip: e.target.value
+      });
+    }
+  }, {
     key: "handleChangeCari",
     value: function handleChangeCari(e) {
       var _this2 = this;
@@ -4689,12 +4715,16 @@ var User = /*#__PURE__*/function (_Component) {
       this.setState({
         loading: true
       });
-      axios.post("/masariuman_tag", {
-        create: this.state.create
+      axios.post("/kanrisha/uuzaa/deeta", {
+        heyaMei: this.state.heyaMei,
+        nip: this.state.nip,
+        name: this.state.name
       }).then(function (response) {
         _this5.setState({
-          data: [response.data.deeta_data].concat(_toConsumableArray(_this5.state.data)),
-          create: "",
+          data: [response.data.data].concat(_toConsumableArray(_this5.state.data)),
+          heyaMei: "",
+          nip: "",
+          name: "",
           loading: false
         });
 
@@ -4745,15 +4775,27 @@ var User = /*#__PURE__*/function (_Component) {
       }); // console.log(this.state.create);
     }
   }, {
+    key: "getHeya",
+    value: function getHeya() {
+      var _this7 = this;
+
+      axios.get("/kanrisha/uuzaa/deeta/create").then(function (response) {
+        _this7.setState({
+          heya: response.data.data.heya,
+          heyaMei: response.data.data.heya[0].rinku
+        });
+      });
+    }
+  }, {
     key: "getData",
     value: function getData() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.setState({
         loading: true
       });
       axios.get("/uuzaa").then(function (response) {
-        _this7.setState({
+        _this8.setState({
           // data: response.data.deeta_data.data,
           loading: false // activePage: response.data.deeta_data.current_page,
           // itemsCountPerPage: response.data.deeta_data.per_page,
@@ -4764,7 +4806,7 @@ var User = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
 
-        _this7.setState({
+        _this8.setState({
           loading: false
         });
       });
@@ -4772,13 +4814,13 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handlePageChange",
     value: function handlePageChange(pageNumber) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.setState({
         loading: true
       });
       axios.get('/masariuman_tag?page=' + pageNumber).then(function (response) {
-        _this8.setState({
+        _this9.setState({
           data: response.data.deeta_data.data,
           loading: false,
           activePage: response.data.deeta_data.current_page,
@@ -4789,7 +4831,7 @@ var User = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
 
-        _this8.setState({
+        _this9.setState({
           loading: false
         });
       });
@@ -4804,16 +4846,27 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.getData(); // console.log(this.state.tag);
+      this.getData();
+      this.getHeya(); // console.log(this.state.tag);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {// this.getTag();
     }
   }, {
+    key: "renderSelect",
+    value: function renderSelect() {
+      return this.state.heya.map(function (albayanat) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+          value: albayanat.rinku,
+          children: albayanat.heyaMei
+        }, albayanat.rinku);
+      });
+    }
+  }, {
     key: "renderData",
     value: function renderData() {
-      var _this9 = this;
+      var _this10 = this;
 
       return !this.state.data.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -4840,12 +4893,12 @@ var User = /*#__PURE__*/function (_Component) {
               "data-toggle": "modal",
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
               type: "button",
-              onClick: _this9.handleEditButton.bind(_this9, data.url),
+              onClick: _this10.handleEditButton.bind(_this10, data.url),
               children: "Edit"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
               type: "button",
-              onClick: _this9.handleDeleteButton.bind(_this9, data.url),
+              onClick: _this10.handleDeleteButton.bind(_this10, data.url),
               children: "Delete"
             })]
           })]
@@ -4903,8 +4956,8 @@ var User = /*#__PURE__*/function (_Component) {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
+                          onChange: this.handleChangeNip,
+                          value: this.state.nip,
                           title: "NIP User",
                           placeholder: "Masukkan NIP Baru..",
                           type: "text",
@@ -4913,8 +4966,8 @@ var User = /*#__PURE__*/function (_Component) {
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
+                          onChange: this.handleChangeName,
+                          value: this.state.name,
                           title: "Nama User",
                           placeholder: "Masukkan Nama User Baru..",
                           type: "text",
@@ -4922,13 +4975,11 @@ var User = /*#__PURE__*/function (_Component) {
                         })
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
-                          title: "BIDANG",
-                          placeholder: "BIDANG..",
-                          type: "text",
-                          className: "form-control"
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("select", {
+                          value: this.state.heyaMei,
+                          onChange: this.handleChangeHeya,
+                          className: "form-control",
+                          children: this.renderSelect()
                         })
                       })]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -5790,7 +5841,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                   className: "sub-menu",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-                      to: "/kanrisha/uuzaa ",
+                      to: "/kanrisha/uuzaa",
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
                         className: "os-icon os-icon-users"
                       }), " \xA0\xA0\xA0User"]

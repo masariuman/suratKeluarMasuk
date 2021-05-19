@@ -17,14 +17,14 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('rinku')->nullable();
             $table->string('juugyouinBangou')->nullable();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name')->nullable();
+            $table->string('email')->unique()->nullable();;
             $table->string('yuuzaaMei')->nullable();
-            $table->string('sashin')->nullable();
+            $table->text('sashin')->nullable();
             $table->enum('reberu', ['3', '2', '1', '0'])->default('3')->comment('3 = Normal User, 2 = Admin Ruangan, 1 = Super Admin, 0 = Lagendary Admin');
             $table->unsignedBigInteger('heya_id');
             $table->foreign('heya_id')->references('id')->on('heya');
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('role_id')->nullable();;
             $table->foreign('role_id')->references('id')->on('userRoles');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resources([
     'kanrisha/heya/deeta' => 'HeyaController',
+    'kanrisha/uuzaa/deeta' => 'UuzaaController',
 ]);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

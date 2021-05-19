@@ -13,6 +13,10 @@ class User extends Component {
         super(props);
         this.state = {
             data: [],
+            heya: [],
+            heyaMei : "",
+            nip : "",
+            name : "",
             dataEditInput: "",
             cari: "",
             url: null,
@@ -27,6 +31,25 @@ class User extends Component {
         this.modalTambah = this.modalTambah.bind(this);
         this.modalUbah = this.modalUbah.bind(this);
         this.handleChangeCari = this.handleChangeCari.bind(this);
+        this.handleChangeHeya = this.handleChangeHeya.bind(this);
+    }
+
+    handleChangeHeya(e) {
+        this.setState({
+            heyaMei: e.target.value,
+        });
+    }
+
+    handleChangeName(e) {
+        this.setState({
+            name: e.target.value,
+        });
+    }
+
+    handleChangeNip(e) {
+        this.setState({
+            nip: e.target.value,
+        });
     }
 
     handleChangeCari(e) {
@@ -129,13 +152,17 @@ class User extends Component {
             loading: true
         });
         axios
-            .post("/masariuman_tag", {
-                create: this.state.create
+            .post("/kanrisha/uuzaa/deeta", {
+                heyaMei : this.state.heyaMei,
+                nip : this.state.nip,
+                name : this.state.name
             })
             .then(response => {
                 this.setState({
-                    data: [response.data.deeta_data, ...this.state.data],
-                    create: "",
+                    data: [response.data.data, ...this.state.data],
+                    heyaMei : "",
+                    nip : "",
+                    name : "",
                     loading: false
                 });
                 $("#tambahModal").removeClass("in");
@@ -185,6 +212,15 @@ class User extends Component {
                 swal("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
             });
         // console.log(this.state.create);
+    }
+
+    getHeya() {
+        axios.get("/kanrisha/uuzaa/deeta/create").then((response) => {
+            this.setState({
+                heya: response.data.data.heya,
+                heyaMei: response.data.data.heya[0].rinku,
+            });
+        });
     }
 
     getData() {
@@ -239,11 +275,20 @@ class User extends Component {
 
     componentDidMount() {
         this.getData();
+        this.getHeya();
         // console.log(this.state.tag);
     }
 
     componentDidUpdate() {
         // this.getTag();
+    }
+
+    renderSelect() {
+        return this.state.heya.map((albayanat) => (
+            <option value={albayanat.rinku} key={albayanat.rinku}>
+                {albayanat.heyaMei}
+            </option>
+        ));
     }
 
     renderData() {
@@ -285,8 +330,8 @@ class User extends Component {
                             <div className="col-sm-12">
                                 <div className="form-group">
                                     <input
-                                        onChange={this.handleChange}
-                                        value={this.state.create}
+                                        onChange={this.handleChangeNip}
+                                        value={this.state.nip}
                                         title="NIP User"
                                         placeholder="Masukkan NIP Baru.."
                                         type="text"
@@ -295,8 +340,8 @@ class User extends Component {
                                 </div>
                                 <div className="form-group">
                                     <input
-                                        onChange={this.handleChange}
-                                        value={this.state.create}
+                                        onChange={this.handleChangeName}
+                                        value={this.state.name}
                                         title="Nama User"
                                         placeholder="Masukkan Nama User Baru.."
                                         type="text"
@@ -304,14 +349,13 @@ class User extends Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <input
-                                        onChange={this.handleChange}
-                                        value={this.state.create}
-                                        title="BIDANG"
-                                        placeholder="BIDANG.."
-                                        type="text"
+                                    <select
+                                        value={this.state.heyaMei}
+                                        onChange={this.handleChangeHeya}
                                         className="form-control"
-                                    />
+                                    >
+                                        {this.renderSelect()}
+                                    </select>
                                 </div>
                             </div>
                             <div className="col-sm-12">

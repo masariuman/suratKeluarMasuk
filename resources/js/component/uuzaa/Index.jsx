@@ -278,7 +278,7 @@ class User extends Component {
                             Tambah User Baru
                         </h4>
                         <div className="onboarding-text">
-                            Masukkan nama User baru.
+                            Masukkan User baru.
                         </div>
                         <form onSubmit={this.handleSubmit}>
                             <div className="row">
@@ -287,8 +287,28 @@ class User extends Component {
                                     <input
                                         onChange={this.handleChange}
                                         value={this.state.create}
+                                        title="NIP User"
+                                        placeholder="Masukkan NIP Baru.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        onChange={this.handleChange}
+                                        value={this.state.create}
                                         title="Nama User"
                                         placeholder="Masukkan Nama User Baru.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        onChange={this.handleChange}
+                                        value={this.state.create}
+                                        title="BIDANG"
+                                        placeholder="BIDANG.."
                                         type="text"
                                         className="form-control"
                                     />
@@ -409,7 +429,7 @@ class User extends Component {
                                                     <th className="width50px">NO</th>
                                                     <th>NIP</th>
                                                     <th>NAMA</th>
-                                                    <th>RUANG</th>
+                                                    <th>Bidang</th>
                                                     <th>LEVEL USER</th>
                                                     <th className="width250px">ACTION</th>
                                                 </tr>

@@ -57,7 +57,7 @@ class Heya extends Component {
             .get(`/kanrisha/heya/deeta/${e}`)
             .then(response => {
                 swal({
-                    title: `Yakin ingin menghapus ruangan ${response.data.data.heyaMei}`,
+                    title: `Yakin ingin menghapus Bidang ${response.data.data.heyaMei}`,
                     text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
                     icon: "warning",
                     buttons: true,
@@ -274,10 +274,10 @@ class Heya extends Component {
                         </div>
                         <div className="onboarding-content with-gradient">
                         <h4 className="onboarding-title">
-                            Tambah Ruangan Baru
+                            Tambah Bidang Baru
                         </h4>
                         <div className="onboarding-text">
-                            Masukkan nama Ruangan baru.
+                            Masukkan nama Bidang baru.
                         </div>
                         <form onSubmit={this.handleSubmit}>
                             <div className="row">
@@ -286,8 +286,8 @@ class Heya extends Component {
                                     <input
                                         onChange={this.handleChange}
                                         value={this.state.dataNewInput}
-                                        title="Nama Ruangan"
-                                        placeholder="Masukkan Nama Ruangan Baru.."
+                                        title="Nama Bidang"
+                                        placeholder="Masukkan Nama Bidang Baru.."
                                         type="text"
                                         className="form-control"
                                     />
@@ -295,7 +295,7 @@ class Heya extends Component {
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group text-center">
-                                    <button className="mr-2 mb-2 btn btn-primary" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Tambah Ruangan Baru</button>
+                                    <button className="mr-2 mb-2 btn btn-primary" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Tambah Bidang Baru</button>
                                 </div>
                             </div>
                             </div>
@@ -320,10 +320,10 @@ class Heya extends Component {
                         </div>
                         <div className="onboarding-content with-gradient">
                         <h4 className="onboarding-title">
-                            Ubah Nama Ruangan
+                            Ubah Nama Bidang
                         </h4>
                         <div className="onboarding-text">
-                            Masukkan nama Ruangan baru.
+                            Masukkan nama Bidang baru.
                         </div>
                         <form onSubmit={this.handleEditSubmit}>
                             <div className="row">
@@ -332,8 +332,8 @@ class Heya extends Component {
                                     <input
                                         onChange={this.handleEditInputChange}
                                         value={this.state.dataEditInput}
-                                        title="Nama Ruangan"
-                                        placeholder="Masukkan Nama Ruangan Baru.."
+                                        title="Nama Bidang"
+                                        placeholder="Masukkan Nama Bidang Baru.."
                                         type="text"
                                         className="form-control"
                                     />
@@ -341,7 +341,7 @@ class Heya extends Component {
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group text-center">
-                                    <button className="mr-2 mb-2 btn btn-warning" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Ubah Nama Ruangan</button>
+                                    <button className="mr-2 mb-2 btn btn-warning" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Ubah Nama Bidang</button>
                                 </div>
                             </div>
                             </div>
@@ -365,8 +365,8 @@ class Heya extends Component {
                         <div className="os-icon os-icon-tag"></div>
                         </div>
                         <div className="masariuman-textleft">
-                            <span className="masariuman-bold">Ruangan</span> <br/>
-                            <small>Ruangan Management</small>
+                            <span className="masariuman-bold">Bidang</span> <br/>
+                            <small>Bidang Management</small>
                         </div>
                     </div>
                     <div className="top-menu-controls">
@@ -375,10 +375,10 @@ class Heya extends Component {
                 </div>
                 <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <a>Ruangan</a>
+                        <a>Bidang</a>
                     </li>
                     <li className="breadcrumb-item">
-                        <span>Ruangan Management</span>
+                        <span>Bidang Management</span>
                     </li>
                 </ul>
 
@@ -389,24 +389,24 @@ class Heya extends Component {
                                 {/* content here */}
                                 <div className="element-box">
                                     <h5 className="form-header">
-                                    Ruangan List
+                                    Bidang List
                                     </h5>
                                     <div className="form-desc">
-                                        Manajemen Ruangan Data
+                                        Manajemen Bidang Data
                                     </div>
                                     <div>
-                                        <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal">Tambah Ruangan Baru</button>
+                                        <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal">Tambah Bidang Baru</button>
                                         <div className="col-sm-4 float-right">
                                             <input type="text" className="form-control" onChange={this.handleChangeCari}
-                                                value={this.state.cari} placeholder="Cari Ruangan..."></input>
+                                                value={this.state.cari} placeholder="Cari Bidang..."></input>
                                         </div>
                                     </div>
-                                    <div className="table-responsive" id="ruanganTable">
+                                    <div className="table-responsive" id="BidangTable">
                                         <table id="tabeldata" width="100%" className="table table-striped table-lightfont">
                                             <thead>
                                                 <tr>
                                                     <th className="width50px">NO</th>
-                                                    <th>NAMA RUANGAN</th>
+                                                    <th>NAMA Bidang</th>
                                                     <th className="width250px">ACTION</th>
                                                 </tr>
                                             </thead>

@@ -81,8 +81,9 @@ class Menu extends Component {
                     <li className="sub-header">
                         <span>Layouts</span>
                     </li>
-                    <li className=" has-sub-menu">
+                    <li className="has-sub-menu">
                         <NavLink
+                            exact
                             activeClassName="masariuman-active"
                             to={`/`}
                         >
@@ -180,7 +181,7 @@ class Menu extends Component {
                     <li className=" has-sub-menu">
                         <NavLink
                             activeClassName="masariuman-active"
-                            to={`/user`}
+                            to={`/kanrisha`}
                         >
                             <div className="icon-w">
                                 <div className="os-icon os-icon-aperture"></div>
@@ -197,7 +198,7 @@ class Menu extends Component {
                             <div className="sub-menu-i">
                                 <ul className="sub-menu">
                                     <li>
-                                        <Link to={`/kanrisha/uuzaa`}>
+                                        <Link to={`/kanrisha/uuzaa `}>
                                             <i className="os-icon os-icon-users"></i> &nbsp;&nbsp;&nbsp;User
                                         </Link>
                                     </li>

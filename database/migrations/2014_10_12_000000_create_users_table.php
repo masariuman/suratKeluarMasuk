@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('yuuzaaMei')->nullable();
             $table->string('sashin')->nullable();
-            $table->enum('reberu', ['2', '1', '0'])->default('2')->comment('2 = bkn pengurus, 1 = admin ruangan, 0 = super admin');
+            $table->enum('reberu', ['3', '2', '1', '0'])->default('3')->comment('3 = Normal User, 2 = Admin Ruangan, 1 = Super Admin, 0 = Lagendary Admin');
             $table->unsignedBigInteger('heya_id');
             $table->foreign('heya_id')->references('id')->on('heya');
             $table->unsignedBigInteger('role_id');

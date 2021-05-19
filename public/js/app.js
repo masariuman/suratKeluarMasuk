@@ -2686,7 +2686,7 @@ var Heya = /*#__PURE__*/function (_Component) {
 
       axios.get("/kanrisha/heya/deeta/".concat(e)).then(function (response) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()({
-          title: "Yakin ingin menghapus ruangan ".concat(response.data.data.heyaMei),
+          title: "Yakin ingin menghapus Bidang ".concat(response.data.data.heyaMei),
           text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
           icon: "warning",
           buttons: true,
@@ -2954,10 +2954,10 @@ var Heya = /*#__PURE__*/function (_Component) {
                 className: "onboarding-content with-gradient",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
-                  children: "Tambah Ruangan Baru"
+                  children: "Tambah Bidang Baru"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "onboarding-text",
-                  children: "Masukkan nama Ruangan baru."
+                  children: "Masukkan nama Bidang baru."
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("form", {
                   onSubmit: this.handleSubmit,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -2969,8 +2969,8 @@ var Heya = /*#__PURE__*/function (_Component) {
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
                           onChange: this.handleChange,
                           value: this.state.dataNewInput,
-                          title: "Nama Ruangan",
-                          placeholder: "Masukkan Nama Ruangan Baru..",
+                          title: "Nama Bidang",
+                          placeholder: "Masukkan Nama Bidang Baru..",
                           type: "text",
                           className: "form-control"
                         })
@@ -2984,7 +2984,7 @@ var Heya = /*#__PURE__*/function (_Component) {
                           "data-target": "#onboardingWideFormModal",
                           "data-toggle": "modal",
                           type: "submit",
-                          children: "Tambah Ruangan Baru"
+                          children: "Tambah Bidang Baru"
                         })
                       })
                     })]
@@ -3034,10 +3034,10 @@ var Heya = /*#__PURE__*/function (_Component) {
                 className: "onboarding-content with-gradient",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
-                  children: "Ubah Nama Ruangan"
+                  children: "Ubah Nama Bidang"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "onboarding-text",
-                  children: "Masukkan nama Ruangan baru."
+                  children: "Masukkan nama Bidang baru."
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("form", {
                   onSubmit: this.handleEditSubmit,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -3049,8 +3049,8 @@ var Heya = /*#__PURE__*/function (_Component) {
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
                           onChange: this.handleEditInputChange,
                           value: this.state.dataEditInput,
-                          title: "Nama Ruangan",
-                          placeholder: "Masukkan Nama Ruangan Baru..",
+                          title: "Nama Bidang",
+                          placeholder: "Masukkan Nama Bidang Baru..",
                           type: "text",
                           className: "form-control"
                         })
@@ -3064,7 +3064,7 @@ var Heya = /*#__PURE__*/function (_Component) {
                           "data-target": "#onboardingWideFormModal",
                           "data-toggle": "modal",
                           type: "submit",
-                          children: "Ubah Nama Ruangan"
+                          children: "Ubah Nama Bidang"
                         })
                       })
                     })]
@@ -3094,9 +3094,9 @@ var Heya = /*#__PURE__*/function (_Component) {
               className: "masariuman-textleft",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
                 className: "masariuman-bold",
-                children: "Ruangan"
+                children: "Bidang"
               }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
-                children: "Ruangan Management"
+                children: "Bidang Management"
               })]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -3117,12 +3117,12 @@ var Heya = /*#__PURE__*/function (_Component) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("li", {
             className: "breadcrumb-item",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-              children: "Ruangan"
+              children: "Bidang"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("li", {
             className: "breadcrumb-item",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
-              children: "Ruangan Management"
+              children: "Bidang Management"
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -3135,10 +3135,10 @@ var Heya = /*#__PURE__*/function (_Component) {
                 className: "element-box",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h5", {
                   className: "form-header",
-                  children: "Ruangan List"
+                  children: "Bidang List"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "form-desc",
-                  children: "Manajemen Ruangan Data"
+                  children: "Manajemen Bidang Data"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
                     className: "mr-2 mb-2 btn btn-primary",
@@ -3146,7 +3146,7 @@ var Heya = /*#__PURE__*/function (_Component) {
                     "data-toggle": "modal",
                     type: "button",
                     id: "buttonTambahModal",
-                    children: "Tambah Ruangan Baru"
+                    children: "Tambah Bidang Baru"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                     className: "col-sm-4 float-right",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
@@ -3154,12 +3154,12 @@ var Heya = /*#__PURE__*/function (_Component) {
                       className: "form-control",
                       onChange: this.handleChangeCari,
                       value: this.state.cari,
-                      placeholder: "Cari Ruangan..."
+                      placeholder: "Cari Bidang..."
                     })
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "table-responsive",
-                  id: "ruanganTable",
+                  id: "BidangTable",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", {
                     id: "tabeldata",
                     width: "100%",
@@ -3170,7 +3170,7 @@ var Heya = /*#__PURE__*/function (_Component) {
                           className: "width50px",
                           children: "NO"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                          children: "NAMA RUANGAN"
+                          children: "NAMA Bidang"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
                           className: "width250px",
                           children: "ACTION"
@@ -4893,14 +4893,24 @@ var User = /*#__PURE__*/function (_Component) {
                   children: "Tambah User Baru"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "onboarding-text",
-                  children: "Masukkan nama User baru."
+                  children: "Masukkan User baru."
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("form", {
                   onSubmit: this.handleSubmit,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                     className: "row",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                       className: "col-sm-12",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                          onChange: this.handleChange,
+                          value: this.state.create,
+                          title: "NIP User",
+                          placeholder: "Masukkan NIP Baru..",
+                          type: "text",
+                          className: "form-control"
+                        })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
                           onChange: this.handleChange,
@@ -4910,7 +4920,17 @@ var User = /*#__PURE__*/function (_Component) {
                           type: "text",
                           className: "form-control"
                         })
-                      })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                          onChange: this.handleChange,
+                          value: this.state.create,
+                          title: "BIDANG",
+                          placeholder: "BIDANG..",
+                          type: "text",
+                          className: "form-control"
+                        })
+                      })]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -5110,7 +5130,7 @@ var User = /*#__PURE__*/function (_Component) {
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
                           children: "NAMA"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                          children: "RUANG"
+                          children: "Bidang"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
                           children: "LEVEL USER"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
@@ -5657,8 +5677,9 @@ var Menu = /*#__PURE__*/function (_Component) {
               children: "Layouts"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-            className: " has-sub-menu",
+            className: "has-sub-menu",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+              exact: true,
               activeClassName: "masariuman-active",
               to: "/",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -5744,7 +5765,7 @@ var Menu = /*#__PURE__*/function (_Component) {
             className: " has-sub-menu",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
               activeClassName: "masariuman-active",
-              to: "/user",
+              to: "/kanrisha",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
                 className: "icon-w",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -5769,7 +5790,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                   className: "sub-menu",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-                      to: "/kanrisha/uuzaa",
+                      to: "/kanrisha/uuzaa ",
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
                         className: "os-icon os-icon-users"
                       }), " \xA0\xA0\xA0User"]

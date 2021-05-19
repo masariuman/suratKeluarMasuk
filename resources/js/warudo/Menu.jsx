@@ -183,19 +183,32 @@ class Menu extends Component {
                             to={`/user`}
                         >
                             <div className="icon-w">
-                                <div className="os-icon os-icon-users"></div>
+                                <div className="os-icon os-icon-aperture"></div>
                             </div>
                             <span>User</span>
                         </NavLink>
                         <div className="sub-menu-w">
-                            <div className="sub-menu-header masariuman_colorWhite">
-                                USER
+                            <div className="sub-menu-header">
+                                ADMIN MANAGEMENT
                             </div>
                             <div className="sub-menu-icon">
-                                <i className="os-icon os-icon-users"></i>
+                                <i className="os-icon os-icon-aperture"></i>
                             </div>
-                            <div className="sub-menu-i masariuman_menuDescription">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <div className="sub-menu-i">
+                                <ul className="sub-menu">
+                                    <li>
+                                        <Link to={`/kanrisha/uuzaa`}>
+                                            <i className="os-icon os-icon-users"></i> &nbsp;&nbsp;&nbsp;User
+                                        </Link>
+                                    </li>
+                                </ul>
+                                <ul className="sub-menu">
+                                    <li>
+                                        <Link to={`/kanrisha/heya`}>
+                                            <i className="os-icon os-icon-home"></i> &nbsp;&nbsp;&nbsp;Ruangan
+                                        </Link>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </li>

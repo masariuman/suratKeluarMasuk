@@ -9,15 +9,10 @@ import MobileMenu from "./warudo/MobileMenu";
 import Menu from "./warudo/Menu";
 import Empatkosongempat from "./warudo/Empatkosongempat";
 import DashboardIndex from "./component/dashboard/Index";
-// import DashboardNovel from "./component/dashboard/novel/Index";
 import KeluarIndex from "./component/keluar/Index";
 import MasukIndex from "./component/masuk/Index";
-// import Toc from "./component/toc/Index";
-// import TocNew from "./component/toc/New";
-// import TocEdit from "./component/toc/Edit";
-// import Novel from "./component/novel/Index";
-// import NovelNew from "./component/novel/New";
-// import NovelEdit from "./component/novel/Edit";
+import UuzaaIndex from "./component/uuzaa/Index";
+import HeyaIndex from "./component/heya/Index";
 
 
 if (document.getElementById("root")) {
@@ -41,6 +36,16 @@ if (document.getElementById("root")) {
                         exact
                         path="/surat-masuk"
                         component={MasukIndex}
+                    />
+                    <Route
+                        exact
+                        path="/kanrisha/uuzaa"
+                        component={UuzaaIndex}
+                    />
+                    <Route
+                        exact
+                        path="/kanrisha/heya"
+                        component={HeyaIndex}
                     />
                     <Empatkosongempat />
                 </Switch>

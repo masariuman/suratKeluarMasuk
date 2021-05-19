@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::resources([
+    'kanrisha/heya/deeta' => 'HeyaController',
+]);
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

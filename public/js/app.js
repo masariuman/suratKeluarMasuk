@@ -4644,9 +4644,9 @@ var User = /*#__PURE__*/function (_Component) {
     value: function handleDeleteButton(e) {
       var _this3 = this;
 
-      axios.get("/masariuman_tag/".concat(e)).then(function (response) {
+      axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()({
-          title: "Yakin ingin menghapus user ".concat(response.data.deeta_data.tag),
+          title: "Yakin ingin menghapus user dengan NIP ".concat(response.data.data.juugyouinBangou, " yang bernama ").concat(response.data.data.name),
           text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
           icon: "warning",
           buttons: true,
@@ -4657,11 +4657,11 @@ var User = /*#__PURE__*/function (_Component) {
               loading: true
             });
 
-            axios["delete"]("/masariuman_tag/".concat(e), {
-              url: _this3.state.url
+            axios["delete"]("/kanrisha/uuzaa/deeta/".concat(e), {
+              rinku: ""
             }).then(function (response) {
               _this3.setState({
-                data: response.data.deeta_data.data,
+                data: response.data.data.data,
                 loading: false
               });
 
@@ -4686,7 +4686,7 @@ var User = /*#__PURE__*/function (_Component) {
     value: function handleEditButton(e) {
       var _this4 = this;
 
-      axios.get("/kanrisha/uuzaa/deeta/".concat(e, "/edit")).then(function (response) {
+      axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
         _this4.setState({
           heyaMei: response.data.data.heyaRinku,
           nip: response.data.data.juugyouinBangou,

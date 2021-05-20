@@ -79,10 +79,10 @@ class User extends Component {
 
     handleDeleteButton(e) {
         axios
-            .get(`/masariuman_tag/${e}`)
+            .get(`/kanrisha/uuzaa/deeta/${e}`)
             .then(response => {
                 swal({
-                    title: `Yakin ingin menghapus user ${response.data.deeta_data.tag}`,
+                    title: `Yakin ingin menghapus user dengan NIP ${response.data.data.juugyouinBangou} yang bernama ${response.data.data.name}`,
                     text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
                     icon: "warning",
                     buttons: true,
@@ -94,12 +94,12 @@ class User extends Component {
                             loading: true
                         });
                         axios
-                            .delete(`/masariuman_tag/${e}`, {
-                                url: this.state.url
+                            .delete(`/kanrisha/uuzaa/deeta/${e}`, {
+                                rinku: ""
                             })
                             .then(response => {
                                 this.setState({
-                                    data: response.data.deeta_data.data,
+                                    data: response.data.data.data,
                                     loading: false
                                 });
                                 swal("Sukses!", "Data Berhasil Dihapus!", "success");
@@ -123,7 +123,7 @@ class User extends Component {
 
     handleEditButton(e) {
         axios
-            .get(`/kanrisha/uuzaa/deeta/${e}/edit`)
+            .get(`/kanrisha/uuzaa/deeta/${e}`)
             .then(response => {
                 this.setState({
                     heyaMei : response.data.data.heyaRinku,

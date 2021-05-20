@@ -52,7 +52,7 @@ class HeyaController extends Controller
             'rinku' => str_replace('#', 'o', str_replace('.', 'A', str_replace('/', '$', Hash::make(Hash::make(Uuid::generate()->string)))))
         ]);
         $data = Heya::orderBy("id", "DESC")->first();
-        $data['nomor'] = "NEW";
+        $data['nomor'] = "BARU";
         return response()->json([
             'data' => $data
         ]);

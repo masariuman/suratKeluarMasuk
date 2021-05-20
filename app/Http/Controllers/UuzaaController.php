@@ -81,12 +81,24 @@ class UuzaaController extends Controller
             'heya_id' => $heya->id,
             'password' => Hash::make($request->nip)
         ]);
-        $pagination = 5;
-        $data = Uuzaa::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
-        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
-        foreach ($data as $items) {
-            $items['nomor'] = $count;
-            $count++;
+        // $pagination = 5;
+        // $data = Uuzaa::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        // $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        // foreach ($data as $items) {
+        //     $items['nomor'] = $count;
+        //     $count++;
+        // }
+        $data = Uuzaa::orderBy("id", "DESC")->first();
+        $data['nomor'] = "BARU";
+        $data['heyaMei'] = $data->heya->heyaMei;
+        if ($data['reberu'] === "3") {
+            $data['level'] = "User";
+        } else if ($itdataems['reberu'] === "2") {
+            $data['level'] = "Admin";
+        } else if ($data['reberu'] === "3") {
+            $data['level'] = "Super Admin";
+        } else {
+            $data['level'] = "Legendary Admin";
         }
         return response()->json([
             'data' => $data
@@ -102,11 +114,11 @@ class UuzaaController extends Controller
     public function show($id)
     {
         //
-        // $novel = Uuzaa::where("url", $id)->first();
-        // // dd($gets);
-        // return response()->json([
-        //     'data' => $novel
-        // ]);
+        $data = Uuzaa::where('rinku', $id)->first();
+        $data['heyaRinku'] = $data->heya->rinku;
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**
@@ -118,11 +130,11 @@ class UuzaaController extends Controller
     public function edit($id)
     {
         //
-        $data = Uuzaa::where('rinku', $id)->first();
-        $data['heyaRinku'] = $data->heya->rinku;
-        return response()->json([
-            'data' => $data
-        ]);
+        // $data = Uuzaa::where('rinku', $id)->first();
+        // $data['heyaRinku'] = $data->heya->rinku;
+        // return response()->json([
+        //     'data' => $data
+        // ]);
     }
 
     /**
@@ -173,20 +185,30 @@ class UuzaaController extends Controller
     public function destroy($id)
     {
         //
-        // $novel = Uuzaa::where("url", $id)->first();
-        // $novel->update([
-        //     'status' => '0'
-        // ]);
-        // $pagination = 5;
-        // $novel = Uuzaa::where("status", "1")->orderBy("id", "DESC")->paginate($pagination);
-        // $count = $novel->CurrentPage() * $pagination - ($pagination - 1);
-        // foreach ($novel as $novels) {
-        //     $novels['nomor'] = $count;
-        //     $count++;
-        // }
-        // return response()->json([
-        //     'data' => $novel
-        // ]);
+        $novel = Uuzaa::where("rinku", $id)->first();
+        $novel->update([
+            'sutattsu' => '0'
+        ]);
+        $pagination = 5;
+        $data = Uuzaa::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $items['heyaMei'] = $items->heya->heyaMei;
+            if ($items['reberu'] === "3") {
+                $items['level'] = "User";
+            } else if ($items['reberu'] === "2") {
+                $items['level'] = "Admin";
+            } else if ($items['reberu'] === "3") {
+                $items['level'] = "Super Admin";
+            } else {
+                $items['level'] = "Legendary Admin";
+            }
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     public function search(Request $request)

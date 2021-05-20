@@ -15,6 +15,7 @@ class User extends Component {
             data: [],
             heya: [],
             heyaMei : "",
+            uuzaNoRinku : "",
             nip : "",
             name : "",
             dataEditInput: "",
@@ -127,6 +128,7 @@ class User extends Component {
                 this.setState({
                     heyaMei : response.data.data.heyaRinku,
                     nip : response.data.data.juugyouinBangou,
+                    uuzaNoRinku : response.data.data.rinku,
                     name : response.data.data.name
                 });
             })
@@ -191,13 +193,17 @@ class User extends Component {
             loading: true
         });
         axios
-            .put(`/masariuman_tag/${this.state.url}`, {
-                content: this.state.dataEditInput
+            .put(`/kanrisha/uuzaa/deeta/${this.state.uuzaNoRinku}`, {
+                heyaMei : this.state.heyaMei,
+                nip : this.state.nip,
+                name : this.state.name
             })
             .then(response => {
                 this.setState({
-                    data: response.data.deeta_data.data,
-                    dataEditInput: "",
+                    data: response.data.data.data,
+                    heyaMei : "",
+                    nip : "",
+                    name : "",
                     loading: false
                 });
                 $("#editModal").removeClass("in");

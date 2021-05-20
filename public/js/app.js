@@ -4572,6 +4572,7 @@ var User = /*#__PURE__*/function (_Component) {
       data: [],
       heya: [],
       heyaMei: "",
+      uuzaNoRinku: "",
       nip: "",
       name: "",
       dataEditInput: "",
@@ -4689,6 +4690,7 @@ var User = /*#__PURE__*/function (_Component) {
         _this4.setState({
           heyaMei: response.data.data.heyaRinku,
           nip: response.data.data.juugyouinBangou,
+          uuzaNoRinku: response.data.data.rinku,
           name: response.data.data.name
         });
       })["catch"](function (error) {
@@ -4754,12 +4756,16 @@ var User = /*#__PURE__*/function (_Component) {
       this.setState({
         loading: true
       });
-      axios.put("/masariuman_tag/".concat(this.state.url), {
-        content: this.state.dataEditInput
+      axios.put("/kanrisha/uuzaa/deeta/".concat(this.state.uuzaNoRinku), {
+        heyaMei: this.state.heyaMei,
+        nip: this.state.nip,
+        name: this.state.name
       }).then(function (response) {
         _this6.setState({
-          data: response.data.deeta_data.data,
-          dataEditInput: "",
+          data: response.data.data.data,
+          heyaMei: "",
+          nip: "",
+          name: "",
           loading: false
         });
 

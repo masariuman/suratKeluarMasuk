@@ -135,43 +135,33 @@ class UuzaaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        // $Uuzaa = Uuzaa::where('url', $id)->first();
-        // $parent = Novel::where('url', $request->parent)->first();
-        // $volume = Volume::where('url', $request->volume)->first();
-        // // dd($request);
-        // $file = $request->thumb;
-        // if ($file) {
-        //     $Uuzaa->update([
-        //         'title' => $request->title,
-        //         'content' => $request->content,
-        //         'novel_id' => $parent->id,
-        //         'thumbnail' => $request->thumb,
-        //         'thumbnail_sidebar' => $request->thumbDesc,
-        //         'volume_id' => $volume->id,
-        //         'titleCh' => $request->titleCh,
-        //         'nameCh' => $request->nameCh,
-        //         'note' => $request->note
-        //     ]);
-        // } else {
-        //     $Uuzaa->update([
-        //         'title' => $request->title,
-        //         'content' => $request->content,
-        //         'novel_id' => $parent->id,
-        //         'thumbnail_sidebar' => $request->thumbDesc,
-        //         'note' => $request->note
-        //     ]);
-        // }
-        // $pagination = 5;
-        // $novel = Uuzaa::where("status", "1")->orderBy("id", "DESC")->paginate($pagination);
-        // $count = $novel->CurrentPage() * $pagination - ($pagination - 1);
-        // foreach ($novel as $novels) {
-        //     $novels['nomor'] = $count;
-        //     $count++;
-        // }
-        // // dd($gets);
-        // return response()->json([
-        //     'data' => $novel
-        // ]);
+        $Uuzaa = Uuzaa::where('rinku', $id)->first();
+        $heya = Heya::where('rinku', $request->heyaMei)->first();
+        $Uuzaa->update([
+            'juugyouinBangou' => $request->nip,
+            'name' => $request->name,
+            'heya_id' => $heya->id
+        ]);
+        $pagination = 5;
+        $data = Uuzaa::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $items['heyaMei'] = $items->heya->heyaMei;
+            if ($items['reberu'] === "3") {
+                $items['level'] = "User";
+            } else if ($items['reberu'] === "2") {
+                $items['level'] = "Admin";
+            } else if ($items['reberu'] === "3") {
+                $items['level'] = "Super Admin";
+            } else {
+                $items['level'] = "Legendary Admin";
+            }
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**

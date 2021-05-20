@@ -5689,7 +5689,6 @@ var Menu = /*#__PURE__*/function (_Component) {
           className: "logo-w",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
             className: "logo",
-            href: "index.html",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
               className: "logo-element"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -5708,10 +5707,10 @@ var Menu = /*#__PURE__*/function (_Component) {
               className: "logged-user-info-w",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
                 className: "logged-user-name",
-                children: "MasariuMan"
+                children: this.state.uuzaaMei
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
                 className: "logged-user-role",
-                children: "Administrator"
+                children: this.state.reberu
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
               className: "logged-user-toggler-arrow",
@@ -5996,13 +5995,51 @@ var MobileMenu = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(MobileMenu);
 
-  function MobileMenu() {
+  function MobileMenu(props) {
+    var _this;
+
     _classCallCheck(this, MobileMenu);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      uuzaaMei: "",
+      reberu: "",
+      sashin: ""
+    };
+    _this.renderSashin = _this.renderSashin.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(MobileMenu, [{
+    key: "getUuzaa",
+    value: function getUuzaa() {
+      var _this2 = this;
+
+      axios.get("/getUuzaa").then(function (response) {
+        _this2.setState({
+          uuzaaMei: response.data.data.name,
+          reberu: response.data.data.level,
+          sashin: response.data.data.sashin
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getUuzaa();
+    }
+  }, {
+    key: "renderSashin",
+    value: function renderSashin() {
+      return !this.state.sashin || this.state.sashin === "" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+        alt: "",
+        src: "/warudo/dist/img/avatar.jpg"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+        alt: "",
+        src: "/sashin/" + this.state.sashin
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -6011,11 +6048,10 @@ var MobileMenu = /*#__PURE__*/function (_Component) {
           className: "mm-logo-buttons-w",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
             className: "mm-logo",
-            href: "index.html",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
               src: "/warudo/dist/img/logo.png"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              children: "MasariuMan"
+              children: this.state.uuzaaMei
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
             className: "mm-buttons",
@@ -6032,18 +6068,15 @@ var MobileMenu = /*#__PURE__*/function (_Component) {
             className: "logged-user-w",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
               className: "avatar-w",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-                alt: "",
-                src: "/warudo/dist/img/avatar1.jpg"
-              })
+              children: this.renderSashin()
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "logged-user-info-w",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
                 className: "logged-user-name",
-                children: "MasariuMan"
+                children: this.state.uuzaaMei
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
                 className: "logged-user-role",
-                children: "Administrator"
+                children: this.state.reberu
               })]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {

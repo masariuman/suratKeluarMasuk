@@ -34,7 +34,7 @@ class Menu extends Component {
         return (
             <div className="menu-w color-scheme-dark color-style-bright menu-position-side menu-side-left menu-layout-mini sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
                 <div className="logo-w">
-                    <a className="logo" href="index.html">
+                    <a className="logo">
                         <div className="logo-element"></div>
                         <div className="logo-label">
                             Clean Admin

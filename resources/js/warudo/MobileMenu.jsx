@@ -2,13 +2,41 @@ import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 class MobileMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            uuzaaMei: "",
+            reberu: "",
+            sashin: "",
+        };
+        this.renderSashin = this.renderSashin.bind(this);
+    }
+
+    getUuzaa() {
+        axios.get("/getUuzaa").then((response) => {
+            this.setState({
+                uuzaaMei: response.data.data.name,
+                reberu: response.data.data.level,
+                sashin: response.data.data.sashin
+            });
+        });
+    }
+
+    componentDidMount() {
+        this.getUuzaa();
+    }
+
+    renderSashin() {
+        return !this.state.sashin || this.state.sashin === "" ? <img alt="" src="/warudo/dist/img/avatar.jpg" /> : <img alt="" src={"/sashin/"+this.state.sashin} />;
+    }
+
     render() {
         return (
             <div className="menu-mobile menu-activated-on-click color-scheme-dark">
                 <div className="mm-logo-buttons-w">
-                    <a className="mm-logo" href="index.html">
+                    <a className="mm-logo">
                         <img src="/warudo/dist/img/logo.png" />
-                        <span>MasariuMan</span>
+                        <span>{this.state.uuzaaMei}</span>
                     </a>
                     <div className="mm-buttons">
                         <div className="mobile-menu-trigger">
@@ -19,14 +47,14 @@ class MobileMenu extends Component {
                 <div className="menu-and-user">
                     <div className="logged-user-w">
                         <div className="avatar-w">
-                            <img alt="" src="/warudo/dist/img/avatar1.jpg" />
+                            {this.renderSashin()}
                         </div>
                         <div className="logged-user-info-w">
                             <div className="logged-user-name">
-                                MasariuMan
+                                {this.state.uuzaaMei}
                             </div>
                             <div className="logged-user-role">
-                                Administrator
+                                {this.state.reberu}
                             </div>
                         </div>
                     </div>

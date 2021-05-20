@@ -7,6 +7,7 @@ use App\Models\Uuzaa;
 use App\Models\Heya;
 use Uuid;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UuzaaController extends Controller
 {
@@ -28,7 +29,7 @@ class UuzaaController extends Controller
                 $items['level'] = "User";
             } else if ($items['reberu'] === "2") {
                 $items['level'] = "Admin";
-            } else if ($items['reberu'] === "3") {
+            } else if ($items['reberu'] === "1") {
                 $items['level'] = "Super Admin";
             } else {
                 $items['level'] = "Legendary Admin";
@@ -94,8 +95,8 @@ class UuzaaController extends Controller
         if ($data['reberu'] === "3") {
             $data['level'] = "User";
         } else if ($itdataems['reberu'] === "2") {
-            $data['level'] = "Admin";
-        } else if ($data['reberu'] === "3") {
+            $data['level'] = "Administrator";
+        } else if ($data['reberu'] === "1") {
             $data['level'] = "Super Admin";
         } else {
             $data['level'] = "Legendary Admin";
@@ -163,8 +164,8 @@ class UuzaaController extends Controller
             if ($items['reberu'] === "3") {
                 $items['level'] = "User";
             } else if ($items['reberu'] === "2") {
-                $items['level'] = "Admin";
-            } else if ($items['reberu'] === "3") {
+                $items['level'] = "Administrator";
+            } else if ($items['reberu'] === "1") {
                 $items['level'] = "Super Admin";
             } else {
                 $items['level'] = "Legendary Admin";
@@ -198,8 +199,8 @@ class UuzaaController extends Controller
             if ($items['reberu'] === "3") {
                 $items['level'] = "User";
             } else if ($items['reberu'] === "2") {
-                $items['level'] = "Admin";
-            } else if ($items['reberu'] === "3") {
+                $items['level'] = "Administrator";
+            } else if ($items['reberu'] === "1") {
                 $items['level'] = "Super Admin";
             } else {
                 $items['level'] = "Legendary Admin";
@@ -267,5 +268,22 @@ class UuzaaController extends Controller
         // return response()->json([
         //     'data' => $parents
         // ]);
+    }
+
+    public function getUuzaa()
+    {
+        $data = Auth::user();
+        if ($data['reberu'] === "3") {
+            $data['level'] = "User Employee";
+        } else if ($data['reberu'] === "2") {
+            $data['level'] = "Administrator";
+        } else if ($data['reberu'] === "1") {
+            $data['level'] = "Super Admin";
+        } else {
+            $data['level'] = "Legendary Admin";
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 }

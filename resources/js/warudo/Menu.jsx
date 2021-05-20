@@ -2,6 +2,34 @@ import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 class Menu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            uuzaaMei: "",
+            reberu: "",
+            sashin: "",
+        };
+        this.renderSashin = this.renderSashin.bind(this);
+    }
+
+    getUuzaa() {
+        axios.get("/getUuzaa").then((response) => {
+            this.setState({
+                uuzaaMei: response.data.data.name,
+                reberu: response.data.data.level,
+                sashin: response.data.data.sashin
+            });
+        });
+    }
+
+    componentDidMount() {
+        this.getUuzaa();
+    }
+
+    renderSashin() {
+        return !this.state.sashin || this.state.sashin === "" ? <img alt="" src="/warudo/dist/img/avatar.jpg" /> : <img alt="" src={"/sashin/"+this.state.sashin} />;
+    }
+
     render() {
         return (
             <div className="menu-w color-scheme-dark color-style-bright menu-position-side menu-side-left menu-layout-mini sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
@@ -16,7 +44,7 @@ class Menu extends Component {
                 <div className="logged-user-w avatar-inline">
                     <div className="logged-user-i">
                         <div className="avatar-w">
-                            <img alt="" src="/warudo/dist/img/avatar.jpg" />
+                            {this.renderSashin()}
                         </div>
                         <div className="logged-user-info-w">
                             <div className="logged-user-name">
@@ -32,14 +60,14 @@ class Menu extends Component {
                         <div className="logged-user-menu color-style-bright">
                             <div className="logged-user-avatar-info">
                                 <div className="avatar-w">
-                                    <img alt="" src="/warudo/dist/img/avatar.jpg" />
+                                    {this.renderSashin()}
                                 </div>
                                 <div className="logged-user-info-w">
                                     <div className="logged-user-name">
-                                        MasariuMan
+                                        {this.state.uuzaaMei}
                                     </div>
                                     <div className="logged-user-role">
-                                        Administrator
+                                        {this.state.reberu}
                                     </div>
                                 </div>
                             </div>

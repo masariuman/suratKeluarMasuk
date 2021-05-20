@@ -122,11 +122,12 @@ class User extends Component {
 
     handleEditButton(e) {
         axios
-            .get(`/masariuman_tag/${e}`)
+            .get(`/kanrisha/uuzaa/deeta/${e}/edit`)
             .then(response => {
                 this.setState({
-                    dataEditInput: response.data.deeta_data.tag,
-                    url: response.data.deeta_data.url
+                    heyaMei : response.data.data.heyaRinku,
+                    nip : response.data.data.juugyouinBangou,
+                    name : response.data.data.name
                 });
             })
             .catch(error => {
@@ -232,18 +233,18 @@ class User extends Component {
         axios
             .get("/kanrisha/uuzaa/deeta")
             .then(response => {
-                console.log(response.data.data.data);
+                // console.log(response.data.data.data);
                 this.setState({
                     data: response.data.data.data,
                     loading: false,
-                    activePage: response.data.deeta_data.current_page,
-                    itemsCountPerPage: response.data.deeta_data.per_page,
-                    totalItemsCount: response.data.deeta_data.total,
+                    activePage: response.data.data.current_page,
+                    itemsCountPerPage: response.data.data.per_page,
+                    totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
             })
             .catch(error => {
-                swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
+                swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! ", "error");
                 this.setState({loading: false});
             });
     }
@@ -279,7 +280,7 @@ class User extends Component {
     componentDidMount() {
         this.getData();
         this.getHeya();
-        // console.log(this.state.tag);
+        // console.log(this.state.data);
     }
 
     componentDidUpdate() {
@@ -298,14 +299,14 @@ class User extends Component {
         return !this.state.data.length ? <tr><td colSpan="6" className="text-center">Data Tidak Ditemukan</td></tr> :
             this.state.data.map(data => (
                 <tr key={data.rinku}>
-                    <th scope="row">{data.nomor}</th>
-                    <td>{data.juugyouinBangou}</td>
-                    <td>{data.name}</td>
-                    <td>{data.heya_id}</td>
-                    <td>{data.reberu}</td>
-                    <td>
-                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.url)}>Edit</button>
-                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.url)}>Delete</button>
+                    <th scope="row" className="text-center">{data.nomor}</th>
+                    <td className="text-center">{data.juugyouinBangou}</td>
+                    <td className="text-center">{data.name}</td>
+                    <td className="text-center">{data.heyaMei}</td>
+                    <td className="text-center">{data.level}</td>
+                    <td className="text-center">
+                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Edit</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Delete</button>
                     </td>
                 </tr>
             ));
@@ -396,15 +397,34 @@ class User extends Component {
                         <form onSubmit={this.handleEditSubmit}>
                             <div className="row">
                             <div className="col-sm-12">
+                            <div className="form-group">
+                                    <input
+                                        onChange={this.handleChangeNip}
+                                        value={this.state.nip}
+                                        title="NIP User"
+                                        placeholder="Masukkan NIP Baru.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
                                 <div className="form-group">
                                     <input
-                                        onChange={this.handleEditInputChange}
-                                        value={this.state.dataEditInput}
+                                        onChange={this.handleChangeName}
+                                        value={this.state.name}
                                         title="Nama User"
                                         placeholder="Masukkan Nama User Baru.."
                                         type="text"
                                         className="form-control"
                                     />
+                                </div>
+                                <div className="form-group">
+                                    <select
+                                        value={this.state.heyaMei}
+                                        onChange={this.handleChangeHeya}
+                                        className="form-control"
+                                    >
+                                        {this.renderSelect()}
+                                    </select>
                                 </div>
                             </div>
                             <div className="col-sm-12">
@@ -473,12 +493,12 @@ class User extends Component {
                                         <table id="tabeldata" width="100%" className="table table-striped table-lightfont">
                                             <thead>
                                                 <tr>
-                                                    <th className="width50px">NO</th>
-                                                    <th>NIP</th>
-                                                    <th>NAMA</th>
-                                                    <th>Bidang</th>
-                                                    <th>LEVEL USER</th>
-                                                    <th className="width250px">ACTION</th>
+                                                    <th className="width50px text-center">NO</th>
+                                                    <th className="text-center">NIP</th>
+                                                    <th className="text-center">NAMA</th>
+                                                    <th className="text-center">Bidang</th>
+                                                    <th className="text-center">LEVEL USER</th>
+                                                    <th className="width250px text-center">ACTION</th>
                                                 </tr>
                                             </thead>
                                             <tbody>{this.renderData()}</tbody>

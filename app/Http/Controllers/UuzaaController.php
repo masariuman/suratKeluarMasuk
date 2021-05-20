@@ -23,9 +23,19 @@ class UuzaaController extends Controller
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
+            $items['heyaMei'] = $items->heya->heyaMei;
+            if ($items['reberu'] === "3") {
+                $items['level'] = "User";
+            } else if ($items['reberu'] === "2") {
+                $items['level'] = "Admin";
+            } else if ($items['reberu'] === "3") {
+                $items['level'] = "Super Admin";
+            } else {
+                $items['level'] = "Legendary Admin";
+            }
             $count++;
         }
-        // dd($gets);
+        // dd($data);
         return response()->json([
             'data' => $data
         ]);
@@ -108,22 +118,11 @@ class UuzaaController extends Controller
     public function edit($id)
     {
         //
-        // $parent = Novel::whereIn('status', ['1', '2'])->orderBy("id", "ASC")->get();
-        // $data['parents'] = [];
-        // $x = 0;
-        // foreach ($parent as $toc) {
-        //     $data['parents']['novel_parent'][$x]['title'] = $toc->title;
-        //     $data['parents']['novel_parent'][$x]['url'] = $toc->url;
-        //     $x = $x + 1;
-        // }
-        // $data['Uuzaa'] = Uuzaa::where('url', $id)->first();
-        // $data['Uuzaa']['volumeName'] = $data['Uuzaa']->volume->url;
-        // $data['parent'] = Novel::where('id', $data['Uuzaa']->novel_id)->first();
-        // $data['Uuzaa']['volumes'] = Volume::where("status", "1")->where('novel_id', $data['parent']['id'])->orderBy("name", "ASC")->get();
-        // // dd($data['parent']);
-        // return response()->json([
-        //     'data' => $data
-        // ]);
+        $data = Uuzaa::where('rinku', $id)->first();
+        $data['heyaRinku'] = $data->heya->rinku;
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**

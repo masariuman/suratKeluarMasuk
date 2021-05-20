@@ -4685,10 +4685,11 @@ var User = /*#__PURE__*/function (_Component) {
     value: function handleEditButton(e) {
       var _this4 = this;
 
-      axios.get("/masariuman_tag/".concat(e)).then(function (response) {
+      axios.get("/kanrisha/uuzaa/deeta/".concat(e, "/edit")).then(function (response) {
         _this4.setState({
-          dataEditInput: response.data.deeta_data.tag,
-          url: response.data.deeta_data.url
+          heyaMei: response.data.data.heyaRinku,
+          nip: response.data.data.juugyouinBangou,
+          name: response.data.data.name
         });
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
@@ -4797,18 +4798,17 @@ var User = /*#__PURE__*/function (_Component) {
         loading: true
       });
       axios.get("/kanrisha/uuzaa/deeta").then(function (response) {
-        console.log(response.data.data.data);
-
+        // console.log(response.data.data.data);
         _this8.setState({
           data: response.data.data.data,
           loading: false,
-          activePage: response.data.deeta_data.current_page,
-          itemsCountPerPage: response.data.deeta_data.per_page,
-          totalItemsCount: response.data.deeta_data.total,
+          activePage: response.data.data.current_page,
+          itemsCountPerPage: response.data.data.per_page,
+          totalItemsCount: response.data.data.total,
           pageRangeDisplayed: 10
         });
       })["catch"](function (error) {
-        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! ", "error");
 
         _this8.setState({
           loading: false
@@ -4851,7 +4851,7 @@ var User = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getData();
-      this.getHeya(); // console.log(this.state.tag);
+      this.getHeya(); // console.log(this.state.data);
     }
   }, {
     key: "componentDidUpdate",
@@ -4882,27 +4882,33 @@ var User = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
             scope: "row",
+            className: "text-center",
             children: data.nomor
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+            className: "text-center",
             children: data.juugyouinBangou
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+            className: "text-center",
             children: data.name
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: data.heya_id
+            className: "text-center",
+            children: data.heyaMei
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: data.reberu
+            className: "text-center",
+            children: data.level
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+            className: "text-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               "data-target": "#editModal",
               "data-toggle": "modal",
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
               type: "button",
-              onClick: _this10.handleEditButton.bind(_this10, data.url),
+              onClick: _this10.handleEditButton.bind(_this10, data.rinku),
               children: "Edit"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
               type: "button",
-              onClick: _this10.handleDeleteButton.bind(_this10, data.url),
+              onClick: _this10.handleDeleteButton.bind(_this10, data.rinku),
               children: "Delete"
             })]
           })]
@@ -5053,19 +5059,37 @@ var User = /*#__PURE__*/function (_Component) {
                   onSubmit: this.handleEditSubmit,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                     className: "row",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                       className: "col-sm-12",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleEditInputChange,
-                          value: this.state.dataEditInput,
+                          onChange: this.handleChangeNip,
+                          value: this.state.nip,
+                          title: "NIP User",
+                          placeholder: "Masukkan NIP Baru..",
+                          type: "text",
+                          className: "form-control"
+                        })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                          onChange: this.handleChangeName,
+                          value: this.state.name,
                           title: "Nama User",
                           placeholder: "Masukkan Nama User Baru..",
                           type: "text",
                           className: "form-control"
                         })
-                      })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("select", {
+                          value: this.state.heyaMei,
+                          onChange: this.handleChangeHeya,
+                          className: "form-control",
+                          children: this.renderSelect()
+                        })
+                      })]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -5178,18 +5202,22 @@ var User = /*#__PURE__*/function (_Component) {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                          className: "width50px",
+                          className: "width50px text-center",
                           children: "NO"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          className: "text-center",
                           children: "NIP"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          className: "text-center",
                           children: "NAMA"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          className: "text-center",
                           children: "Bidang"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          className: "text-center",
                           children: "LEVEL USER"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                          className: "width250px",
+                          className: "width250px text-center",
                           children: "ACTION"
                         })]
                       })

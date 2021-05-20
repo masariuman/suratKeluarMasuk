@@ -206,7 +206,12 @@ class Menu extends Component {
                                 <ul className="sub-menu">
                                     <li>
                                         <Link to={`/kanrisha/heya`}>
-                                            <i className="os-icon os-icon-home"></i> &nbsp;&nbsp;&nbsp;Ruangan
+                                            <i className="os-icon os-icon-home"></i> &nbsp;&nbsp;&nbsp;Bidang
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to={`/kanrisha/subBidang`}>
+                                            <i className="fa fa-sitemap"></i> &nbsp;&nbsp;&nbsp;Sub Bidang
                                         </Link>
                                     </li>
                                 </ul>

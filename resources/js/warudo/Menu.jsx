@@ -48,10 +48,10 @@ class Menu extends Component {
                         </div>
                         <div className="logged-user-info-w">
                             <div className="logged-user-name">
-                                MasariuMan
+                                {this.state.uuzaaMei}
                             </div>
                             <div className="logged-user-role">
-                                Administrator
+                                {this.state.reberu}
                             </div>
                         </div>
                         <div className="logged-user-toggler-arrow">

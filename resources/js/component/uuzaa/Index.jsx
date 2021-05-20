@@ -311,8 +311,10 @@ class User extends Component {
                     <td className="text-center">{data.heyaMei}</td>
                     <td className="text-center">{data.level}</td>
                     <td className="text-center">
-                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Edit</button>
-                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Delete</button>
+                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Jadikan Admin</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-alternative" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Jadikan Super Admin</button>
                     </td>
                 </tr>
             ));

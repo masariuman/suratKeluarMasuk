@@ -2905,12 +2905,12 @@ var Heya = /*#__PURE__*/function (_Component) {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
               type: "button",
               onClick: _this9.handleEditButton.bind(_this9, data.rinku),
-              children: "Edit"
+              children: "Ubah"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
               type: "button",
               onClick: _this9.handleDeleteButton.bind(_this9, data.rinku),
-              children: "Delete"
+              children: "Hapus"
             })]
           })]
         }, data.id);
@@ -4910,12 +4910,22 @@ var User = /*#__PURE__*/function (_Component) {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
               type: "button",
               onClick: _this10.handleEditButton.bind(_this10, data.rinku),
-              children: "Edit"
+              children: "Ubah"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
               type: "button",
               onClick: _this10.handleDeleteButton.bind(_this10, data.rinku),
-              children: "Delete"
+              children: "Hapus"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+              className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary",
+              type: "button",
+              onClick: _this10.handleDeleteButton.bind(_this10, data.rinku),
+              children: "Jadikan Admin"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+              className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-alternative",
+              type: "button",
+              onClick: _this10.handleDeleteButton.bind(_this10, data.rinku),
+              children: "Jadikan Super Admin"
             })]
           })]
         }, data.rinku);

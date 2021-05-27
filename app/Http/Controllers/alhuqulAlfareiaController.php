@@ -139,5 +139,19 @@ class alhuqulAlfareiaController extends Controller
     public function destroy($id)
     {
         //
+        $data = AlhuqulAlfareia::where("rinku", $id)->first();
+        $data->update([
+            'sutattsu' => '0'
+        ]);
+        $pagination = 5;
+        $data = AlhuqulAlfareia::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 }

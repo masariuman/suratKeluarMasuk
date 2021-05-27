@@ -216,7 +216,7 @@ class Heya extends Component {
             loading: true
         });
         axios
-            .get('/masariuman_tag?page='+pageNumber)
+            .get('/kanrisha/heya/deeta?page='+pageNumber)
             .then(response => {
                 this.setState({
                     data: response.data.deeta_data.data,

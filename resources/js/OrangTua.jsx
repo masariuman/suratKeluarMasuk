@@ -13,6 +13,7 @@ import KeluarIndex from "./component/keluar/Index";
 import MasukIndex from "./component/masuk/Index";
 import UuzaaIndex from "./component/uuzaa/Index";
 import HeyaIndex from "./component/heya/Index";
+import SubBidangIndex from "./component/alhuqulAlfareia/Index";
 
 
 if (document.getElementById("root")) {
@@ -46,6 +47,11 @@ if (document.getElementById("root")) {
                         exact
                         path="/kanrisha/heya"
                         component={HeyaIndex}
+                    />
+                    <Route
+                        exact
+                        path="/kanrisha/subBidang"
+                        component={SubBidangIndex}
                     />
                     <Empatkosongempat />
                 </Switch>

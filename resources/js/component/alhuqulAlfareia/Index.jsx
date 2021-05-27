@@ -8,16 +8,14 @@ import swal from 'sweetalert';
 import Pagination from "react-js-pagination";
 
 
-class User extends Component {
+class alhuqulAlfareia extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
             heya: [],
             heyaMei : "",
-            uuzaNoRinku : "",
-            nip : "",
-            name : "",
+            dataNewInput: "",
             dataEditInput: "",
             cari: "",
             url: null,
@@ -33,25 +31,11 @@ class User extends Component {
         this.modalUbah = this.modalUbah.bind(this);
         this.handleChangeCari = this.handleChangeCari.bind(this);
         this.handleChangeHeya = this.handleChangeHeya.bind(this);
-        this.handleChangeName = this.handleChangeName.bind(this);
-        this.handleChangeNip = this.handleChangeNip.bind(this);
     }
 
     handleChangeHeya(e) {
         this.setState({
             heyaMei: e.target.value,
-        });
-    }
-
-    handleChangeName(e) {
-        this.setState({
-            name: e.target.value,
-        });
-    }
-
-    handleChangeNip(e) {
-        this.setState({
-            nip: e.target.value,
         });
     }
 
@@ -79,10 +63,10 @@ class User extends Component {
 
     handleDeleteButton(e) {
         axios
-            .get(`/kanrisha/uuzaa/deeta/${e}`)
+            .get(`/kanrisha/alhuqulAlfareia/deeta/${e}`)
             .then(response => {
                 swal({
-                    title: `Yakin ingin menghapus user dengan NIP ${response.data.data.juugyouinBangou} yang bernama ${response.data.data.name}`,
+                    title: `Yakin ingin menghapus Sub Bidang ${response.data.data.asm}`,
                     text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
                     icon: "warning",
                     buttons: true,
@@ -94,8 +78,8 @@ class User extends Component {
                             loading: true
                         });
                         axios
-                            .delete(`/kanrisha/uuzaa/deeta/${e}`, {
-                                rinku: ""
+                            .delete(`/kanrisha/alhuqulAlfareia/deeta/${e}`, {
+                                url: this.state.url
                             })
                             .then(response => {
                                 this.setState({
@@ -123,13 +107,11 @@ class User extends Component {
 
     handleEditButton(e) {
         axios
-            .get(`/kanrisha/uuzaa/deeta/${e}`)
+            .get(`/kanrisha/alhuqulAlfareia/deeta/${e}`)
             .then(response => {
                 this.setState({
-                    heyaMei : response.data.data.heyaRinku,
-                    nip : response.data.data.juugyouinBangou,
-                    uuzaNoRinku : response.data.data.rinku,
-                    name : response.data.data.name
+                    dataEditInput: response.data.data.asm,
+                    url: response.data.data.rinku
                 });
             })
             .catch(error => {
@@ -139,7 +121,7 @@ class User extends Component {
 
     handleChange(e) {
         this.setState({
-            create: e.target.value
+            dataNewInput: e.target.value
         });
         // console.log(e.target.value);
     }
@@ -157,17 +139,13 @@ class User extends Component {
             loading: true
         });
         axios
-            .post("/kanrisha/uuzaa/deeta", {
-                heyaMei : this.state.heyaMei,
-                nip : this.state.nip,
-                name : this.state.name
+            .post("/kanrisha/alhuqulAlfareia/deeta", {
+                data: this.state.dataNewInput
             })
             .then(response => {
                 this.setState({
                     data: [response.data.data, ...this.state.data],
-                    heyaMei : "",
-                    nip : "",
-                    name : "",
+                    dataNewInput: "",
                     loading: false
                 });
                 $("#tambahModal").removeClass("in");
@@ -193,17 +171,13 @@ class User extends Component {
             loading: true
         });
         axios
-            .put(`/kanrisha/uuzaa/deeta/${this.state.uuzaNoRinku}`, {
-                heyaMei : this.state.heyaMei,
-                nip : this.state.nip,
-                name : this.state.name
+            .put(`/kanrisha/alhuqulAlfareia/deeta/${this.state.url}`, {
+                data: this.state.dataEditInput
             })
             .then(response => {
                 this.setState({
                     data: response.data.data.data,
-                    heyaMei : "",
-                    nip : "",
-                    name : "",
+                    dataEditInput: "",
                     loading: false
                 });
                 $("#editModal").removeClass("in");
@@ -218,13 +192,13 @@ class User extends Component {
                 this.setState({
                     loading: false
                 });
-                swal("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
+                swal("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin! Kode Error : HS", "error");
             });
         // console.log(this.state.create);
     }
 
     getHeya() {
-        axios.get("/kanrisha/uuzaa/deeta/create").then((response) => {
+        axios.get("/kanrisha/alhuqulAlfareia/deeta/create").then((response) => {
             this.setState({
                 heya: response.data.data.heya,
                 heyaMei: response.data.data.heya[0].rinku,
@@ -237,7 +211,7 @@ class User extends Component {
             loading: true
         });
         axios
-            .get("/kanrisha/uuzaa/deeta")
+            .get("/kanrisha/alhuqulAlfareia/deeta")
             .then(response => {
                 // console.log(response.data.data.data);
                 this.setState({
@@ -250,7 +224,7 @@ class User extends Component {
                 });
             })
             .catch(error => {
-                swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! ", "error");
+                swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! Code Error : GD", "error");
                 this.setState({loading: false});
             });
     }
@@ -260,7 +234,7 @@ class User extends Component {
             loading: true
         });
         axios
-            .get('/masariuman_tag?page='+pageNumber)
+            .get('/kanrisha/alhuqulAlfareia/deeta?page='+pageNumber)
             .then(response => {
                 this.setState({
                     data: response.data.deeta_data.data,
@@ -286,7 +260,7 @@ class User extends Component {
     componentDidMount() {
         this.getData();
         this.getHeya();
-        // console.log(this.state.data);
+        // console.log(this.state.tag);
     }
 
     componentDidUpdate() {
@@ -302,18 +276,14 @@ class User extends Component {
     }
 
     renderData() {
-        return !this.state.data.length ? <tr><td colSpan="6" className="text-center">Data Tidak Ditemukan</td></tr> :
+        return !this.state.data.length ? <tr><td colSpan="3" className="text-center">Data Tidak Ditemukan</td></tr> :
             this.state.data.map(data => (
-                <tr key={data.rinku}>
-                    <th scope="row" className="text-center">{data.nomor}</th>
-                    <td className="text-center">{data.juugyouinBangou}</td>
-                    <td className="text-center">{data.name}</td>
-                    <td className="text-center">{data.heyaMei}</td>
-                    <td className="text-center">{data.level}</td>
-                    <td className="text-center">
+                <tr key={data.id}>
+                    <th scope="row">{data.nomor}</th>
+                    <td>{data.asm}</td>
+                    <td>
                         <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
                         <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button>
-                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Level</button>
                     </td>
                 </tr>
             ));
@@ -331,30 +301,20 @@ class User extends Component {
                         </div>
                         <div className="onboarding-content with-gradient">
                         <h4 className="onboarding-title">
-                            Tambah User Baru
+                            Tambah Sub Bidang Baru
                         </h4>
                         <div className="onboarding-text">
-                            Masukkan User baru.
+                            Masukkan nama Sub Bidang baru.
                         </div>
                         <form onSubmit={this.handleSubmit}>
                             <div className="row">
                             <div className="col-sm-12">
                                 <div className="form-group">
                                     <input
-                                        onChange={this.handleChangeNip}
-                                        value={this.state.nip}
-                                        title="NIP User"
-                                        placeholder="Masukkan NIP Baru.."
-                                        type="text"
-                                        className="form-control"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        onChange={this.handleChangeName}
-                                        value={this.state.name}
-                                        title="Nama User"
-                                        placeholder="Masukkan Nama User Baru.."
+                                        onChange={this.handleChange}
+                                        value={this.state.dataNewInput}
+                                        title="Nama Sub Bidang"
+                                        placeholder="Masukkan Nama Sub Bidang Baru.."
                                         type="text"
                                         className="form-control"
                                     />
@@ -371,7 +331,7 @@ class User extends Component {
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group text-center">
-                                    <button className="mr-2 mb-2 btn btn-primary" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Tambah User Baru</button>
+                                    <button className="mr-2 mb-2 btn btn-primary" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Tambah Sub Bidang Baru</button>
                                 </div>
                             </div>
                             </div>
@@ -396,47 +356,28 @@ class User extends Component {
                         </div>
                         <div className="onboarding-content with-gradient">
                         <h4 className="onboarding-title">
-                            Ubah Nama User
+                            Ubah Nama Sub Bidang
                         </h4>
                         <div className="onboarding-text">
-                            Masukkan nama User baru.
+                            Masukkan nama Sub Bidang baru.
                         </div>
                         <form onSubmit={this.handleEditSubmit}>
                             <div className="row">
                             <div className="col-sm-12">
-                            <div className="form-group">
+                                <div className="form-group">
                                     <input
-                                        onChange={this.handleChangeNip}
-                                        value={this.state.nip}
-                                        title="NIP User"
-                                        placeholder="Masukkan NIP Baru.."
+                                        onChange={this.handleEditInputChange}
+                                        value={this.state.dataEditInput}
+                                        title="Nama Sub Bidang"
+                                        placeholder="Masukkan Nama Sub Bidang Baru.."
                                         type="text"
                                         className="form-control"
                                     />
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        onChange={this.handleChangeName}
-                                        value={this.state.name}
-                                        title="Nama User"
-                                        placeholder="Masukkan Nama User Baru.."
-                                        type="text"
-                                        className="form-control"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <select
-                                        value={this.state.heyaMei}
-                                        onChange={this.handleChangeHeya}
-                                        className="form-control"
-                                    >
-                                        {this.renderSelect()}
-                                    </select>
                                 </div>
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group text-center">
-                                    <button className="mr-2 mb-2 btn btn-warning" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Ubah Nama User</button>
+                                    <button className="mr-2 mb-2 btn btn-warning" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Ubah Nama Sub Bidang</button>
                                 </div>
                             </div>
                             </div>
@@ -460,8 +401,8 @@ class User extends Component {
                         <div className="os-icon os-icon-tag"></div>
                         </div>
                         <div className="masariuman-textleft">
-                            <span className="masariuman-bold">User</span> <br/>
-                            <small>User Management</small>
+                            <span className="masariuman-bold">Sub Bidang</span> <br/>
+                            <small>Sub Bidang Management</small>
                         </div>
                     </div>
                     <div className="top-menu-controls">
@@ -470,10 +411,10 @@ class User extends Component {
                 </div>
                 <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <a>User</a>
+                        <a>Sub Bidang</a>
                     </li>
                     <li className="breadcrumb-item">
-                        <span>User Management</span>
+                        <span>Sub Bidang Management</span>
                     </li>
                 </ul>
 
@@ -484,28 +425,25 @@ class User extends Component {
                                 {/* content here */}
                                 <div className="element-box">
                                     <h5 className="form-header">
-                                    User List
+                                    Sub Bidang List
                                     </h5>
                                     <div className="form-desc">
-                                        Manajemen User Data
+                                        Manajemen Sub Bidang Data
                                     </div>
                                     <div>
-                                        <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal">Tambah User Baru</button>
+                                        <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal">Tambah Sub Bidang Baru</button>
                                         <div className="col-sm-4 float-right">
                                             <input type="text" className="form-control" onChange={this.handleChangeCari}
-                                                value={this.state.cari} placeholder="Cari User..."></input>
+                                                value={this.state.cari} placeholder="Cari Sub Bidang..."></input>
                                         </div>
                                     </div>
-                                    <div className="table-responsive" id="ruanganTable">
+                                    <div className="table-responsive" id="Sub BidangTable">
                                         <table id="tabeldata" width="100%" className="table table-striped table-lightfont">
                                             <thead>
                                                 <tr>
-                                                    <th className="width50px text-center">NO</th>
-                                                    <th className="text-center">NIP</th>
-                                                    <th className="text-center">NAMA</th>
-                                                    <th className="text-center">Bidang</th>
-                                                    <th className="text-center">LEVEL USER</th>
-                                                    <th className="width250px text-center">ACTION</th>
+                                                    <th className="width50px">NO</th>
+                                                    <th>NAMA Sub Bidang</th>
+                                                    <th className="width250px">ACTION</th>
                                                 </tr>
                                             </thead>
                                             <tbody>{this.renderData()}</tbody>
@@ -534,4 +472,4 @@ class User extends Component {
     }
 }
 
-export default User;
+export default alhuqulAlfareia;

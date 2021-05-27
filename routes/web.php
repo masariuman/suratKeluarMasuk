@@ -22,6 +22,7 @@ Route::get('/getUuzaa', 'UuzaaController@getUuzaa');
 Route::resources([
     'kanrisha/heya/deeta' => 'HeyaController',
     'kanrisha/uuzaa/deeta' => 'UuzaaController',
+    'kanrisha/alhuqulAlfareia/deeta' => 'alhuqulAlfareiaController',
 ]);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -29,8 +30,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::any('{all}', function () {
-        return view('template');
-    })
-        ->where(['all' => '.*']);
 });
+Route::any('{all}', function () {
+    return view('template');
+})
+    ->where(['all' => '.*']);

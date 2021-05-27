@@ -111,7 +111,8 @@ class alhuqulAlfareia extends Component {
             .then(response => {
                 this.setState({
                     dataEditInput: response.data.data.asm,
-                    url: response.data.data.rinku
+                    url: response.data.data.rinku,
+                    heyaMei: response.data.data.heyaRinku
                 });
             })
             .catch(error => {
@@ -140,7 +141,8 @@ class alhuqulAlfareia extends Component {
         });
         axios
             .post("/kanrisha/alhuqulAlfareia/deeta", {
-                data: this.state.dataNewInput
+                data: this.state.dataNewInput,
+                heyaMei: this.state.heyaMei
             })
             .then(response => {
                 this.setState({
@@ -172,6 +174,7 @@ class alhuqulAlfareia extends Component {
         });
         axios
             .put(`/kanrisha/alhuqulAlfareia/deeta/${this.state.url}`, {
+                heyaMei: this.state.heyaMei,
                 data: this.state.dataEditInput
             })
             .then(response => {
@@ -203,6 +206,7 @@ class alhuqulAlfareia extends Component {
                 heya: response.data.data.heya,
                 heyaMei: response.data.data.heya[0].rinku,
             });
+            // console.log(response.data.data.heya[0].rinku);
         });
     }
 
@@ -373,6 +377,15 @@ class alhuqulAlfareia extends Component {
                                         type="text"
                                         className="form-control"
                                     />
+                                </div>
+                                <div className="form-group">
+                                    <select
+                                        value={this.state.heyaMei}
+                                        onChange={this.handleChangeHeya}
+                                        className="form-control"
+                                    >
+                                        {this.renderSelect()}
+                                    </select>
                                 </div>
                             </div>
                             <div className="col-sm-12">

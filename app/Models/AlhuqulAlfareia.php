@@ -18,6 +18,6 @@ class AlhuqulAlfareia extends Model
 
     public function heya()
     {
-        return $this->belongsToMany('App\Models\Heya')->withTimestamps();
+        return $this->belongsTo('App\Models\Heya');
     }
 }

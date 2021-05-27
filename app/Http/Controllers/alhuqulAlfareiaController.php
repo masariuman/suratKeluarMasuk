@@ -61,8 +61,10 @@ class alhuqulAlfareiaController extends Controller
     public function store(Request $request)
     {
         //
+        $heya = Heya::where('rinku', $request->heyaMei)->first();
         AlhuqulAlfareia::create([
             'asm' => $request->data,
+            'heya_id' => $heya->id,
             'rinku' => str_replace('#', 'o', str_replace('.', 'A', str_replace('/', '$', Hash::make(Hash::make(Uuid::generate()->string)))))
         ]);
         $data = AlhuqulAlfareia::orderBy("id", "DESC")->first();
@@ -81,6 +83,12 @@ class alhuqulAlfareiaController extends Controller
     public function show($id)
     {
         //
+        $data = AlhuqulAlfareia::where("rinku", $id)->first();
+        $data['heyaRinku'] = $data->heya->rinku;
+        // dd($gets);
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**
@@ -104,6 +112,22 @@ class alhuqulAlfareiaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = AlhuqulAlfareia::where("rinku", $id)->first();
+        $heya = Heya::where('rinku', $request->heyaMei)->first();
+        $data->update([
+            'heya_id' => $heya->id,
+            'asm' => $request->data
+        ]);
+        $pagination = 5;
+        $data = AlhuqulAlfareia::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**

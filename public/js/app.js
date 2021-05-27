@@ -2241,7 +2241,8 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
       axios.get("/kanrisha/alhuqulAlfareia/deeta/".concat(e)).then(function (response) {
         _this4.setState({
           dataEditInput: response.data.data.asm,
-          url: response.data.data.rinku
+          url: response.data.data.rinku,
+          heyaMei: response.data.data.heyaRinku
         });
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
@@ -2271,7 +2272,8 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
         loading: true
       });
       axios.post("/kanrisha/alhuqulAlfareia/deeta", {
-        data: this.state.dataNewInput
+        data: this.state.dataNewInput,
+        heyaMei: this.state.heyaMei
       }).then(function (response) {
         _this5.setState({
           data: [response.data.data].concat(_toConsumableArray(_this5.state.data)),
@@ -2303,6 +2305,7 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
         loading: true
       });
       axios.put("/kanrisha/alhuqulAlfareia/deeta/".concat(this.state.url), {
+        heyaMei: this.state.heyaMei,
         data: this.state.dataEditInput
       }).then(function (response) {
         _this6.setState({
@@ -2334,7 +2337,8 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
         _this7.setState({
           heya: response.data.data.heya,
           heyaMei: response.data.data.heya[0].rinku
-        });
+        }); // console.log(response.data.data.heya[0].rinku);
+
       });
     }
   }, {
@@ -2585,9 +2589,9 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
                   onSubmit: this.handleEditSubmit,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                     className: "row",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                       className: "col-sm-12",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
                           onChange: this.handleEditInputChange,
@@ -2597,7 +2601,15 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
                           type: "text",
                           className: "form-control"
                         })
-                      })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("select", {
+                          value: this.state.heyaMei,
+                          onChange: this.handleChangeHeya,
+                          className: "form-control",
+                          children: this.renderSelect()
+                        })
+                      })]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {

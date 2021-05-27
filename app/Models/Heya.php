@@ -19,4 +19,9 @@ class Heya extends Model
     {
         return $this->hasMany('App\Models\User')->withTimestamps();
     }
+
+    public function alhuqulalfareia()
+    {
+        return $this->hasMany('App\Models\AlhuqulAlfareia')->withTimestamps();
+    }
 }

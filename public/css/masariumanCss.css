@@ -277,3 +277,8 @@ li.masariuman_input-tag__tags__input {
 .masariuman_menuDescription {
     margin: 30px;
 }
+
+.masariuman_tableLabelTanggal {
+    width: 100%;
+    margin-bottom: 20px;
+}

@@ -23,6 +23,7 @@ Route::resources([
     'kanrisha/heya/deeta' => 'HeyaController',
     'kanrisha/uuzaa/deeta' => 'UuzaaController',
     'kanrisha/alhuqulAlfareia/deeta' => 'alhuqulAlfareiaController',
+    'kanrisha/masuk/deeta' => 'suratMasukCOntroller',
 ]);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

@@ -34,17 +34,17 @@ class Masuk extends Component {
             cari: e.target.value
         });
         axios
-            .post(`/masariuman_tag/search`, {
+            .post(`/kanrisha/masuk/deeta/search`, {
                 cari: e.target.value
             })
             .then(response => {
                 // console.log(response.data);
                 this.setState({
-                    data: response.data.deeta_data.data,
+                    data: response.data.data.data,
                     loading: false,
-                    activePage: response.data.deeta_data.current_page,
-                    itemsCountPerPage: response.data.deeta_data.per_page,
-                    totalItemsCount: response.data.deeta_data.total,
+                    activePage: response.data.data.current_page,
+                    itemsCountPerPage: response.data.data.per_page,
+                    totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
                 // console.log(this.state.tag);
@@ -53,10 +53,10 @@ class Masuk extends Component {
 
     handleDeleteButton(e) {
         axios
-            .get(`/masariuman_tag/${e}`)
+            .get(`/kanrisha/masuk/deeta/${e}`)
             .then(response => {
                 swal({
-                    title: `Yakin ingin menghapus surat ${response.data.deeta_data.tag}`,
+                    title: `Yakin ingin menghapus surat ${response.data.data.tag}`,
                     text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
                     icon: "warning",
                     buttons: true,
@@ -68,12 +68,12 @@ class Masuk extends Component {
                             loading: true
                         });
                         axios
-                            .delete(`/masariuman_tag/${e}`, {
+                            .delete(`/kanrisha/masuk/deeta/${e}`, {
                                 url: this.state.url
                             })
                             .then(response => {
                                 this.setState({
-                                    data: response.data.deeta_data.data,
+                                    data: response.data.data.data,
                                     loading: false
                                 });
                                 swal("Sukses!", "Data Berhasil Dihapus!", "success");
@@ -97,11 +97,11 @@ class Masuk extends Component {
 
     handleEditButton(e) {
         axios
-            .get(`/masariuman_tag/${e}`)
+            .get(`/kanrisha/masuk/deeta/${e}`)
             .then(response => {
                 this.setState({
-                    dataEditInput: response.data.deeta_data.tag,
-                    url: response.data.deeta_data.url
+                    dataEditInput: response.data.data.tag,
+                    url: response.data.data.url
                 });
             })
             .catch(error => {
@@ -129,12 +129,12 @@ class Masuk extends Component {
             loading: true
         });
         axios
-            .post("/masariuman_tag", {
+            .post("/kanrisha/masuk/deeta", {
                 create: this.state.create
             })
             .then(response => {
                 this.setState({
-                    data: [response.data.deeta_data, ...this.state.data],
+                    data: [response.data.data, ...this.state.data],
                     create: "",
                     loading: false
                 });
@@ -161,12 +161,12 @@ class Masuk extends Component {
             loading: true
         });
         axios
-            .put(`/masariuman_tag/${this.state.url}`, {
+            .put(`/kanrisha/masuk/deeta/${this.state.url}`, {
                 content: this.state.dataEditInput
             })
             .then(response => {
                 this.setState({
-                    data: response.data.deeta_data.data,
+                    data: response.data.data.data,
                     dataEditInput: "",
                     loading: false
                 });
@@ -192,14 +192,14 @@ class Masuk extends Component {
             loading: true
         });
         axios
-            .get("/masariuman_data")
+            .get("/kanrisha/masuk/deeta")
             .then(response => {
                 this.setState({
-                    data: response.data.deeta_data.data,
+                    data: response.data.data.data,
                     loading: false,
-                    activePage: response.data.deeta_data.current_page,
-                    itemsCountPerPage: response.data.deeta_data.per_page,
-                    totalItemsCount: response.data.deeta_data.total,
+                    activePage: response.data.data.current_page,
+                    itemsCountPerPage: response.data.data.per_page,
+                    totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
             })
@@ -214,14 +214,14 @@ class Masuk extends Component {
             loading: true
         });
         axios
-            .get('/masariuman_tag?page='+pageNumber)
+            .get('/kanrisha/masuk/deeta?page='+pageNumber)
             .then(response => {
                 this.setState({
-                    data: response.data.deeta_data.data,
+                    data: response.data.data.data,
                     loading: false,
-                    activePage: response.data.deeta_data.current_page,
-                    itemsCountPerPage: response.data.deeta_data.per_page,
-                    totalItemsCount: response.data.deeta_data.total,
+                    activePage: response.data.data.current_page,
+                    itemsCountPerPage: response.data.data.per_page,
+                    totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
             })
@@ -233,8 +233,8 @@ class Masuk extends Component {
 
     testData() {
         axios
-            .get("/masariuman_tag")
-            .then(response => console.log(response.data.deeta_data));
+            .get("/kanrisha/masuk/deeta")
+            .then(response => console.log(response.data.data));
     }
 
     componentDidMount() {
@@ -247,10 +247,13 @@ class Masuk extends Component {
     }
 
     renderData() {
-        return !this.state.data.length ? <tr><td colSpan="3" className="text-center">Data Tidak Ditemukan</td></tr> :
+        return !this.state.data.length ? <tr><td colSpan="6" className="text-center">Data Tidak Ditemukan</td></tr> :
             this.state.data.map(data => (
                 <tr key={data.id}>
                     <th scope="row">{data.nomor}</th>
+                    <td>{data.tag}</td>
+                    <td>{data.tag}</td>
+                    <td>{data.tag}</td>
                     <td>{data.tag}</td>
                     <td>
                         <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.url)}>Edit</button>
@@ -274,9 +277,6 @@ class Masuk extends Component {
                         <h4 className="onboarding-title">
                             Tambah Surat Masuk Baru
                         </h4>
-                        <div className="onboarding-text">
-                            Masukkan nama Surat Masuk baru.
-                        </div>
                         <form onSubmit={this.handleSubmit}>
                             <div className="row">
                             <div className="col-sm-12">
@@ -284,8 +284,106 @@ class Masuk extends Component {
                                     <input
                                         onChange={this.handleChange}
                                         value={this.state.create}
-                                        title="Nama Surat Masuk"
-                                        placeholder="Masukkan Nama Surat Masuk Baru.."
+                                        title="Asal Surat"
+                                        placeholder="Asal Surat.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <input
+                                        onChange={this.handleChange}
+                                        value={this.state.create}
+                                        title="Nomor Surat"
+                                        placeholder="Nomor Surat.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-sm-12">
+                                <table className="masariuman_tableLabelTanggal">
+                                    <tr>
+                                        <td>
+                                            Tanggal Surat :
+                                        </td>
+                                        <td className="form-group">
+                                            <input
+                                                onChange={this.handleChange}
+                                                value={this.state.create}
+                                                title="Tanggal Surat"
+                                                placeholder="Tanggal Surat.."
+                                                type="date"
+                                                className="form-control"
+                                            />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <textarea
+                                        onChange={this.handleChange}
+                                        value={this.state.create}
+                                        title="Perihal Surat"
+                                        placeholder="Perihal Surat.."
+                                        className="form-control"
+                                        rows="3" />
+                                </div>
+                            </div>
+                            <div className="col-sm-12">
+                                Tanggal Surat Naik Ke Kepala :
+                                <div className="form-group">
+                                    <input
+                                        onChange={this.handleChange}
+                                        value={this.state.create}
+                                        title="Tanggal Surat Naik Ke Kepala"
+                                        placeholder="Tanggal Surat Naik Ke Kepala.."
+                                        type="date"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <input
+                                        onChange={this.handleChange}
+                                        value={this.state.create}
+                                        title="Turun Ke"
+                                        placeholder="Turun Ke.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-sm-12">
+                                <table className="masariuman_tableLabelTanggal">
+                                    <tr>
+                                        <td>
+                                            Tanggal Surat Turun :
+                                        </td>
+                                        <td className="form-group">
+                                            <input
+                                                onChange={this.handleChange}
+                                                value={this.state.create}
+                                                title="Tanggal Surat"
+                                                placeholder="Tanggal Surat.."
+                                                type="date"
+                                                className="form-control"
+                                            />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <input
+                                        onChange={this.handleChange}
+                                        value={this.state.create}
+                                        title="File"
+                                        placeholder="File.."
                                         type="text"
                                         className="form-control"
                                     />
@@ -404,7 +502,10 @@ class Masuk extends Component {
                                             <thead>
                                                 <tr>
                                                     <th className="width50px">NO</th>
-                                                    <th>Surat Masuk NAME</th>
+                                                    <th>Asal Surat</th>
+                                                    <th>Nomor/Tanggal Surat</th>
+                                                    <th>Perihal</th>
+                                                    <th>Tujuan/Tanggal Turun</th>
                                                     <th className="width250px">ACTION</th>
                                                 </tr>
                                             </thead>

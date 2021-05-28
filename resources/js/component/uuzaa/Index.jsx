@@ -15,6 +15,7 @@ class User extends Component {
             data: [],
             heya: [],
             heyaMei : "",
+            level: "3",
             uuzaNoRinku : "",
             nip : "",
             name : "",
@@ -26,15 +27,25 @@ class User extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleEditInputChange = this.handleEditInputChange.bind(this);
         this.handleEditSubmit = this.handleEditSubmit.bind(this);
+        this.handleLevelSubmit = this.handleLevelSubmit.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.renderData = this.renderData.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
         this.modalTambah = this.modalTambah.bind(this);
         this.modalUbah = this.modalUbah.bind(this);
+        this.modalLevel = this.modalLevel.bind(this);
         this.handleChangeCari = this.handleChangeCari.bind(this);
         this.handleChangeHeya = this.handleChangeHeya.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeNip = this.handleChangeNip.bind(this);
+        this.handleChangeLevel = this.handleChangeLevel.bind(this);
+    }
+
+    handleChangeLevel(e) {
+        this.setState({
+            level: e.target.value,
+        });
+        console.log(this.state.level);
     }
 
     handleChangeHeya(e) {
@@ -137,6 +148,20 @@ class User extends Component {
             });
     }
 
+    handleLevelButton(e) {
+        axios
+            .get(`/kanrisha/uuzaa/deeta/${e}`)
+            .then(response => {
+                this.setState({
+                    level : response.data.data.reberu,
+                    uuzaNoRinku : response.data.data.rinku
+                });
+            })
+            .catch(error => {
+                swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
+            });
+    }
+
     handleChange(e) {
         this.setState({
             create: e.target.value
@@ -211,6 +236,38 @@ class User extends Component {
                 $('body').removeClass('modal-open');
                 $('body').css('padding-right', '');
                 $("#editModal").hide();
+                swal("Sukses!", "Data Berhasil Diubah!", "success");
+                // console.log("from handle sumit", response);
+            })
+            .catch(error => {
+                this.setState({
+                    loading: false
+                });
+                swal("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
+            });
+        // console.log(this.state.create);
+    }
+
+    handleLevelSubmit(e) {
+        e.preventDefault();
+        this.setState({
+            loading: true
+        });
+        axios
+            .put(`/kanrisha/uuzaa/deeta/${this.state.uuzaNoRinku}`, {
+                reberu : this.state.level
+            })
+            .then(response => {
+                this.setState({
+                    data: response.data.data.data,
+                    level : "3",
+                    loading: false
+                });
+                $("#levelModal").removeClass("in");
+                $(".modal-backdrop").remove();
+                $('body').removeClass('modal-open');
+                $('body').css('padding-right', '');
+                $("#levelModal").hide();
                 swal("Sukses!", "Data Berhasil Diubah!", "success");
                 // console.log("from handle sumit", response);
             })
@@ -313,7 +370,7 @@ class User extends Component {
                     <td className="text-center">
                         <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
                         <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button>
-                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Level</button>
+                        <button data-target="#levelModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary" type="button" onClick={this.handleLevelButton.bind(this, data.rinku)}>Level</button>
                     </td>
                 </tr>
             ));
@@ -449,6 +506,62 @@ class User extends Component {
         );
     }
 
+    modalLevel() {
+        return (
+            <div aria-hidden="true" className="onboarding-modal modal fade animated" id="levelModal" role="dialog" tabIndex="-1">
+                <div className="modal-dialog modal-lg modal-centered" role="document">
+                    <div className="modal-content text-center">
+                    <button aria-label="Close" className="close" data-dismiss="modal" type="button"><span className="close-label">Tutup</span><span className="os-icon os-icon-close"></span></button>
+                    <div className="onboarding-side-by-side">
+                        <div className="onboarding-media">
+                        <img alt="" src="/iconModal/tagEdit.png" width="200px" />
+                        </div>
+                        <div className="onboarding-content with-gradient">
+                        <h4 className="onboarding-title">
+                            Ubah Level User
+                        </h4>
+                        <div className="onboarding-text">
+                            Masukkan Level User Baru.
+                        </div>
+                        <form onSubmit={this.handleLevelSubmit}>
+                            <div className="row">
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <select
+                                        value={this.state.level}
+                                        onChange={this.handleChangeLevel}
+                                        className="form-control"
+                                    >
+                                        <option value="nol" key="nol">
+                                            Legendary Admin
+                                        </option>
+                                        <option value="1" key="1">
+                                            Super Admin
+                                        </option>
+                                        <option value="2" key="2">
+                                            Admin Bidang
+                                        </option>
+                                        <option value="3" key="3">
+                                            Normal User
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-sm-12">
+                                <div className="form-group text-center">
+                                    <button className="mr-2 mb-2 btn btn-warning" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Ubah Nama User</button>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     render() {
         return (
             this.state.loading === true ? <Loading /> :
@@ -529,6 +642,7 @@ class User extends Component {
                 <Footer />
                 {this.modalTambah()}
                 {this.modalUbah()}
+                {this.modalLevel()}
             </div>
         );
     }

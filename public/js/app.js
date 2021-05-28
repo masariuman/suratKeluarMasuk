@@ -5277,6 +5277,7 @@ var User = /*#__PURE__*/function (_Component) {
       data: [],
       heya: [],
       heyaMei: "",
+      level: "3",
       uuzaNoRinku: "",
       nip: "",
       name: "",
@@ -5288,19 +5289,30 @@ var User = /*#__PURE__*/function (_Component) {
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleEditInputChange = _this.handleEditInputChange.bind(_assertThisInitialized(_this));
     _this.handleEditSubmit = _this.handleEditSubmit.bind(_assertThisInitialized(_this));
+    _this.handleLevelSubmit = _this.handleLevelSubmit.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.renderData = _this.renderData.bind(_assertThisInitialized(_this));
     _this.handlePageChange = _this.handlePageChange.bind(_assertThisInitialized(_this));
     _this.modalTambah = _this.modalTambah.bind(_assertThisInitialized(_this));
     _this.modalUbah = _this.modalUbah.bind(_assertThisInitialized(_this));
+    _this.modalLevel = _this.modalLevel.bind(_assertThisInitialized(_this));
     _this.handleChangeCari = _this.handleChangeCari.bind(_assertThisInitialized(_this));
     _this.handleChangeHeya = _this.handleChangeHeya.bind(_assertThisInitialized(_this));
     _this.handleChangeName = _this.handleChangeName.bind(_assertThisInitialized(_this));
     _this.handleChangeNip = _this.handleChangeNip.bind(_assertThisInitialized(_this));
+    _this.handleChangeLevel = _this.handleChangeLevel.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(User, [{
+    key: "handleChangeLevel",
+    value: function handleChangeLevel(e) {
+      this.setState({
+        level: e.target.value
+      });
+      console.log(this.state.level);
+    }
+  }, {
     key: "handleChangeHeya",
     value: function handleChangeHeya(e) {
       this.setState({
@@ -5403,6 +5415,20 @@ var User = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "handleLevelButton",
+    value: function handleLevelButton(e) {
+      var _this5 = this;
+
+      axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
+        _this5.setState({
+          level: response.data.data.reberu,
+          uuzaNoRinku: response.data.data.rinku
+        });
+      })["catch"](function (error) {
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
+      });
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(e) {
       this.setState({
@@ -5419,7 +5445,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this5 = this;
+      var _this6 = this;
 
       e.preventDefault();
       this.setState({
@@ -5430,8 +5456,8 @@ var User = /*#__PURE__*/function (_Component) {
         nip: this.state.nip,
         name: this.state.name
       }).then(function (response) {
-        _this5.setState({
-          data: [response.data.data].concat(_toConsumableArray(_this5.state.data)),
+        _this6.setState({
+          data: [response.data.data].concat(_toConsumableArray(_this6.state.data)),
           heyaMei: "",
           nip: "",
           name: "",
@@ -5445,7 +5471,7 @@ var User = /*#__PURE__*/function (_Component) {
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#tambahModal").hide();
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Baru Berhasil Ditambahkan!", "success"); // console.log("from handle sumit", response);
       })["catch"](function (error) {
-        _this5.setState({
+        _this6.setState({
           loading: false
         });
 
@@ -5455,7 +5481,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleEditSubmit",
     value: function handleEditSubmit(e) {
-      var _this6 = this;
+      var _this7 = this;
 
       e.preventDefault();
       this.setState({
@@ -5466,7 +5492,7 @@ var User = /*#__PURE__*/function (_Component) {
         nip: this.state.nip,
         name: this.state.name
       }).then(function (response) {
-        _this6.setState({
+        _this7.setState({
           data: response.data.data.data,
           heyaMei: "",
           nip: "",
@@ -5481,7 +5507,39 @@ var User = /*#__PURE__*/function (_Component) {
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#editModal").hide();
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
       })["catch"](function (error) {
-        _this6.setState({
+        _this7.setState({
+          loading: false
+        });
+
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
+      }); // console.log(this.state.create);
+    }
+  }, {
+    key: "handleLevelSubmit",
+    value: function handleLevelSubmit(e) {
+      var _this8 = this;
+
+      e.preventDefault();
+      this.setState({
+        loading: true
+      });
+      axios.put("/kanrisha/uuzaa/deeta/".concat(this.state.uuzaNoRinku), {
+        reberu: this.state.level
+      }).then(function (response) {
+        _this8.setState({
+          data: response.data.data.data,
+          level: "3",
+          loading: false
+        });
+
+        jquery__WEBPACK_IMPORTED_MODULE_1___default()("#levelModal").removeClass("in");
+        jquery__WEBPACK_IMPORTED_MODULE_1___default()(".modal-backdrop").remove();
+        jquery__WEBPACK_IMPORTED_MODULE_1___default()('body').removeClass('modal-open');
+        jquery__WEBPACK_IMPORTED_MODULE_1___default()('body').css('padding-right', '');
+        jquery__WEBPACK_IMPORTED_MODULE_1___default()("#levelModal").hide();
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
+      })["catch"](function (error) {
+        _this8.setState({
           loading: false
         });
 
@@ -5491,10 +5549,10 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "getHeya",
     value: function getHeya() {
-      var _this7 = this;
+      var _this9 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/create").then(function (response) {
-        _this7.setState({
+        _this9.setState({
           heya: response.data.data.heya,
           heyaMei: response.data.data.heya[0].rinku
         });
@@ -5503,14 +5561,14 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "getData",
     value: function getData() {
-      var _this8 = this;
+      var _this10 = this;
 
       this.setState({
         loading: true
       });
       axios.get("/kanrisha/uuzaa/deeta").then(function (response) {
         // console.log(response.data.data.data);
-        _this8.setState({
+        _this10.setState({
           data: response.data.data.data,
           loading: false,
           activePage: response.data.data.current_page,
@@ -5521,7 +5579,7 @@ var User = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! ", "error");
 
-        _this8.setState({
+        _this10.setState({
           loading: false
         });
       });
@@ -5529,13 +5587,13 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handlePageChange",
     value: function handlePageChange(pageNumber) {
-      var _this9 = this;
+      var _this11 = this;
 
       this.setState({
         loading: true
       });
       axios.get('/masariuman_tag?page=' + pageNumber).then(function (response) {
-        _this9.setState({
+        _this11.setState({
           data: response.data.deeta_data.data,
           loading: false,
           activePage: response.data.deeta_data.current_page,
@@ -5546,7 +5604,7 @@ var User = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
 
-        _this9.setState({
+        _this11.setState({
           loading: false
         });
       });
@@ -5581,7 +5639,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "renderData",
     value: function renderData() {
-      var _this10 = this;
+      var _this12 = this;
 
       return !this.state.data.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -5614,17 +5672,19 @@ var User = /*#__PURE__*/function (_Component) {
               "data-toggle": "modal",
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
               type: "button",
-              onClick: _this10.handleEditButton.bind(_this10, data.rinku),
+              onClick: _this12.handleEditButton.bind(_this12, data.rinku),
               children: "Ubah"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
               type: "button",
-              onClick: _this10.handleDeleteButton.bind(_this10, data.rinku),
+              onClick: _this12.handleDeleteButton.bind(_this12, data.rinku),
               children: "Hapus"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+              "data-target": "#levelModal",
+              "data-toggle": "modal",
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary",
               type: "button",
-              onClick: _this10.handleDeleteButton.bind(_this10, data.rinku),
+              onClick: _this12.handleLevelButton.bind(_this12, data.rinku),
               children: "Level"
             })]
           })]
@@ -5828,6 +5888,96 @@ var User = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "modalLevel",
+    value: function modalLevel() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        "aria-hidden": "true",
+        className: "onboarding-modal modal fade animated",
+        id: "levelModal",
+        role: "dialog",
+        tabIndex: "-1",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "modal-dialog modal-lg modal-centered",
+          role: "document",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            className: "modal-content text-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
+              "aria-label": "Close",
+              className: "close",
+              "data-dismiss": "modal",
+              type: "button",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                className: "close-label",
+                children: "Tutup"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                className: "os-icon os-icon-close"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+              className: "onboarding-side-by-side",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                className: "onboarding-media",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                  alt: "",
+                  src: "/iconModal/tagEdit.png",
+                  width: "200px"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                className: "onboarding-content with-gradient",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
+                  className: "onboarding-title",
+                  children: "Ubah Level User"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                  className: "onboarding-text",
+                  children: "Masukkan Level User Baru."
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("form", {
+                  onSubmit: this.handleLevelSubmit,
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                    className: "row",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("select", {
+                          value: this.state.level,
+                          onChange: this.handleChangeLevel,
+                          className: "form-control",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+                            value: "nol",
+                            children: "Legendary Admin"
+                          }, "nol"), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+                            value: "1",
+                            children: "Super Admin"
+                          }, "1"), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+                            value: "2",
+                            children: "Admin Bidang"
+                          }, "2"), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+                            value: "3",
+                            children: "Normal User"
+                          }, "3")]
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group text-center",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                          className: "mr-2 mb-2 btn btn-warning",
+                          "data-target": "#onboardingWideFormModal",
+                          "data-toggle": "modal",
+                          type: "submit",
+                          children: "Ubah Nama User"
+                        })
+                      })
+                    })]
+                  })
+                })]
+              })]
+            })]
+          })
+        })
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return this.state.loading === true ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_warudo_Loading__WEBPACK_IMPORTED_MODULE_4__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -5954,7 +6104,7 @@ var User = /*#__PURE__*/function (_Component) {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_warudo_DarkMode__WEBPACK_IMPORTED_MODULE_3__.default, {})]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_warudo_Footer__WEBPACK_IMPORTED_MODULE_2__.default, {}), this.modalTambah(), this.modalUbah()]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_warudo_Footer__WEBPACK_IMPORTED_MODULE_2__.default, {}), this.modalTambah(), this.modalUbah(), this.modalLevel()]
       });
     }
   }]);

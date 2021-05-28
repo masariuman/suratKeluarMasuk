@@ -150,11 +150,23 @@ class UuzaaController extends Controller
         //
         $Uuzaa = Uuzaa::where('rinku', $id)->first();
         $heya = Heya::where('rinku', $request->heyaMei)->first();
-        $Uuzaa->update([
-            'juugyouinBangou' => $request->nip,
-            'name' => $request->name,
-            'heya_id' => $heya->id
-        ]);
+        if ($request->reberu) {
+            if ($request->reberu === "nol") {
+                $Uuzaa->update([
+                    'reberu' => "0"
+                ]);
+            } else {
+                $Uuzaa->update([
+                    'reberu' => $request->reberu
+                ]);
+            }
+        } else {
+            $Uuzaa->update([
+                'juugyouinBangou' => $request->nip,
+                'name' => $request->name,
+                'heya_id' => $heya->id
+            ]);
+        }
         $pagination = 5;
         $data = Uuzaa::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);

@@ -190,7 +190,6 @@ class User extends Component {
             .then(response => {
                 this.setState({
                     data: [response.data.data, ...this.state.data],
-                    heyaMei : "",
                     nip : "",
                     name : "",
                     loading: false
@@ -226,7 +225,6 @@ class User extends Component {
             .then(response => {
                 this.setState({
                     data: response.data.data.data,
-                    heyaMei : "",
                     nip : "",
                     name : "",
                     loading: false

@@ -5458,7 +5458,6 @@ var User = /*#__PURE__*/function (_Component) {
       }).then(function (response) {
         _this6.setState({
           data: [response.data.data].concat(_toConsumableArray(_this6.state.data)),
-          heyaMei: "",
           nip: "",
           name: "",
           loading: false
@@ -5494,7 +5493,6 @@ var User = /*#__PURE__*/function (_Component) {
       }).then(function (response) {
         _this7.setState({
           data: response.data.data.data,
-          heyaMei: "",
           nip: "",
           name: "",
           loading: false

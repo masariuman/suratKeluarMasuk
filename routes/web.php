@@ -31,8 +31,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::any('{all}', function () {
+        return view('template');
+    })
+        ->where(['all' => '.*']);
 });
-Route::any('{all}', function () {
-    return view('template');
-})
-    ->where(['all' => '.*']);

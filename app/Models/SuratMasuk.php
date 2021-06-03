@@ -16,6 +16,7 @@ class SuratMasuk extends Model
         'tanggalNaik',
         'tanggalTurun',
         'subbid_id',
+        'file',
         'user_id',
         'sutattsu'
     ];

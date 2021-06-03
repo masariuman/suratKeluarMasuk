@@ -22,6 +22,6 @@ class Heya extends Model
 
     public function alhuqulalfareia()
     {
-        return $this->hasMany('App\Models\AlhuqulAlfareia')->withTimestamps();
+        return $this->hasMany('App\Models\AlhuqulAlfareia', 'heya_id');
     }
 }

@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
+use Uuid;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\AlhuqulAlfareia;
+use Illuminate\Support\Carbon;
 
 class suratMasukCOntroller extends Controller
 {
@@ -18,6 +23,18 @@ class suratMasukCOntroller extends Controller
         $pagination = 5;
         $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $items['potonganPerihal'] = substr($items['perihal'], 0, 30) . " . . .";
+            $items['tujuan'] = $items->subbid->asm;
+            if ($items['tanggalSurat']) {
+                $items['tanggalSuratText'] = date("d F Y", strtotime($items['tanggalSurat']));
+            }
+            if ($items['tanggalTurun']) {
+                $items['tanggalTurunText'] = date("d F Y", strtotime($items['tanggalTurun']));
+            }
+            $count++;
+        }
         return response()->json([
             'data' => $data
         ]);
@@ -31,6 +48,15 @@ class suratMasukCOntroller extends Controller
     public function create()
     {
         //
+        $user = Auth::user();
+        if ($user->reberu === "3" || $user->reberu === "2") {
+            $data = $user->heya->alhuqulalfareia;
+        } else {
+            $data = AlhuqulAlfareia::all();
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**
@@ -42,6 +68,53 @@ class suratMasukCOntroller extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->request->all();
+        // dd($data['turunKe']);
+        $file = $request->files;
+        $subbid = AlhuqulAlfareia::where('rinku', $data['turunKe'])->first();
+        if ($file) {
+            $file = $request->file('file');
+            $fileExt = $file->getClientOriginalExtension();
+            $fileName = date('YmdHis') . ".$fileExt";
+            $request->file('file')->move("zaFail", $fileName);
+            SuratMasuk::create([
+                'rinku' => str_replace('#', 'o', str_replace('.', 'A', str_replace('/', '$', Hash::make(Hash::make(Uuid::generate()->string))))),
+                'asalSurat' => $data['asalSurat'],
+                'nomorSurat' => $data['nomorSurat'],
+                'tanggalSurat' => $data['tanggalSurat'],
+                'perihal' => $data['perihal'],
+                'tanggalNaik' => $data['tanggalNaik'],
+                'subbid_id' => $subbid->id,
+                'tanggalTurun' => $data['tanggalTurun'],
+                'file' => $fileName,
+                'user_id' => Auth::user()->id
+            ]);
+        } else {
+            SuratMasuk::create([
+                'rinku' => str_replace('#', 'o', str_replace('.', 'A', str_replace('/', '$', Hash::make(Hash::make(Uuid::generate()->string))))),
+                'asalSurat' => $data['asalSurat'],
+                'nomorSurat' => $$data['nomorSurat'],
+                'tanggalSurat' => $data['tanggalSurat'],
+                'perihal' => $data['perihal'],
+                'tanggalNaik' => $data['tanggalNaik'],
+                'subbid_id' => $subbid->id,
+                'tanggalTurun' => $data['tanggalTurun'],
+                'user_id' => Auth::user()->id
+            ]);
+        }
+        $data = SuratMasuk::orderBy("id", "DESC")->first();
+        $data['potonganPerihal'] = substr($data['perihal'], 0, 30) . " . . .";
+        $data['tujuan'] = $data->subbid->asm;
+        if ($data['tanggalSurat']) {
+            $data['tanggalSuratText'] = date("d F Y", strtotime($data['tanggalSurat']));
+        }
+        if ($data['tanggalTurun']) {
+            $data['tanggalTurunText'] = date("d F Y", strtotime($data['tanggalTurun']));
+        }
+        $data['nomor'] = "BARU";
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**

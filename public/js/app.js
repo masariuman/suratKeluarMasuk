@@ -4631,9 +4631,20 @@ var Masuk = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       data: [],
+      subbid: [],
+      asalSurat: "",
+      nomorSurat: "",
+      tanggalSurat: "",
+      perihal: "",
+      tanggalNaik: "",
+      turunKe: "",
+      tanggalTurun: "",
       dataEditInput: "",
       cari: "",
       url: null,
+      file: null,
+      filePath: null,
+      fileUrl: null,
       loading: true
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
@@ -4645,10 +4656,83 @@ var Masuk = /*#__PURE__*/function (_Component) {
     _this.modalTambah = _this.modalTambah.bind(_assertThisInitialized(_this));
     _this.modalUbah = _this.modalUbah.bind(_assertThisInitialized(_this));
     _this.handleChangeCari = _this.handleChangeCari.bind(_assertThisInitialized(_this));
+    _this.handleChangeAsalSurat = _this.handleChangeAsalSurat.bind(_assertThisInitialized(_this));
+    _this.handleChangeNomorSurat = _this.handleChangeNomorSurat.bind(_assertThisInitialized(_this));
+    _this.handleChangeTanggalSurat = _this.handleChangeTanggalSurat.bind(_assertThisInitialized(_this));
+    _this.handleChangePerihal = _this.handleChangePerihal.bind(_assertThisInitialized(_this));
+    _this.handleChangeTanggalNaik = _this.handleChangeTanggalNaik.bind(_assertThisInitialized(_this));
+    _this.handleChangeTurunKe = _this.handleChangeTurunKe.bind(_assertThisInitialized(_this));
+    _this.handleChangeTanggalTurun = _this.handleChangeTanggalTurun.bind(_assertThisInitialized(_this));
+    _this.handleChangeFile = _this.handleChangeFile.bind(_assertThisInitialized(_this));
+    _this.handleButtonFile = _this.handleButtonFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Masuk, [{
+    key: "handleButtonFile",
+    value: function handleButtonFile(e) {
+      this.refs.fileUploader.click(); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeAsalSurat",
+    value: function handleChangeAsalSurat(e) {
+      this.setState({
+        asalSurat: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeNomorSurat",
+    value: function handleChangeNomorSurat(e) {
+      this.setState({
+        nomorSurat: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeTanggalSurat",
+    value: function handleChangeTanggalSurat(e) {
+      this.setState({
+        tanggalSurat: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangePerihal",
+    value: function handleChangePerihal(e) {
+      this.setState({
+        perihal: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeTanggalNaik",
+    value: function handleChangeTanggalNaik(e) {
+      this.setState({
+        tanggalNaik: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeTurunKe",
+    value: function handleChangeTurunKe(e) {
+      this.setState({
+        turunKe: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeTanggalTurun",
+    value: function handleChangeTanggalTurun(e) {
+      this.setState({
+        tanggalTurun: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeFile",
+    value: function handleChangeFile(e) {
+      // console.log(e.target.files[0]);
+      this.setState({
+        file: e.target.files[0],
+        filePath: e.target.value,
+        fileUrl: e.target.value
+      });
+    }
+  }, {
     key: "handleChangeCari",
     value: function handleChangeCari(e) {
       var _this2 = this;
@@ -4750,12 +4834,25 @@ var Masuk = /*#__PURE__*/function (_Component) {
       this.setState({
         loading: true
       });
-      axios.post("/kanrisha/masuk/deeta", {
-        create: this.state.create
-      }).then(function (response) {
+      var data = new FormData();
+      data.append('file', this.state.file);
+      data.append('asalSurat', this.state.asalSurat);
+      data.append('nomorSurat', this.state.nomorSurat);
+      data.append('tanggalSurat', this.state.tanggalSurat);
+      data.append('perihal', this.state.perihal);
+      data.append('tanggalNaik', this.state.tanggalNaik);
+      data.append('turunKe', this.state.turunKe);
+      data.append('tanggalTurun', this.state.tanggalTurun);
+      axios.post("/kanrisha/masuk/deeta", data).then(function (response) {
         _this5.setState({
           data: [response.data.data].concat(_toConsumableArray(_this5.state.data)),
-          create: "",
+          asalSurat: "",
+          nomorSurat: "",
+          tanggalSurat: "",
+          perihal: "",
+          tanggalNaik: "",
+          tanggalTurun: "",
+          file: "",
           loading: false
         });
 
@@ -4831,15 +4928,27 @@ var Masuk = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "getSubbid",
+    value: function getSubbid() {
+      var _this8 = this;
+
+      axios.get("/kanrisha/masuk/deeta/create").then(function (response) {
+        _this8.setState({
+          subbid: response.data.data,
+          turunKe: response.data.data[0].rinku
+        });
+      });
+    }
+  }, {
     key: "handlePageChange",
     value: function handlePageChange(pageNumber) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.setState({
         loading: true
       });
       axios.get('/kanrisha/masuk/deeta?page=' + pageNumber).then(function (response) {
-        _this8.setState({
+        _this9.setState({
           data: response.data.data.data,
           loading: false,
           activePage: response.data.data.current_page,
@@ -4850,7 +4959,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
 
-        _this8.setState({
+        _this9.setState({
           loading: false
         });
       });
@@ -4865,7 +4974,8 @@ var Masuk = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.getData(); // console.log(this.state.tag);
+      this.getData();
+      this.getSubbid();
     }
   }, {
     key: "componentDidUpdate",
@@ -4874,7 +4984,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
   }, {
     key: "renderData",
     value: function renderData() {
-      var _this9 = this;
+      var _this10 = this;
 
       return !this.state.data.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -4888,29 +4998,63 @@ var Masuk = /*#__PURE__*/function (_Component) {
             scope: "row",
             children: data.nomor
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: data.tag
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: data.tag
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: data.tag
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: data.tag
+            children: data.asalSurat
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-              "data-target": "#editModal",
-              "data-toggle": "modal",
-              className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
-              type: "button",
-              onClick: _this9.handleEditButton.bind(_this9, data.url),
-              children: "Edit"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-              className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
-              type: "button",
-              onClick: _this9.handleDeleteButton.bind(_this9, data.url),
-              children: "Delete"
+            children: [data.nomorSurat, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
+              children: data.tanggalSuratText
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+            children: data.potonganPerihal
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+            children: [data.tujuan, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
+              children: data.tanggalTurunText
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+              className: "text-center",
+              children: [data.file ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                "data-target": "#editModal",
+                "data-toggle": "modal",
+                className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
+                type: "button",
+                onClick: _this10.handleEditButton.bind(_this10, data.url),
+                children: "Download"
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                "data-target": "#editModal",
+                "data-toggle": "modal",
+                className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
+                type: "button",
+                onClick: _this10.handleEditButton.bind(_this10, data.url),
+                children: "Detail"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                "data-target": "#editModal",
+                "data-toggle": "modal",
+                className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
+                type: "button",
+                onClick: _this10.handleEditButton.bind(_this10, data.url),
+                children: "Ubah"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
+                type: "button",
+                onClick: _this10.handleDeleteButton.bind(_this10, data.url),
+                children: "Hapus"
+              })]
             })]
           })]
-        }, data.id);
+        }, data.rinku);
+      });
+    }
+  }, {
+    key: "renderSelect",
+    value: function renderSelect() {
+      return this.state.subbid.map(function (data) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+          value: data.rinku,
+          children: data.asm
+        }, data.rinku);
       });
     }
   }, {
@@ -4961,8 +5105,8 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
+                          onChange: this.handleChangeAsalSurat,
+                          value: this.state.asalSurat,
                           title: "Asal Surat",
                           placeholder: "Asal Surat..",
                           type: "text",
@@ -4974,8 +5118,8 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
+                          onChange: this.handleChangeNomorSurat,
+                          value: this.state.nomorSurat,
                           title: "Nomor Surat",
                           placeholder: "Nomor Surat..",
                           type: "text",
@@ -4986,20 +5130,22 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
                         className: "masariuman_tableLabelTanggal",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Tanggal Surat :"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                              onChange: this.handleChange,
-                              value: this.state.create,
-                              title: "Tanggal Surat",
-                              placeholder: "Tanggal Surat..",
-                              type: "date",
-                              className: "form-control"
-                            })
-                          })]
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Tanggal Surat :"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                                onChange: this.handleChangeTanggalSurat,
+                                value: this.state.tanggalSurat,
+                                title: "Tanggal Surat",
+                                placeholder: "Tanggal Surat..",
+                                type: "date",
+                                className: "form-control"
+                              })
+                            })]
+                          })
                         })
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -5007,8 +5153,8 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("textarea", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
+                          onChange: this.handleChangePerihal,
+                          value: this.state.perihal,
                           title: "Perihal Surat",
                           placeholder: "Perihal Surat..",
                           className: "form-control",
@@ -5020,8 +5166,8 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       children: ["Tanggal Surat Naik Ke Kepala :", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
+                          onChange: this.handleChangeTanggalNaik,
+                          value: this.state.tanggalNaik,
                           title: "Tanggal Surat Naik Ke Kepala",
                           placeholder: "Tanggal Surat Naik Ke Kepala..",
                           type: "date",
@@ -5032,33 +5178,33 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
-                          title: "Turun Ke",
-                          placeholder: "Turun Ke..",
-                          type: "text",
-                          className: "form-control"
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("select", {
+                          value: this.state.turunKe,
+                          onChange: this.handleChangeTurunKe,
+                          className: "form-control",
+                          children: this.renderSelect()
                         })
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
                         className: "masariuman_tableLabelTanggal",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Tanggal Surat Turun :"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                              onChange: this.handleChange,
-                              value: this.state.create,
-                              title: "Tanggal Surat",
-                              placeholder: "Tanggal Surat..",
-                              type: "date",
-                              className: "form-control"
-                            })
-                          })]
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Tanggal Surat Turun :"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                                onChange: this.handleChangeTanggalTurun,
+                                value: this.state.tanggalTurun,
+                                title: "Tanggal Surat",
+                                placeholder: "Tanggal Surat..",
+                                type: "date",
+                                className: "form-control"
+                              })
+                            })]
+                          })
                         })
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -5066,12 +5212,37 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChange,
-                          value: this.state.create,
+                          onChange: this.handleChangeFile,
                           title: "File",
                           placeholder: "File..",
-                          type: "text",
-                          className: "form-control"
+                          type: "file",
+                          className: "form-control masariuman_displayNone",
+                          ref: "fileUploader"
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+                        className: "masariuman_tableFile",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "masariuman_width110px",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                                className: "mr-2 mb-2 btn btn-primary",
+                                type: "button",
+                                onClick: this.handleButtonFile,
+                                children: "Upload File"
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+                                target: "_blank",
+                                href: this.state.fileUrl,
+                                children: this.state.filePath
+                              })
+                            })]
+                          })
                         })
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -5133,10 +5304,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                 className: "onboarding-content with-gradient",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
-                  children: "Ubah Nama Surat Masuk"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                  className: "onboarding-text",
-                  children: "Masukkan nama Surat Masuk baru."
+                  children: "Ubah Data Surat Masuk"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("form", {
                   onSubmit: this.handleEditSubmit,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -5146,10 +5314,10 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleEditInputChange,
-                          value: this.state.dataEditInput,
-                          title: "Nama Surat Masuk",
-                          placeholder: "Masukkan Nama Surat Masuk Baru..",
+                          onChange: this.handleChangeAsalSurat,
+                          value: this.state.asalSurat,
+                          title: "Asal Surat",
+                          placeholder: "Asal Surat..",
                           type: "text",
                           className: "form-control"
                         })
@@ -5157,13 +5325,131 @@ var Masuk = /*#__PURE__*/function (_Component) {
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                          onChange: this.handleChangeNomorSurat,
+                          value: this.state.nomorSurat,
+                          title: "Nomor Surat",
+                          placeholder: "Nomor Surat..",
+                          type: "text",
+                          className: "form-control"
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+                        className: "masariuman_tableLabelTanggal",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Tanggal Surat :"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                                onChange: this.handleChangeTanggalSurat,
+                                value: this.state.tanggalSurat,
+                                title: "Tanggal Surat",
+                                placeholder: "Tanggal Surat..",
+                                type: "date",
+                                className: "form-control"
+                              })
+                            })]
+                          })
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("textarea", {
+                          onChange: this.handleChangePerihal,
+                          value: this.state.perihal,
+                          title: "Perihal Surat",
+                          placeholder: "Perihal Surat..",
+                          className: "form-control",
+                          rows: "3"
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                      className: "col-sm-12",
+                      children: ["Tanggal Surat Naik Ke Kepala :", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                          onChange: this.handleChangeTanggalNaik,
+                          value: this.state.tanggalNaik,
+                          title: "Tanggal Surat Naik Ke Kepala",
+                          placeholder: "Tanggal Surat Naik Ke Kepala..",
+                          type: "date",
+                          className: "form-control"
+                        })
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                          onChange: this.handleChangeTurunKe,
+                          value: this.state.turunKe,
+                          title: "Turun Ke",
+                          placeholder: "Turun Ke..",
+                          type: "text",
+                          className: "form-control"
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+                        className: "masariuman_tableLabelTanggal",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Tanggal Surat Turun :"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                                onChange: this.handleChangeTanggalTurun,
+                                value: this.state.tanggalTurun,
+                                title: "Tanggal Surat",
+                                placeholder: "Tanggal Surat..",
+                                type: "date",
+                                className: "form-control"
+                              })
+                            })]
+                          })
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+                        className: "masariuman_tableFile",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "masariuman_width110px",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                                className: "mr-2 mb-2 btn btn-primary",
+                                type: "button",
+                                onClick: this.handleButtonFile,
+                                children: "Upload File"
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group"
+                            })]
+                          })
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group text-center",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                          className: "mr-2 mb-2 btn btn-warning",
+                          className: "mr-2 mb-2 btn btn-primary",
                           "data-target": "#onboardingWideFormModal",
                           "data-toggle": "modal",
                           type: "submit",
-                          children: "Ubah Nama Surat Masuk"
+                          children: "Tambah Surat Masuk Baru"
                         })
                       })
                     })]
@@ -5266,18 +5552,22 @@ var Masuk = /*#__PURE__*/function (_Component) {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                          className: "width50px",
+                          className: "width50px text-center",
                           children: "NO"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          className: "text-center",
                           children: "Asal Surat"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          className: "text-center",
                           children: "Nomor/Tanggal Surat"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          className: "text-center",
                           children: "Perihal"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          className: "text-center",
                           children: "Tujuan/Tanggal Turun"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                          className: "width250px",
+                          className: "width250px text-center",
                           children: "ACTION"
                         })]
                       })

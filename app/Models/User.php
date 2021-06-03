@@ -61,6 +61,6 @@ class User extends Authenticatable
 
     public function heya()
     {
-        return $this->belongsToMany('App\Models\Heya')->withTimestamps();
+        return $this->belongsTo('App\Models\Heya', 'heya_id');
     }
 }

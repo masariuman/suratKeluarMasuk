@@ -282,3 +282,17 @@ li.masariuman_input-tag__tags__input {
     width: 100%;
     margin-bottom: 20px;
 }
+
+.masariuman_displayNone {
+    display: none;
+}
+
+.masariuman_tableFile {
+    width: 100%;
+    margin-bottom: 20px;
+    table-layout: fixed;
+}
+
+.masariuman_width110px {
+    width: 110px;
+}

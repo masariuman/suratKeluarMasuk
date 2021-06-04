@@ -4665,10 +4665,26 @@ var Masuk = /*#__PURE__*/function (_Component) {
     _this.handleChangeTanggalTurun = _this.handleChangeTanggalTurun.bind(_assertThisInitialized(_this));
     _this.handleChangeFile = _this.handleChangeFile.bind(_assertThisInitialized(_this));
     _this.handleButtonFile = _this.handleButtonFile.bind(_assertThisInitialized(_this));
+    _this.handleTambahButton = _this.handleTambahButton.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Masuk, [{
+    key: "handleTambahButton",
+    value: function handleTambahButton(e) {
+      this.setState({
+        asalSurat: "",
+        nomorSurat: "",
+        tanggalSurat: "",
+        perihal: "",
+        tanggalNaik: "",
+        tanggalTurun: "",
+        file: null,
+        filePath: null,
+        fileUrl: null
+      });
+    }
+  }, {
     key: "handleButtonFile",
     value: function handleButtonFile(e) {
       this.refs.fileUploader.click(); // console.log(e.target.value);
@@ -4804,8 +4820,17 @@ var Masuk = /*#__PURE__*/function (_Component) {
 
       axios.get("/kanrisha/masuk/deeta/".concat(e)).then(function (response) {
         _this4.setState({
-          dataEditInput: response.data.data.tag,
-          url: response.data.data.url
+          asalSurat: response.data.data.asalSurat,
+          nomorSurat: response.data.data.nomorSurat,
+          tanggalSurat: response.data.data.tanggalSurat,
+          perihal: response.data.data.perihal,
+          tanggalNaik: response.data.data.tanggalNaik,
+          tanggalTurun: response.data.data.tanggalTurun,
+          turunKe: response.data.data.subbid.rinku,
+          url: e,
+          filePath: response.data.data.filePath,
+          fileUrl: response.data.data.filePath,
+          file: null
         });
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
@@ -4852,7 +4877,9 @@ var Masuk = /*#__PURE__*/function (_Component) {
           perihal: "",
           tanggalNaik: "",
           tanggalTurun: "",
-          file: "",
+          file: null,
+          filePath: null,
+          fileUrl: null,
           loading: false
         });
 
@@ -4879,12 +4906,29 @@ var Masuk = /*#__PURE__*/function (_Component) {
       this.setState({
         loading: true
       });
-      axios.put("/kanrisha/masuk/deeta/".concat(this.state.url), {
-        content: this.state.dataEditInput
-      }).then(function (response) {
+      var data = new FormData();
+      data.append('file', this.state.file);
+      data.append('asalSurat', this.state.asalSurat);
+      data.append('nomorSurat', this.state.nomorSurat);
+      data.append('tanggalSurat', this.state.tanggalSurat);
+      data.append('perihal', this.state.perihal);
+      data.append('tanggalNaik', this.state.tanggalNaik);
+      data.append('turunKe', this.state.turunKe);
+      data.append('tanggalTurun', this.state.tanggalTurun);
+      data.append('rinku', this.state.url);
+      console.log(data);
+      axios.post("/kanrisha/masuk/deeta/update", data).then(function (response) {
         _this6.setState({
           data: response.data.data.data,
-          dataEditInput: "",
+          asalSurat: "",
+          nomorSurat: "",
+          tanggalSurat: "",
+          perihal: "",
+          tanggalNaik: "",
+          tanggalTurun: "",
+          file: null,
+          filePath: null,
+          fileUrl: null,
           loading: false
         });
 
@@ -5015,16 +5059,16 @@ var Masuk = /*#__PURE__*/function (_Component) {
               children: [data.file ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
                 "data-target": "#editModal",
                 "data-toggle": "modal",
-                className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
+                className: "mr-2 mb-2 btn btn-outline-secondary",
                 type: "button",
-                onClick: _this10.handleEditButton.bind(_this10, data.url),
+                onClick: _this10.handleEditButton.bind(_this10, data.rinku),
                 children: "Download"
               }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
                 "data-target": "#editModal",
                 "data-toggle": "modal",
-                className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
+                className: "mr-2 mb-2 btn btn-outline-info",
                 type: "button",
-                onClick: _this10.handleEditButton.bind(_this10, data.url),
+                onClick: _this10.handleEditButton.bind(_this10, data.rinku),
                 children: "Detail"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -5032,14 +5076,14 @@ var Masuk = /*#__PURE__*/function (_Component) {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
                 "data-target": "#editModal",
                 "data-toggle": "modal",
-                className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
+                className: "mr-2 mb-2 btn btn-outline-warning",
                 type: "button",
-                onClick: _this10.handleEditButton.bind(_this10, data.url),
+                onClick: _this10.handleEditButton.bind(_this10, data.rinku),
                 children: "Ubah"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
+                className: "mr-2 mb-2 btn btn-outline-danger",
                 type: "button",
-                onClick: _this10.handleDeleteButton.bind(_this10, data.url),
+                onClick: _this10.handleDeleteButton.bind(_this10, data.rinku),
                 children: "Hapus"
               })]
             })]
@@ -5387,13 +5431,11 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChangeTurunKe,
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("select", {
                           value: this.state.turunKe,
-                          title: "Turun Ke",
-                          placeholder: "Turun Ke..",
-                          type: "text",
-                          className: "form-control"
+                          onChange: this.handleChangeTurunKe,
+                          className: "form-control",
+                          children: this.renderSelect()
                         })
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -5419,7 +5461,18 @@ var Masuk = /*#__PURE__*/function (_Component) {
                         })
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                      className: "col-sm-12"
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                          onChange: this.handleChangeFile,
+                          title: "File",
+                          placeholder: "File..",
+                          type: "file",
+                          className: "form-control masariuman_displayNone",
+                          ref: "fileUploader"
+                        })
+                      })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                       className: "col-sm-12",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
@@ -5429,13 +5482,18 @@ var Masuk = /*#__PURE__*/function (_Component) {
                             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                               className: "masariuman_width110px",
                               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                                className: "mr-2 mb-2 btn btn-primary",
+                                className: "mr-2 mb-2 btn btn-warning",
                                 type: "button",
                                 onClick: this.handleButtonFile,
-                                children: "Upload File"
+                                children: "Upload File Baru"
                               })
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                              className: "form-group"
+                              className: "form-group",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+                                target: "_blank",
+                                href: this.state.fileUrl,
+                                children: this.state.filePath
+                              })
                             })]
                           })
                         })
@@ -5445,11 +5503,11 @@ var Masuk = /*#__PURE__*/function (_Component) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                         className: "form-group text-center",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                          className: "mr-2 mb-2 btn btn-primary",
+                          className: "mr-2 mb-2 btn btn-warning",
                           "data-target": "#onboardingWideFormModal",
                           "data-toggle": "modal",
                           type: "submit",
-                          children: "Tambah Surat Masuk Baru"
+                          children: "Ubah Surat Masuk Baru"
                         })
                       })
                     })]
@@ -5531,6 +5589,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                     "data-toggle": "modal",
                     type: "button",
                     id: "buttonTambahModal",
+                    onClick: this.handleTambahButton,
                     children: "Tambah Surat Masuk Baru"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                     className: "col-sm-4 float-right",

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/getUuzaa', 'UuzaaController@getUuzaa');
+Route::post('/kanrisha/masuk/deeta/update', 'suratMasukCOntroller@apdet');
 
 Route::resources([
     'kanrisha/heya/deeta' => 'HeyaController',

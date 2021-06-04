@@ -75,7 +75,7 @@ class suratMasukCOntroller extends Controller
         if ($file) {
             $file = $request->file('file');
             $fileExt = $file->getClientOriginalExtension();
-            $fileName = date('YmdHis') . ".$fileExt";
+            $fileName = "SuratMasuk_" . str_replace(' ', '', $subbid->asm) . "_" . date('YmdHis') . ".$fileExt";
             $request->file('file')->move("zaFail", $fileName);
             SuratMasuk::create([
                 'rinku' => str_replace('#', 'o', str_replace('.', 'A', str_replace('/', '$', Hash::make(Hash::make(Uuid::generate()->string))))),
@@ -93,7 +93,7 @@ class suratMasukCOntroller extends Controller
             SuratMasuk::create([
                 'rinku' => str_replace('#', 'o', str_replace('.', 'A', str_replace('/', '$', Hash::make(Hash::make(Uuid::generate()->string))))),
                 'asalSurat' => $data['asalSurat'],
-                'nomorSurat' => $$data['nomorSurat'],
+                'nomorSurat' => $data['nomorSurat'],
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalNaik' => $data['tanggalNaik'],
@@ -126,6 +126,12 @@ class suratMasukCOntroller extends Controller
     public function show($id)
     {
         //
+        $data = SuratMasuk::where('rinku', $id)->first();
+        $data['subbid'] = $data->subbid->rinku;
+        $data['filePath'] = '/zaFail/' . $data->file;
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**
@@ -160,5 +166,61 @@ class suratMasukCOntroller extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function apdet(Request $request)
+    {
+        //
+        $data = $request->request->all();
+        // dd($data);
+        $file = $request->files->all();
+        $subbid = AlhuqulAlfareia::where('rinku', $data['turunKe'])->first();
+        $suratMasuk = SuratMasuk::where('rinku', $data['rinku'])->first();
+        if ($file) {
+            $file = $request->file('file');
+            $fileExt = $file->getClientOriginalExtension();
+            $fileName = "SuratMasuk_" . str_replace(' ', '', $subbid->asm) . "_" . date('YmdHis') . ".$fileExt";
+            $request->file('file')->move("zaFail", $fileName);
+            $suratMasuk->update([
+                'asalSurat' => $data['asalSurat'],
+                'nomorSurat' => $data['nomorSurat'],
+                'tanggalSurat' => $data['tanggalSurat'],
+                'perihal' => $data['perihal'],
+                'tanggalNaik' => $data['tanggalNaik'],
+                'subbid_id' => $subbid->id,
+                'tanggalTurun' => $data['tanggalTurun'],
+                'file' => $fileName,
+                'user_id' => Auth::user()->id
+            ]);
+        } else {
+            $suratMasuk->update([
+                'asalSurat' => $data['asalSurat'],
+                'nomorSurat' => $data['nomorSurat'],
+                'tanggalSurat' => $data['tanggalSurat'],
+                'perihal' => $data['perihal'],
+                'tanggalNaik' => $data['tanggalNaik'],
+                'subbid_id' => $subbid->id,
+                'tanggalTurun' => $data['tanggalTurun'],
+                'user_id' => Auth::user()->id
+            ]);
+        }
+        $pagination = 5;
+        $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $items['potonganPerihal'] = substr($items['perihal'], 0, 30) . " . . .";
+            $items['tujuan'] = $items->subbid->asm;
+            if ($items['tanggalSurat']) {
+                $items['tanggalSuratText'] = date("d F Y", strtotime($items['tanggalSurat']));
+            }
+            if ($items['tanggalTurun']) {
+                $items['tanggalTurunText'] = date("d F Y", strtotime($items['tanggalTurun']));
+            }
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 }

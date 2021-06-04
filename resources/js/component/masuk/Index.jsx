@@ -47,6 +47,21 @@ class Masuk extends Component {
         this.handleChangeTanggalTurun = this.handleChangeTanggalTurun.bind(this);
         this.handleChangeFile = this.handleChangeFile.bind(this);
         this.handleButtonFile = this.handleButtonFile.bind(this);
+        this.handleTambahButton = this.handleTambahButton.bind(this);
+    }
+
+    handleTambahButton(e) {
+        this.setState({
+            asalSurat: "",
+            nomorSurat: "",
+            tanggalSurat: "",
+            perihal: "",
+            tanggalNaik: "",
+            tanggalTurun: "",
+            file: null,
+            filePath: null,
+            fileUrl: null,
+        });
     }
 
     handleButtonFile(e) {
@@ -183,8 +198,17 @@ class Masuk extends Component {
             .get(`/kanrisha/masuk/deeta/${e}`)
             .then(response => {
                 this.setState({
-                    dataEditInput: response.data.data.tag,
-                    url: response.data.data.url
+                    asalSurat: response.data.data.asalSurat,
+                    nomorSurat: response.data.data.nomorSurat,
+                    tanggalSurat: response.data.data.tanggalSurat,
+                    perihal: response.data.data.perihal,
+                    tanggalNaik: response.data.data.tanggalNaik,
+                    tanggalTurun: response.data.data.tanggalTurun,
+                    turunKe: response.data.data.subbid.rinku,
+                    url: e,
+                    filePath: response.data.data.filePath,
+                    fileUrl: response.data.data.filePath,
+                    file: null
                 });
             })
             .catch(error => {
@@ -231,7 +255,9 @@ class Masuk extends Component {
                     perihal: "",
                     tanggalNaik: "",
                     tanggalTurun: "",
-                    file: "",
+                    file: null,
+                    filePath: null,
+                    fileUrl: null,
                     loading: false
                 });
                 $("#tambahModal").removeClass("in");
@@ -256,14 +282,31 @@ class Masuk extends Component {
         this.setState({
             loading: true
         });
+        const data = new FormData();
+        data.append('file', this.state.file);
+        data.append('asalSurat', this.state.asalSurat);
+        data.append('nomorSurat', this.state.nomorSurat);
+        data.append('tanggalSurat', this.state.tanggalSurat);
+        data.append('perihal', this.state.perihal);
+        data.append('tanggalNaik', this.state.tanggalNaik);
+        data.append('turunKe', this.state.turunKe);
+        data.append('tanggalTurun', this.state.tanggalTurun);
+        data.append('rinku', this.state.url);
+        console.log(data);
         axios
-            .put(`/kanrisha/masuk/deeta/${this.state.url}`, {
-                content: this.state.dataEditInput
-            })
+            .post(`/kanrisha/masuk/deeta/update`, data)
             .then(response => {
                 this.setState({
                     data: response.data.data.data,
-                    dataEditInput: "",
+                    asalSurat: "",
+                    nomorSurat: "",
+                    tanggalSurat: "",
+                    perihal: "",
+                    tanggalNaik: "",
+                    tanggalTurun: "",
+                    file: null,
+                    filePath: null,
+                    fileUrl: null,
                     loading: false
                 });
                 $("#editModal").removeClass("in");
@@ -369,15 +412,15 @@ class Masuk extends Component {
                     <td>
                         <div className="text-center">
                             {data.file ? (
-                                <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.url)}>Download</button>
+                                <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-secondary" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Download</button>
                             ) : (
                                 <span></span>
                             )}
-                            <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.url)}>Detail</button>
+                            <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-info" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Detail</button>
                         </div>
                         <div className="text-center">
-                            <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.url)}>Ubah</button>
-                            <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.url)}>Hapus</button>
+                            <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
+                            <button className="mr-2 mb-2 btn btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button>
                         </div>
                     </td>
                 </tr>
@@ -637,14 +680,13 @@ class Masuk extends Component {
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group">
-                                    <input
-                                        onChange={this.handleChangeTurunKe}
+                                    <select
                                         value={this.state.turunKe}
-                                        title="Turun Ke"
-                                        placeholder="Turun Ke.."
-                                        type="text"
+                                        onChange={this.handleChangeTurunKe}
                                         className="form-control"
-                                    />
+                                    >
+                                        {this.renderSelect()}
+                                    </select>
                                 </div>
                             </div>
                             <div className="col-sm-12">
@@ -669,16 +711,26 @@ class Masuk extends Component {
                                 </table>
                             </div>
                             <div className="col-sm-12">
+                                <div className="form-group">
+                                    <input
+                                        onChange={this.handleChangeFile}
+                                        title="File"
+                                        placeholder="File.."
+                                        type="file"
+                                        className="form-control masariuman_displayNone"
+                                        ref="fileUploader"
+                                    />
+                                </div>
                             </div>
                             <div className="col-sm-12">
                                 <table className="masariuman_tableFile">
                                     <tbody>
                                         <tr>
                                             <td className="masariuman_width110px">
-                                                <button className="mr-2 mb-2 btn btn-primary" type="button" onClick={this.handleButtonFile} >Upload File</button>
+                                                <button className="mr-2 mb-2 btn btn-warning" type="button" onClick={this.handleButtonFile} >Upload File Baru</button>
                                             </td>
                                             <td className="form-group">
-
+                                                <a target="_blank" href={this.state.fileUrl}>{this.state.filePath}</a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -686,7 +738,7 @@ class Masuk extends Component {
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group text-center">
-                                    <button className="mr-2 mb-2 btn btn-primary" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Tambah Surat Masuk Baru</button>
+                                    <button className="mr-2 mb-2 btn btn-warning" data-target="#onboardingWideFormModal" data-toggle="modal" type="submit">Ubah Surat Masuk Baru</button>
                                 </div>
                             </div>
                             </div>
@@ -740,7 +792,7 @@ class Masuk extends Component {
                                         Manajemen Surat Masuk Data
                                     </div>
                                     <div>
-                                        <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal">Tambah Surat Masuk Baru</button>
+                                        <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal" onClick={this.handleTambahButton}>Tambah Surat Masuk Baru</button>
                                         <div className="col-sm-4 float-right">
                                             <input type="text" className="form-control" onChange={this.handleChangeCari}
                                                 value={this.state.cari} placeholder="Cari Surat Masuk..."></input>

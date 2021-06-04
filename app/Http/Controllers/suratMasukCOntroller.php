@@ -166,6 +166,28 @@ class suratMasukCOntroller extends Controller
     public function destroy($id)
     {
         //
+        $data = SuratMasuk::where("rinku", $id)->first();
+        $data->update([
+            'sutattsu' => '0'
+        ]);
+        $pagination = 5;
+        $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $items['potonganPerihal'] = substr($items['perihal'], 0, 30) . " . . .";
+            $items['tujuan'] = $items->subbid->asm;
+            if ($items['tanggalSurat']) {
+                $items['tanggalSuratText'] = date("d F Y", strtotime($items['tanggalSurat']));
+            }
+            if ($items['tanggalTurun']) {
+                $items['tanggalTurunText'] = date("d F Y", strtotime($items['tanggalTurun']));
+            }
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     public function apdet(Request $request)

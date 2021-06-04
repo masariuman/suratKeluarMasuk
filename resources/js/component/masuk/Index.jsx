@@ -154,7 +154,7 @@ class Masuk extends Component {
             .get(`/kanrisha/masuk/deeta/${e}`)
             .then(response => {
                 swal({
-                    title: `Yakin ingin menghapus surat ${response.data.data.tag}`,
+                    title: `Yakin ingin menghapus surat dari ${response.data.data.asalSurat} dengan nomor surat ${response.data.data.nomorSurat}`,
                     text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
                     icon: "warning",
                     buttons: true,
@@ -412,7 +412,7 @@ class Masuk extends Component {
                     <td>
                         <div className="text-center">
                             {data.file ? (
-                                <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-secondary" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Download</button>
+                                <a href={`/zaFail/${data.file}`} className="mr-2 mb-2 btn btn-outline-secondary">Download</a>
                             ) : (
                                 <span></span>
                             )}

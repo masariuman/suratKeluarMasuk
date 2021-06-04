@@ -4778,7 +4778,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
 
       axios.get("/kanrisha/masuk/deeta/".concat(e)).then(function (response) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()({
-          title: "Yakin ingin menghapus surat ".concat(response.data.data.tag),
+          title: "Yakin ingin menghapus surat dari ".concat(response.data.data.asalSurat, " dengan nomor surat ").concat(response.data.data.nomorSurat),
           text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
           icon: "warning",
           buttons: true,
@@ -5056,12 +5056,9 @@ var Masuk = /*#__PURE__*/function (_Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
               className: "text-center",
-              children: [data.file ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                "data-target": "#editModal",
-                "data-toggle": "modal",
+              children: [data.file ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+                href: "/zaFail/".concat(data.file),
                 className: "mr-2 mb-2 btn btn-outline-secondary",
-                type: "button",
-                onClick: _this10.handleEditButton.bind(_this10, data.rinku),
                 children: "Download"
               }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
                 "data-target": "#editModal",

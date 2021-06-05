@@ -4655,6 +4655,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
     _this.handlePageChange = _this.handlePageChange.bind(_assertThisInitialized(_this));
     _this.modalTambah = _this.modalTambah.bind(_assertThisInitialized(_this));
     _this.modalUbah = _this.modalUbah.bind(_assertThisInitialized(_this));
+    _this.modalDetail = _this.modalDetail.bind(_assertThisInitialized(_this));
     _this.handleChangeCari = _this.handleChangeCari.bind(_assertThisInitialized(_this));
     _this.handleChangeAsalSurat = _this.handleChangeAsalSurat.bind(_assertThisInitialized(_this));
     _this.handleChangeNomorSurat = _this.handleChangeNomorSurat.bind(_assertThisInitialized(_this));
@@ -5061,7 +5062,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                 className: "mr-2 mb-2 btn btn-outline-secondary",
                 children: "Download"
               }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                "data-target": "#editModal",
+                "data-target": "#detailModal",
                 "data-toggle": "modal",
                 className: "mr-2 mb-2 btn btn-outline-info",
                 type: "button",
@@ -5517,6 +5518,116 @@ var Masuk = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "modalDetail",
+    value: function modalDetail() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        "aria-hidden": "true",
+        className: "onboarding-modal modal fade animated",
+        id: "detailModal",
+        role: "dialog",
+        tabIndex: "-1",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "modal-dialog modal-lg modal-centered",
+          role: "document",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            className: "modal-content",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
+              "aria-label": "Close",
+              className: "close",
+              "data-dismiss": "modal",
+              type: "button",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                className: "close-label",
+                children: "Tutup"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                className: "os-icon os-icon-close"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+              className: "onboarding-side-by-side",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                className: "onboarding-media",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                  alt: "",
+                  src: "/iconModal/tagEdit.png",
+                  width: "200px"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                className: "onboarding-content with-gradient",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
+                  className: "onboarding-title",
+                  children: "Detail Data"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                  className: "row",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                    className: "col-sm-12",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+                      className: "masariuman_tableLabelTanggal",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tbody", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: "Asal Surat :"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            className: "form-group masariuman_tdwarp",
+                            children: this.state.asalSurat
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: "Nomor Surat :"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            className: "form-group masariuman_tdwarp",
+                            children: this.state.nomorSurat
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: "Tanggal Surat :"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            className: "form-group masariuman_tdwarp",
+                            children: this.state.tanggalSurat
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: "Perihal Surat :"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            className: "form-group masariuman_tdwarp",
+                            children: this.state.perihal
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: "Tanggal Surat Naik Ke Kepala :"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            className: "form-group masariuman_tdwarp",
+                            children: this.state.tanggalNaik
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: "Turun Ke Bidang :"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            className: "form-group masariuman_tdwarp",
+                            children: this.state.turunKe
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: "Tanggal Surat Turun :"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            className: "form-group masariuman_tdwarp",
+                            children: this.state.tanggalTurun
+                          })]
+                        })]
+                      })
+                    }), this.state.file ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+                      href: "/zaFail/".concat(this.state.filePath),
+                      className: "mr-2 mb-2 btn btn-outline-secondary",
+                      children: "Download"
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {})]
+                  })
+                })]
+              })]
+            })]
+          })
+        })
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return this.state.loading === true ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_warudo_Loading__WEBPACK_IMPORTED_MODULE_4__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -5644,7 +5755,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_warudo_DarkMode__WEBPACK_IMPORTED_MODULE_3__.default, {})]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_warudo_Footer__WEBPACK_IMPORTED_MODULE_2__.default, {}), this.modalTambah(), this.modalUbah()]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_warudo_Footer__WEBPACK_IMPORTED_MODULE_2__.default, {}), this.modalTambah(), this.modalUbah(), this.modalDetail()]
       });
     }
   }]);

@@ -37,6 +37,7 @@ class Masuk extends Component {
         this.handlePageChange = this.handlePageChange.bind(this);
         this.modalTambah = this.modalTambah.bind(this);
         this.modalUbah = this.modalUbah.bind(this);
+        this.modalDetail = this.modalDetail.bind(this);
         this.handleChangeCari = this.handleChangeCari.bind(this);
         this.handleChangeAsalSurat = this.handleChangeAsalSurat.bind(this);
         this.handleChangeNomorSurat = this.handleChangeNomorSurat.bind(this);
@@ -416,7 +417,7 @@ class Masuk extends Component {
                             ) : (
                                 <span></span>
                             )}
-                            <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-info" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Detail</button>
+                            <button data-target="#detailModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-info" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Detail</button>
                         </div>
                         <div className="text-center">
                             <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
@@ -751,6 +752,97 @@ class Masuk extends Component {
         );
     }
 
+    modalDetail() {
+        return (
+            <div aria-hidden="true" className="onboarding-modal modal fade animated" id="detailModal" role="dialog" tabIndex="-1">
+                <div className="modal-dialog modal-lg modal-centered" role="document">
+                    <div className="modal-content">
+                    <button aria-label="Close" className="close" data-dismiss="modal" type="button"><span className="close-label">Tutup</span><span className="os-icon os-icon-close"></span></button>
+                    <div className="onboarding-side-by-side">
+                        <div className="onboarding-media">
+                        <img alt="" src="/iconModal/tagEdit.png" width="200px" />
+                        </div>
+                        <div className="onboarding-content with-gradient">
+                        <h4 className="onboarding-title">
+                            Detail Data
+                        </h4>
+                            <div className="row">
+                                <div className="col-sm-12">
+                                <table className="masariuman_tableLabelTanggal">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Asal Surat :
+                                                </td>
+                                                <td className="form-group masariuman_tdwarp">
+                                                    {this.state.asalSurat}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Nomor Surat :
+                                                </td>
+                                                <td className="form-group masariuman_tdwarp">
+                                                    {this.state.nomorSurat}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Tanggal Surat :
+                                                </td>
+                                                <td className="form-group masariuman_tdwarp">
+                                                    {this.state.tanggalSurat}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Perihal Surat :
+                                                </td>
+                                                <td className="form-group masariuman_tdwarp">
+                                                    {this.state.perihal}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Tanggal Surat Naik Ke Kepala :
+                                                </td>
+                                                <td className="form-group masariuman_tdwarp">
+                                                    {this.state.tanggalNaik}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Turun Ke Bidang :
+                                                </td>
+                                                <td className="form-group masariuman_tdwarp">
+                                                    {this.state.turunKe}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Tanggal Surat Turun :
+                                                </td>
+                                                <td className="form-group masariuman_tdwarp">
+                                                    {this.state.tanggalTurun}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    {this.state.file ? (
+                                        <a href={`/zaFail/${this.state.filePath}`} className="mr-2 mb-2 btn btn-outline-secondary">Download</a>
+                                    ) : (
+                                        <span></span>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     render() {
         return (
             this.state.loading === true ? <Loading /> :
@@ -831,6 +923,7 @@ class Masuk extends Component {
                 <Footer />
                 {this.modalTambah()}
                 {this.modalUbah()}
+                {this.modalDetail()}
             </div>
         );
     }

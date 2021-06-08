@@ -20,6 +20,7 @@ class Masuk extends Component {
             perihal: "",
             tanggalNaik: "",
             turunKe: "",
+            kodeBerkas: "",
             tanggalTurun: "",
             dataEditInput: "",
             cari: "",
@@ -46,6 +47,7 @@ class Masuk extends Component {
         this.handleChangeTanggalNaik = this.handleChangeTanggalNaik.bind(this);
         this.handleChangeTurunKe = this.handleChangeTurunKe.bind(this);
         this.handleChangeTanggalTurun = this.handleChangeTanggalTurun.bind(this);
+        this.handleChangeKodeBerkas = this.handleChangeKodeBerkas.bind(this);
         this.handleChangeFile = this.handleChangeFile.bind(this);
         this.handleButtonFile = this.handleButtonFile.bind(this);
         this.handleTambahButton = this.handleTambahButton.bind(this);
@@ -73,6 +75,13 @@ class Masuk extends Component {
     handleChangeAsalSurat(e) {
         this.setState({
             asalSurat: e.target.value
+        });
+        // console.log(e.target.value);
+    }
+
+    handleChangeKodeBerkas(e) {
+        this.setState({
+            kodeBerkas: e.target.value
         });
         // console.log(e.target.value);
     }
@@ -206,6 +215,7 @@ class Masuk extends Component {
                     tanggalNaik: response.data.data.tanggalNaik,
                     tanggalTurun: response.data.data.tanggalTurun,
                     turunKe: response.data.data.subbid.rinku,
+                    kodeBerkas: response.data.data.kodeBerkas,
                     url: e,
                     filePath: response.data.data.filePath,
                     fileUrl: response.data.data.filePath,
@@ -245,6 +255,7 @@ class Masuk extends Component {
         data.append('tanggalNaik', this.state.tanggalNaik);
         data.append('turunKe', this.state.turunKe);
         data.append('tanggalTurun', this.state.tanggalTurun);
+        data.append('kodeBerkas', this.state.kodeBerkas);
         axios
             .post("/kanrisha/masuk/deeta", data)
             .then(response => {
@@ -256,6 +267,7 @@ class Masuk extends Component {
                     perihal: "",
                     tanggalNaik: "",
                     tanggalTurun: "",
+                    kodeBerkas: "",
                     file: null,
                     filePath: null,
                     fileUrl: null,
@@ -292,6 +304,7 @@ class Masuk extends Component {
         data.append('tanggalNaik', this.state.tanggalNaik);
         data.append('turunKe', this.state.turunKe);
         data.append('tanggalTurun', this.state.tanggalTurun);
+        data.append('kodeBerkas', this.state.kodeBerkas);
         data.append('rinku', this.state.url);
         console.log(data);
         axios
@@ -305,6 +318,7 @@ class Masuk extends Component {
                     perihal: "",
                     tanggalNaik: "",
                     tanggalTurun: "",
+                    kodeBerkas: "",
                     file: null,
                     filePath: null,
                     fileUrl: null,
@@ -556,6 +570,18 @@ class Masuk extends Component {
                             <div className="col-sm-12">
                                 <div className="form-group">
                                     <input
+                                        onChange={this.handleChangeKodeBerkas}
+                                        value={this.state.kodeBerkas}
+                                        title="Kode Berkas"
+                                        placeholder="Kode Berkas.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <input
                                         onChange={this.handleChangeFile}
                                         title="File"
                                         placeholder="File.."
@@ -714,6 +740,18 @@ class Masuk extends Component {
                             <div className="col-sm-12">
                                 <div className="form-group">
                                     <input
+                                        onChange={this.handleChangeKodeBerkas}
+                                        value={this.state.kodeBerkas}
+                                        title="Kode Berkas"
+                                        placeholder="Kode Berkas.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <input
                                         onChange={this.handleChangeFile}
                                         title="File"
                                         placeholder="File.."
@@ -767,12 +805,15 @@ class Masuk extends Component {
                             Detail Data
                         </h4>
                             <div className="row">
-                                <div className="col-sm-12">
-                                <table className="masariuman_tableLabelTanggal">
+                                <div className="col-sm-12 table-responsive">
+                                <table className="masariuman_tableLabelTanggal table table-striped">
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    Asal Surat :
+                                                <td className="masariuman_width200px">
+                                                    Asal Surat
+                                                </td>
+                                                <td className="titikDua">
+                                                    :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
                                                     {this.state.asalSurat}
@@ -780,7 +821,10 @@ class Masuk extends Component {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Nomor Surat :
+                                                    Nomor Surat
+                                                </td>
+                                                <td>
+                                                    :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
                                                     {this.state.nomorSurat}
@@ -788,7 +832,10 @@ class Masuk extends Component {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Tanggal Surat :
+                                                    Tanggal Surat
+                                                </td>
+                                                <td>
+                                                    :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
                                                     {this.state.tanggalSurat}
@@ -796,7 +843,10 @@ class Masuk extends Component {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Perihal Surat :
+                                                    Perihal Surat
+                                                </td>
+                                                <td>
+                                                    :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
                                                     {this.state.perihal}
@@ -804,7 +854,10 @@ class Masuk extends Component {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Tanggal Surat Naik Ke Kepala :
+                                                    Tanggal Surat Naik Ke Kepala
+                                                </td>
+                                                <td>
+                                                    :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
                                                     {this.state.tanggalNaik}
@@ -812,7 +865,10 @@ class Masuk extends Component {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Turun Ke Bidang :
+                                                    Turun Ke Bidang
+                                                </td>
+                                                <td>
+                                                    :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
                                                     {this.state.turunKe}
@@ -820,15 +876,29 @@ class Masuk extends Component {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Tanggal Surat Turun :
+                                                    Tanggal Surat Turun
+                                                </td>
+                                                <td>
+                                                    :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
                                                     {this.state.tanggalTurun}
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>
+                                                    Kode Berkas
+                                                </td>
+                                                <td>
+                                                    :
+                                                </td>
+                                                <td className="form-group masariuman_tdwarp">
+                                                    {this.state.kodeBerkas}
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
-                                    {this.state.file ? (
+                                    {this.state.filePath ? (
                                         <a href={`/zaFail/${this.state.filePath}`} className="mr-2 mb-2 btn btn-outline-secondary">Download</a>
                                     ) : (
                                         <span></span>

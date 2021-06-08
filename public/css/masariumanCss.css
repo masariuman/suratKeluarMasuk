@@ -395,6 +395,14 @@ li.masariuman_input-tag__tags__input {
 }
 
 .masariuman_tdwarp {
-    display: inline-block;
+    /* display: inline-block; */
     word-break: break-word;
+}
+
+.titikDua {
+    width: 10px;
+}
+
+.masariuman_width200px {
+    width: 50%;
 }

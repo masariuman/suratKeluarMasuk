@@ -25,6 +25,7 @@ class CreateTableSuratMasuk extends Migration
             $table->unsignedBigInteger('subbid_id');
             $table->foreign('subbid_id')->references('id')->on('alhuqulAlfareia');
             $table->unsignedBigInteger('user_id');
+            $table->string('kodeBerkas')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('file')->nullable();
             $table->enum('sutattsu', ['1', '0'])->default('1');

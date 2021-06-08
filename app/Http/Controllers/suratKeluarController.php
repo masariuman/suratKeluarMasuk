@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SuratMasuk;
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Uuid;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\AlhuqulAlfareia;
 use Illuminate\Support\Carbon;
 
-class suratMasukCOntroller extends Controller
+class suratKeluarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -71,35 +72,33 @@ class suratMasukCOntroller extends Controller
         $data = $request->request->all();
         // dd($data['turunKe']);
         $file = $request->files->all();
-        $subbid = AlhuqulAlfareia::where('rinku', $data['turunKe'])->first();
+        $subbid = AlhuqulAlfareia::where('rinku', $data['asalSurat'])->first();
         if ($file) {
             $file = $request->file('file');
             $fileExt = $file->getClientOriginalExtension();
-            $fileName = "SuratMasuk_" . str_replace(' ', '', $subbid->asm) . "_" . date('YmdHis') . ".$fileExt";
+            $fileName = "SuratKeluar_" . str_replace(' ', '', $subbid->asm) . "_" . date('YmdHis') . ".$fileExt";
             $request->file('file')->move("zaFail", $fileName);
-            SuratMasuk::create([
+            SuratKeluar::create([
                 'rinku' => str_replace('#', 'o', str_replace('.', 'A', str_replace('/', '$', Hash::make(Hash::make(Uuid::generate()->string))))),
-                'asalSurat' => $data['asalSurat'],
                 'nomorSurat' => $data['nomorSurat'],
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
-                'tanggalNaik' => $data['tanggalNaik'],
+                'tanggalKirim' => $data['tanggalKirim'],
                 'subbid_id' => $subbid->id,
-                'tanggalTurun' => $data['tanggalTurun'],
+                'tujuanSurat' => $data['tujuanSurat'],
                 'file' => $fileName,
                 'kodeBerkas' => $data['kodeBerkas'],
                 'user_id' => Auth::user()->id
             ]);
         } else {
-            SuratMasuk::create([
+            SuratKeluar::create([
                 'rinku' => str_replace('#', 'o', str_replace('.', 'A', str_replace('/', '$', Hash::make(Hash::make(Uuid::generate()->string))))),
-                'asalSurat' => $data['asalSurat'],
                 'nomorSurat' => $data['nomorSurat'],
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
-                'tanggalNaik' => $data['tanggalNaik'],
+                'tanggalKirim' => $data['tanggalKirim'],
                 'subbid_id' => $subbid->id,
-                'tanggalTurun' => $data['tanggalTurun'],
+                'tujuanSurat' => $data['tujuanSurat'],
                 'kodeBerkas' => $data['kodeBerkas'],
                 'user_id' => Auth::user()->id
             ]);

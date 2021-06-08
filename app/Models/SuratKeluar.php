@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SuratMasuk extends Model
+class SuratKeluar extends Model
 {
-    protected $table = 'masuk';
+    protected $table = 'keluar';
     protected $fillable = [
         'rinku',
-        'asalSurat',
+        'tujuanSurat',
         'nomorSurat',
         'tanggalSurat',
         'perihal',
-        'tanggalNaik',
-        'tanggalTurun',
+        'tanggalKirim',
         'subbid_id',
         'file',
         'user_id',

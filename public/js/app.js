@@ -2778,6 +2778,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5253,11 +5254,13 @@ var Masuk = /*#__PURE__*/function (_Component) {
       kodeBerkas: "",
       tanggalTurun: "",
       dataEditInput: "",
+      buttonTambahModal: "",
       cari: "",
       url: null,
       file: null,
       filePath: null,
       fileUrl: null,
+      ubahPetunjukId: "",
       loading: true
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
@@ -5586,11 +5589,23 @@ var Masuk = /*#__PURE__*/function (_Component) {
       axios.get("/kanrisha/masuk/deeta").then(function (response) {
         _this7.setState({
           data: response.data.data.data,
+          ubahPetunjukId: response.data.data.data[0].rinku,
           loading: false,
           activePage: response.data.data.current_page,
           itemsCountPerPage: response.data.data.per_page,
           totalItemsCount: response.data.data.total,
           pageRangeDisplayed: 10
+        });
+
+        jquery__WEBPACK_IMPORTED_MODULE_1___default()('#petunjuk').on('click', function () {
+          var enjoyhint_instance = new EnjoyHint({});
+          var enjoyhint_script_steps = [{
+            'next #buttonTambahModal': 'Untuk Menambah Data Baru, Tekan Tombol Tambah Surat Masuk Baru'
+          }, {
+            'next #1': 'Untuk Mengubah Data Baru, Tekan Tombol Tambah Surat Masuk Baru'
+          }];
+          enjoyhint_instance.set(enjoyhint_script_steps);
+          enjoyhint_instance.run();
         });
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
@@ -5705,6 +5720,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                 className: "mr-2 mb-2 btn btn-outline-warning",
                 type: "button",
                 onClick: _this10.handleEditButton.bind(_this10, data.rinku),
+                id: data.nomor,
                 children: "Ubah"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
                 className: "mr-2 mb-2 btn btn-outline-danger",
@@ -7405,7 +7421,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var DarkMode = /*#__PURE__*/function (_Component) {
   _inherits(DarkMode, _Component);
 
@@ -7420,22 +7435,15 @@ var DarkMode = /*#__PURE__*/function (_Component) {
   _createClass(DarkMode, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "floated-colors-btn floated-chat-btn",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "os-toggler-w",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "os-toggler-i",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "os-toggler-pill"
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-          children: "Mode "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-          children: "Malam"
-        })]
-      });
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {}) // <div className="floated-colors-btn floated-chat-btn">
+      //     <div className="os-toggler-w">
+      //         <div className="os-toggler-i">
+      //             <div className="os-toggler-pill"></div>
+      //         </div>
+      //     </div>
+      //     <span>Mode </span><span>Malam</span>
+      // </div>
+      ;
     }
   }]);
 

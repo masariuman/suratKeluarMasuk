@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const webpack = require("webpack");
 
 /*
  |--------------------------------------------------------------------------
@@ -16,7 +17,15 @@ mix.js('resources/js/app.jsx', 'public/js')
         require('postcss-import'),
         require('tailwindcss'),
     ])
-    .react();
+    .react()
+    .webpackConfig({
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
+            })
+        ]
+    });
 
 if (mix.inProduction()) {
     mix.version();

@@ -24,11 +24,13 @@ class Masuk extends Component {
             kodeBerkas: "",
             tanggalTurun: "",
             dataEditInput: "",
+            buttonTambahModal: "",
             cari: "",
             url: null,
             file: null,
             filePath: null,
             fileUrl: null,
+            ubahPetunjukId: "",
             loading: true
         };
         this.handleChange = this.handleChange.bind(this);
@@ -353,11 +355,25 @@ class Masuk extends Component {
             .then(response => {
                 this.setState({
                     data: response.data.data.data,
+                    ubahPetunjukId: response.data.data.data[0].rinku,
                     loading: false,
                     activePage: response.data.data.current_page,
                     itemsCountPerPage: response.data.data.per_page,
                     totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
+                });
+                $('#petunjuk').on('click',function() {
+                    var enjoyhint_instance = new EnjoyHint({});
+                    var enjoyhint_script_steps = [
+                    {
+                        'next #buttonTambahModal' : 'Untuk Menambah Data Baru, Tekan Tombol Tambah Surat Masuk Baru'
+                    },
+                    {
+                        'next #1' : 'Untuk Mengubah Data Baru, Tekan Tombol Tambah Surat Masuk Baru'
+                    }
+                    ];
+                    enjoyhint_instance.set(enjoyhint_script_steps);
+                    enjoyhint_instance.run();
                 });
             })
             .catch(error => {
@@ -437,7 +453,7 @@ class Masuk extends Component {
                             <button data-target="#detailModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-info" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Detail</button>
                         </div>
                         <div className="text-center">
-                            <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
+                            <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)} id={data.nomor}>Ubah</button>
                             <button className="mr-2 mb-2 btn btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button>
                         </div>
                     </td>

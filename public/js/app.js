@@ -3993,6 +3993,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
       asalSurat: "",
       tujuanSurat: "",
       nomorSurat: "",
+      asalSuratName: "",
       tanggalSurat: "",
       perihal: "",
       tanggalKirim: "",
@@ -4032,12 +4033,13 @@ var Keluar = /*#__PURE__*/function (_Component) {
     key: "handleTambahButton",
     value: function handleTambahButton(e) {
       this.setState({
-        asalSurat: "",
         nomorSurat: "",
         tanggalSurat: "",
         perihal: "",
-        tanggalNaik: "",
-        tanggalTurun: "",
+        tanggalKirim: "",
+        tujuanSurat: "",
+        asalSurat: "",
+        kodeBerkas: "",
         file: null,
         filePath: null,
         fileUrl: null
@@ -4135,9 +4137,9 @@ var Keluar = /*#__PURE__*/function (_Component) {
     value: function handleDeleteButton(e) {
       var _this3 = this;
 
-      axios.get("/kanrisha/masuk/deeta/".concat(e)).then(function (response) {
+      axios.get("/kanrisha/keluar/deeta/".concat(e)).then(function (response) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()({
-          title: "Yakin ingin menghapus surat dari ".concat(response.data.data.asalSurat, " dengan nomor surat ").concat(response.data.data.nomorSurat),
+          title: "Yakin ingin menghapus surat yang menuju ".concat(response.data.data.tujuanSurat, " dengan nomor surat ").concat(response.data.data.nomorSurat),
           text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
           icon: "warning",
           buttons: true,
@@ -4148,7 +4150,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
               loading: true
             });
 
-            axios["delete"]("/kanrisha/masuk/deeta/".concat(e), {
+            axios["delete"]("/kanrisha/keluar/deeta/".concat(e), {
               url: _this3.state.url
             }).then(function (response) {
               _this3.setState({
@@ -4177,15 +4179,15 @@ var Keluar = /*#__PURE__*/function (_Component) {
     value: function handleEditButton(e) {
       var _this4 = this;
 
-      axios.get("/kanrisha/masuk/deeta/".concat(e)).then(function (response) {
+      axios.get("/kanrisha/keluar/deeta/".concat(e)).then(function (response) {
         _this4.setState({
-          asalSurat: response.data.data.asalSurat,
           nomorSurat: response.data.data.nomorSurat,
           tanggalSurat: response.data.data.tanggalSurat,
           perihal: response.data.data.perihal,
-          tanggalNaik: response.data.data.tanggalNaik,
-          tanggalTurun: response.data.data.tanggalTurun,
-          turunKe: response.data.data.subbid.rinku,
+          tujuanSurat: response.data.data.tujuanSurat,
+          tanggalKirim: response.data.data.tanggalKirim,
+          asalSurat: response.data.data.asalSuratId.rinku,
+          asalSuratName: response.data.data.subbid.asm,
           kodeBerkas: response.data.data.kodeBerkas,
           url: e,
           filePath: response.data.data.filePath,
@@ -4272,21 +4274,19 @@ var Keluar = /*#__PURE__*/function (_Component) {
       data.append('nomorSurat', this.state.nomorSurat);
       data.append('tanggalSurat', this.state.tanggalSurat);
       data.append('perihal', this.state.perihal);
-      data.append('tanggalNaik', this.state.tanggalNaik);
-      data.append('turunKe', this.state.turunKe);
-      data.append('tanggalTurun', this.state.tanggalTurun);
+      data.append('tujuanSurat', this.state.tujuanSurat);
+      data.append('tanggalKirim', this.state.tanggalKirim);
       data.append('kodeBerkas', this.state.kodeBerkas);
       data.append('rinku', this.state.url);
       console.log(data);
-      axios.post("/kanrisha/masuk/deeta/update", data).then(function (response) {
+      axios.post("/kanrisha/keluar/deeta/update", data).then(function (response) {
         _this6.setState({
           data: response.data.data.data,
-          asalSurat: "",
+          tujuanSurat: "",
           nomorSurat: "",
           tanggalSurat: "",
           perihal: "",
-          tanggalNaik: "",
-          tanggalTurun: "",
+          tanggalKirim: "",
           kodeBerkas: "",
           file: null,
           filePath: null,
@@ -4316,7 +4316,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
       this.setState({
         loading: true
       });
-      axios.get("/kanrisha/masuk/deeta").then(function (response) {
+      axios.get("/kanrisha/keluar/deeta").then(function (response) {
         _this7.setState({
           data: response.data.data.data,
           loading: false,
@@ -4342,7 +4342,8 @@ var Keluar = /*#__PURE__*/function (_Component) {
         _this8.setState({
           subbid: response.data.data,
           asalSurat: response.data.data[0].rinku
-        });
+        }); // console.log(this.state.asalSurat);
+
       });
     }
   }, {
@@ -4404,7 +4405,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
             scope: "row",
             children: data.nomor
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-            children: data.tujuan
+            children: data.asalSuratText
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
             children: [data.nomorSurat, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
               children: data.tanggalSuratText
@@ -4412,8 +4413,8 @@ var Keluar = /*#__PURE__*/function (_Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
             children: data.potonganPerihal
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-            children: [data.asalSurat, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
-              children: data.tanggalTurunText
+            children: [data.tujuanSurat, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
+              children: data.tanggalKirimText
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -4723,15 +4724,22 @@ var Keluar = /*#__PURE__*/function (_Component) {
                     className: "row",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                       className: "col-sm-12",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                        className: "form-group",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                          onChange: this.handleChangeAsalSurat,
-                          value: this.state.asalSurat,
-                          title: "Asal Surat",
-                          placeholder: "Asal Surat..",
-                          type: "text",
-                          className: "form-control"
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+                        className: "masariuman_tableLabelTanggal",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Asal Surat :"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("select", {
+                                value: this.state.asalSurat,
+                                onChange: this.handleChangeAsalSurat,
+                                className: "form-control",
+                                children: this.renderSelect()
+                              })
+                            })]
+                          })
                         })
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -4789,12 +4797,12 @@ var Keluar = /*#__PURE__*/function (_Component) {
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
                             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                              children: "Tanggal Surat Turun :"
+                              children: "Tanggal Surat Dikirim :"
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                               className: "form-group",
                               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                                onChange: this.handleChangeTanggalTurun,
-                                value: this.state.tanggalTurun,
+                                onChange: this.handleChangeTanggalKirim,
+                                value: this.state.tanggalKirim,
                                 title: "Tanggal Surat",
                                 placeholder: "Tanggal Surat..",
                                 type: "date",
@@ -4802,6 +4810,19 @@ var Keluar = /*#__PURE__*/function (_Component) {
                               })
                             })]
                           })
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "col-sm-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                        className: "form-group",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                          onChange: this.handleChangeTujuanSurat,
+                          value: this.state.tujuanSurat,
+                          title: "Tujuan Surat",
+                          placeholder: "Tujuan Surat..",
+                          type: "text",
+                          className: "form-control"
                         })
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -4839,10 +4860,10 @@ var Keluar = /*#__PURE__*/function (_Component) {
                             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                               className: "masariuman_width110px",
                               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                                className: "mr-2 mb-2 btn btn-warning",
+                                className: "mr-2 mb-2 btn btn-primary",
                                 type: "button",
                                 onClick: this.handleButtonFile,
-                                children: "Upload File Baru"
+                                children: "Upload File"
                               })
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                               className: "form-group",
@@ -4911,9 +4932,9 @@ var Keluar = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
-                  className: "onboarding-title",
+                  className: "onboarding-title text-center",
                   children: "Detail Data"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "row",
@@ -4931,7 +4952,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
                             children: ":"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                             className: "form-group masariuman_tdwarp",
-                            children: this.state.asalSurat
+                            children: this.state.asalSuratName
                           })]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -4962,21 +4983,21 @@ var Keluar = /*#__PURE__*/function (_Component) {
                           })]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Turun Ke Bidang"
+                            children: "Tujuan Surat"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                             children: ":"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                             className: "form-group masariuman_tdwarp",
-                            children: this.state.asalSurat
+                            children: this.state.tujuanSurat
                           })]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Tanggal Surat Turun"
+                            children: "Tanggal Kirim Surat"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                             children: ":"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
                             className: "form-group masariuman_tdwarp",
-                            children: this.state.tanggalTurun
+                            children: this.state.tanggalKirim
                           })]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -4991,8 +5012,8 @@ var Keluar = /*#__PURE__*/function (_Component) {
                       })
                     }), this.state.filePath ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
                       href: "/zaFail/".concat(this.state.filePath),
-                      className: "mr-2 mb-2 btn btn-outline-secondary",
-                      children: "Download"
+                      className: "mr-2 mb-2 btn btn-outline-secondary masariuman_width100percent",
+                      children: "Download File"
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {})]
                   })
                 })]
@@ -5228,6 +5249,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
       perihal: "",
       tanggalNaik: "",
       turunKe: "",
+      turunKeName: "",
       kodeBerkas: "",
       tanggalTurun: "",
       dataEditInput: "",
@@ -5272,6 +5294,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
         perihal: "",
         tanggalNaik: "",
         tanggalTurun: "",
+        kodeBerkas: "",
         file: null,
         filePath: null,
         fileUrl: null
@@ -5427,6 +5450,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
           tanggalNaik: response.data.data.tanggalNaik,
           tanggalTurun: response.data.data.tanggalTurun,
           turunKe: response.data.data.subbid.rinku,
+          turunKeName: response.data.data.subbid.asm,
           kodeBerkas: response.data.data.kodeBerkas,
           url: e,
           filePath: response.data.data.filePath,
@@ -6182,97 +6206,100 @@ var Masuk = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
-                  className: "onboarding-title",
+                  className: "onboarding-title text-center",
                   children: "Detail Data"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "row",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                    className: "col-sm-12 table-responsive",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
-                      className: "masariuman_tableLabelTanggal table table-striped",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tbody", {
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "masariuman_width200px",
-                            children: "Asal Surat"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "titikDua",
-                            children: ":"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group masariuman_tdwarp",
-                            children: this.state.asalSurat
+                    className: "col-sm-12",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                      className: "table-responsive",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("table", {
+                        className: "masariuman_tableLabelTanggal table table-striped",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tbody", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "masariuman_width200px",
+                              children: "Asal Surat"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "titikDua",
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: this.state.asalSurat
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Nomor Surat"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: this.state.nomorSurat
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Tanggal Surat"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: this.state.tanggalSurat
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Perihal Surat"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: this.state.perihal
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Tanggal Surat Naik Ke Kepala"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: this.state.tanggalNaik
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Turun Ke Bidang"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: this.state.turunKeName
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Tanggal Surat Turun"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: this.state.tanggalTurun
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: "Kode Berkas"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: this.state.kodeBerkas
+                            })]
                           })]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Nomor Surat"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: ":"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group masariuman_tdwarp",
-                            children: this.state.nomorSurat
-                          })]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Tanggal Surat"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: ":"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group masariuman_tdwarp",
-                            children: this.state.tanggalSurat
-                          })]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Perihal Surat"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: ":"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group masariuman_tdwarp",
-                            children: this.state.perihal
-                          })]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Tanggal Surat Naik Ke Kepala"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: ":"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group masariuman_tdwarp",
-                            children: this.state.tanggalNaik
-                          })]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Turun Ke Bidang"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: ":"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group masariuman_tdwarp",
-                            children: this.state.turunKe
-                          })]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Tanggal Surat Turun"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: ":"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group masariuman_tdwarp",
-                            children: this.state.tanggalTurun
-                          })]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: "Kode Berkas"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            children: ":"
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                            className: "form-group masariuman_tdwarp",
-                            children: this.state.kodeBerkas
-                          })]
-                        })]
+                        })
                       })
                     }), this.state.filePath ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
                       href: "/zaFail/".concat(this.state.filePath),
-                      className: "mr-2 mb-2 btn btn-outline-secondary",
-                      children: "Download"
+                      className: "mr-2 mb-2 btn btn-outline-secondary masariuman_width100percent",
+                      children: "Download File"
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {})]
                   })
                 })]

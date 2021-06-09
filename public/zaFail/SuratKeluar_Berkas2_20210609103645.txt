@@ -1,0 +1,43 @@
+CREATE TABLE `sisfo_sekolah`.`data_murid`(
+    `id` INT(10) NOT NULL AUTO_INCREMENT,
+    `nisn` VARCHAR(50) NOT NULL,
+    `induk_sekolah` TEXT NOT NULL,
+    `photo` TEXT NOT NULL,
+    `nama` VARCHAR(255) NOT NULL,
+    `tempat_lahir` TEXT NOT NULL,
+    `tanggal_lahir` DATE NOT NULL,
+    `kelamin` ENUM('LAKI-LAKI', 'PEREMPUAN') NOT NULL,
+    `agama` ENUM(
+        'BUDDHA',
+        'HINDU',
+        'ISLAM',
+        'KRISTEN KATOLIK',
+        'KRISTEN PROTESTAN',
+        'KONG HU CU',
+        'AGAMA KEPERCAYAAN'
+    ) NOT NULL,
+    `phone` INT(20) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `ayah` VARCHAR(255) NOT NULL,
+    `ibu` VARCHAR(255) NOT NULL,
+    `alamat` TEXT NOT NULL,
+    INDEX `provinsi_id` INT(2) NOT NULL,
+    INDEX `kabupaten_id` INT(5) NOT NULL,
+    INDEX `kecamatan_id` INT(6) NOT NULL,
+    INDEX `kelurahan_id` INT(11) NOT NULL,
+    `kode_pos` INT(10) NOT NULL,
+    `id_login` INT(6) NULL,
+    `stats` ENUM('1', '0') NOT NULL,
+    `created_at` TIMESTAMP NULL,
+    `updated_at` TIMESTAMP NULL,
+    PRIMARY KEY(`id`),
+    FOREIGN KEY (provinsi_id) REFERENCES location_province(province_id),
+    FOREIGN KEY (kabupaten_id) REFERENCES location_city(city_id),
+    FOREIGN KEY (kecamatan_id) REFERENCES location_district(district_id),
+    FOREIGN KEY (kelurahan_id) REFERENCES location_village(village_id),
+    FOREIGN KEY (id_login) REFERENCES login_app(id)
+) ENGINE = INNODB;
+
+
+
+ALTER TABLE `location_city` ADD CONSTRAINT `kjbkjb` FOREIGN KEY (`city_fullname`) REFERENCES `absent_harian`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

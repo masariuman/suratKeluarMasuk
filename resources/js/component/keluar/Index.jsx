@@ -17,6 +17,7 @@ class Keluar extends Component {
             asalSurat: "",
             tujuanSurat: "",
             nomorSurat: "",
+            asalSuratName: "",
             tanggalSurat: "",
             perihal: "",
             tanggalKirim: "",
@@ -53,12 +54,13 @@ class Keluar extends Component {
 
     handleTambahButton(e) {
         this.setState({
-            asalSurat: "",
             nomorSurat: "",
             tanggalSurat: "",
             perihal: "",
-            tanggalNaik: "",
-            tanggalTurun: "",
+            tanggalKirim: "",
+            tujuanSurat: "",
+            asalSurat: "",
+            kodeBerkas: "",
             file: null,
             filePath: null,
             fileUrl: null,
@@ -152,10 +154,10 @@ class Keluar extends Component {
 
     handleDeleteButton(e) {
         axios
-            .get(`/kanrisha/masuk/deeta/${e}`)
+            .get(`/kanrisha/keluar/deeta/${e}`)
             .then(response => {
                 swal({
-                    title: `Yakin ingin menghapus surat dari ${response.data.data.asalSurat} dengan nomor surat ${response.data.data.nomorSurat}`,
+                    title: `Yakin ingin menghapus surat yang menuju ${response.data.data.tujuanSurat} dengan nomor surat ${response.data.data.nomorSurat}`,
                     text: "Kalau Terhapus, Hubungi Admin Untuk Mengembalikan Data yang Terhapus!",
                     icon: "warning",
                     buttons: true,
@@ -167,7 +169,7 @@ class Keluar extends Component {
                             loading: true
                         });
                         axios
-                            .delete(`/kanrisha/masuk/deeta/${e}`, {
+                            .delete(`/kanrisha/keluar/deeta/${e}`, {
                                 url: this.state.url
                             })
                             .then(response => {
@@ -196,16 +198,16 @@ class Keluar extends Component {
 
     handleEditButton(e) {
         axios
-            .get(`/kanrisha/masuk/deeta/${e}`)
+            .get(`/kanrisha/keluar/deeta/${e}`)
             .then(response => {
                 this.setState({
-                    asalSurat: response.data.data.asalSurat,
                     nomorSurat: response.data.data.nomorSurat,
                     tanggalSurat: response.data.data.tanggalSurat,
                     perihal: response.data.data.perihal,
-                    tanggalNaik: response.data.data.tanggalNaik,
-                    tanggalTurun: response.data.data.tanggalTurun,
-                    turunKe: response.data.data.subbid.rinku,
+                    tujuanSurat: response.data.data.tujuanSurat,
+                    tanggalKirim: response.data.data.tanggalKirim,
+                    asalSurat: response.data.data.asalSuratId.rinku,
+                    asalSuratName: response.data.data.subbid.asm,
                     kodeBerkas: response.data.data.kodeBerkas,
                     url: e,
                     filePath: response.data.data.filePath,
@@ -290,23 +292,21 @@ class Keluar extends Component {
         data.append('nomorSurat', this.state.nomorSurat);
         data.append('tanggalSurat', this.state.tanggalSurat);
         data.append('perihal', this.state.perihal);
-        data.append('tanggalNaik', this.state.tanggalNaik);
-        data.append('turunKe', this.state.turunKe);
-        data.append('tanggalTurun', this.state.tanggalTurun);
+        data.append('tujuanSurat', this.state.tujuanSurat);
+        data.append('tanggalKirim', this.state.tanggalKirim);
         data.append('kodeBerkas', this.state.kodeBerkas);
         data.append('rinku', this.state.url);
         console.log(data);
         axios
-            .post(`/kanrisha/masuk/deeta/update`, data)
+            .post(`/kanrisha/keluar/deeta/update`, data)
             .then(response => {
                 this.setState({
                     data: response.data.data.data,
-                    asalSurat: "",
+                    tujuanSurat: "",
                     nomorSurat: "",
                     tanggalSurat: "",
                     perihal: "",
-                    tanggalNaik: "",
-                    tanggalTurun: "",
+                    tanggalKirim: "",
                     kodeBerkas: "",
                     file: null,
                     filePath: null,
@@ -335,7 +335,7 @@ class Keluar extends Component {
             loading: true
         });
         axios
-            .get("/kanrisha/masuk/deeta")
+            .get("/kanrisha/keluar/deeta")
             .then(response => {
                 this.setState({
                     data: response.data.data.data,
@@ -358,6 +358,7 @@ class Keluar extends Component {
                 subbid: response.data.data,
                 asalSurat: response.data.data[0].rinku,
             });
+            // console.log(this.state.asalSurat);
         });
     }
 
@@ -403,15 +404,15 @@ class Keluar extends Component {
             this.state.data.map(data => (
                 <tr key={data.rinku}>
                     <th scope="row">{data.nomor}</th>
-                    <td>{data.tujuan}</td>
+                    <td>{data.asalSuratText}</td>
                     <td>
                         {data.nomorSurat}<br />
                         <small>{data.tanggalSuratText}</small>
                     </td>
                     <td>{data.potonganPerihal}</td>
                     <td>
-                        {data.asalSurat}<br />
-                        <small>{data.tanggalTurunText}</small>
+                        {data.tujuanSurat}<br />
+                        <small>{data.tanggalKirimText}</small>
                     </td>
                     <td>
                         <div className="text-center">
@@ -622,16 +623,24 @@ class Keluar extends Component {
                         <form onSubmit={this.handleEditSubmit}>
                             <div className="row">
                             <div className="col-sm-12">
-                                <div className="form-group">
-                                    <input
-                                        onChange={this.handleChangeAsalSurat}
-                                        value={this.state.asalSurat}
-                                        title="Asal Surat"
-                                        placeholder="Asal Surat.."
-                                        type="text"
-                                        className="form-control"
-                                    />
-                                </div>
+                                <table className="masariuman_tableLabelTanggal">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Asal Surat :
+                                            </td>
+                                            <td className="form-group">
+                                                <select
+                                                    value={this.state.asalSurat}
+                                                    onChange={this.handleChangeAsalSurat}
+                                                    className="form-control"
+                                                >
+                                                    {this.renderSelect()}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group">
@@ -682,12 +691,12 @@ class Keluar extends Component {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                Tanggal Surat Turun :
+                                                Tanggal Surat Dikirim :
                                             </td>
                                             <td className="form-group">
                                                 <input
-                                                    onChange={this.handleChangeTanggalTurun}
-                                                    value={this.state.tanggalTurun}
+                                                    onChange={this.handleChangeTanggalKirim}
+                                                    value={this.state.tanggalKirim}
                                                     title="Tanggal Surat"
                                                     placeholder="Tanggal Surat.."
                                                     type="date"
@@ -697,6 +706,18 @@ class Keluar extends Component {
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <input
+                                        onChange={this.handleChangeTujuanSurat}
+                                        value={this.state.tujuanSurat}
+                                        title="Tujuan Surat"
+                                        placeholder="Tujuan Surat.."
+                                        type="text"
+                                        className="form-control"
+                                    />
+                                </div>
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group">
@@ -727,7 +748,7 @@ class Keluar extends Component {
                                     <tbody>
                                         <tr>
                                             <td className="masariuman_width110px">
-                                                <button className="mr-2 mb-2 btn btn-warning" type="button" onClick={this.handleButtonFile} >Upload File Baru</button>
+                                                <button className="mr-2 mb-2 btn btn-primary" type="button" onClick={this.handleButtonFile} >Upload File</button>
                                             </td>
                                             <td className="form-group">
                                                 <a target="_blank" href={this.state.fileUrl}>{this.state.filePath}</a>
@@ -761,8 +782,8 @@ class Keluar extends Component {
                         <div className="onboarding-media">
                         <img alt="" src="/iconModal/tagEdit.png" width="200px" />
                         </div>
-                        <div className="onboarding-content with-gradient">
-                        <h4 className="onboarding-title">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
+                        <h4 className="onboarding-title text-center">
                             Detail Data
                         </h4>
                             <div className="row">
@@ -777,7 +798,7 @@ class Keluar extends Component {
                                                     :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
-                                                    {this.state.asalSurat}
+                                                    {this.state.asalSuratName}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -815,24 +836,24 @@ class Keluar extends Component {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Turun Ke Bidang
+                                                    Tujuan Surat
                                                 </td>
                                                 <td>
                                                     :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
-                                                    {this.state.asalSurat}
+                                                    {this.state.tujuanSurat}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Tanggal Surat Turun
+                                                    Tanggal Kirim Surat
                                                 </td>
                                                 <td>
                                                     :
                                                 </td>
                                                 <td className="form-group masariuman_tdwarp">
-                                                    {this.state.tanggalTurun}
+                                                    {this.state.tanggalKirim}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -849,7 +870,7 @@ class Keluar extends Component {
                                         </tbody>
                                     </table>
                                     {this.state.filePath ? (
-                                        <a href={`/zaFail/${this.state.filePath}`} className="mr-2 mb-2 btn btn-outline-secondary">Download</a>
+                                        <a href={`/zaFail/${this.state.filePath}`} className="mr-2 mb-2 btn btn-outline-secondary masariuman_width100percent">Download File</a>
                                     ) : (
                                         <span></span>
                                     )}

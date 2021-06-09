@@ -20,6 +20,7 @@ class Masuk extends Component {
             perihal: "",
             tanggalNaik: "",
             turunKe: "",
+            turunKeName: "",
             kodeBerkas: "",
             tanggalTurun: "",
             dataEditInput: "",
@@ -61,6 +62,7 @@ class Masuk extends Component {
             perihal: "",
             tanggalNaik: "",
             tanggalTurun: "",
+            kodeBerkas:"",
             file: null,
             filePath: null,
             fileUrl: null,
@@ -215,6 +217,7 @@ class Masuk extends Component {
                     tanggalNaik: response.data.data.tanggalNaik,
                     tanggalTurun: response.data.data.tanggalTurun,
                     turunKe: response.data.data.subbid.rinku,
+                    turunKeName : response.data.data.subbid.asm,
                     kodeBerkas: response.data.data.kodeBerkas,
                     url: e,
                     filePath: response.data.data.filePath,
@@ -800,106 +803,108 @@ class Masuk extends Component {
                         <div className="onboarding-media">
                         <img alt="" src="/iconModal/tagEdit.png" width="200px" />
                         </div>
-                        <div className="onboarding-content with-gradient">
-                        <h4 className="onboarding-title">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
+                        <h4 className="onboarding-title text-center">
                             Detail Data
                         </h4>
                             <div className="row">
-                                <div className="col-sm-12 table-responsive">
-                                <table className="masariuman_tableLabelTanggal table table-striped">
-                                        <tbody>
-                                            <tr>
-                                                <td className="masariuman_width200px">
-                                                    Asal Surat
-                                                </td>
-                                                <td className="titikDua">
-                                                    :
-                                                </td>
-                                                <td className="form-group masariuman_tdwarp">
-                                                    {this.state.asalSurat}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Nomor Surat
-                                                </td>
-                                                <td>
-                                                    :
-                                                </td>
-                                                <td className="form-group masariuman_tdwarp">
-                                                    {this.state.nomorSurat}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Tanggal Surat
-                                                </td>
-                                                <td>
-                                                    :
-                                                </td>
-                                                <td className="form-group masariuman_tdwarp">
-                                                    {this.state.tanggalSurat}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Perihal Surat
-                                                </td>
-                                                <td>
-                                                    :
-                                                </td>
-                                                <td className="form-group masariuman_tdwarp">
-                                                    {this.state.perihal}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Tanggal Surat Naik Ke Kepala
-                                                </td>
-                                                <td>
-                                                    :
-                                                </td>
-                                                <td className="form-group masariuman_tdwarp">
-                                                    {this.state.tanggalNaik}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Turun Ke Bidang
-                                                </td>
-                                                <td>
-                                                    :
-                                                </td>
-                                                <td className="form-group masariuman_tdwarp">
-                                                    {this.state.turunKe}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Tanggal Surat Turun
-                                                </td>
-                                                <td>
-                                                    :
-                                                </td>
-                                                <td className="form-group masariuman_tdwarp">
-                                                    {this.state.tanggalTurun}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Kode Berkas
-                                                </td>
-                                                <td>
-                                                    :
-                                                </td>
-                                                <td className="form-group masariuman_tdwarp">
-                                                    {this.state.kodeBerkas}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div className="col-sm-12">
+                                    <div className="table-responsive">
+                                        <table className="masariuman_tableLabelTanggal table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td className="masariuman_width200px">
+                                                        Asal Surat
+                                                    </td>
+                                                    <td className="titikDua">
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.asalSurat}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Nomor Surat
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.nomorSurat}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Tanggal Surat
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.tanggalSurat}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Perihal Surat
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.perihal}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Tanggal Surat Naik Ke Kepala
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.tanggalNaik}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Turun Ke Bidang
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.turunKeName}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Tanggal Surat Turun
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.tanggalTurun}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Kode Berkas
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.kodeBerkas}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     {this.state.filePath ? (
-                                        <a href={`/zaFail/${this.state.filePath}`} className="mr-2 mb-2 btn btn-outline-secondary">Download</a>
+                                        <a href={`/zaFail/${this.state.filePath}`} className="mr-2 mb-2 btn btn-outline-secondary masariuman_width100percent">Download File</a>
                                     ) : (
                                         <span></span>
                                     )}

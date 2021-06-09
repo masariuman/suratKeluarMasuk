@@ -22,17 +22,17 @@ class suratKeluarController extends Controller
     {
         //
         $pagination = 5;
-        $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
             $items['potonganPerihal'] = substr($items['perihal'], 0, 30) . " . . .";
-            $items['tujuan'] = $items->subbid->asm;
+            $items['asalSuratText'] = $items->subbid->asm;
             if ($items['tanggalSurat']) {
                 $items['tanggalSuratText'] = date("d F Y", strtotime($items['tanggalSurat']));
             }
-            if ($items['tanggalTurun']) {
-                $items['tanggalTurunText'] = date("d F Y", strtotime($items['tanggalTurun']));
+            if ($items['tanggalKirim']) {
+                $items['tanggalKirimText'] = date("d F Y", strtotime($items['tanggalKirim']));
             }
             $count++;
         }
@@ -103,14 +103,14 @@ class suratKeluarController extends Controller
                 'user_id' => Auth::user()->id
             ]);
         }
-        $data = SuratMasuk::orderBy("id", "DESC")->first();
+        $data = SuratKeluar::orderBy("id", "DESC")->first();
         $data['potonganPerihal'] = substr($data['perihal'], 0, 30) . " . . .";
-        $data['tujuan'] = $data->subbid->asm;
+        $data['asalSuratText'] = $data->subbid->asm;
         if ($data['tanggalSurat']) {
             $data['tanggalSuratText'] = date("d F Y", strtotime($data['tanggalSurat']));
         }
-        if ($data['tanggalTurun']) {
-            $data['tanggalTurunText'] = date("d F Y", strtotime($data['tanggalTurun']));
+        if ($data['tanggalKirim']) {
+            $data['tanggalKirimText'] = date("d F Y", strtotime($data['tanggalKirim']));
         }
         $data['nomor'] = "BARU";
         return response()->json([
@@ -127,8 +127,8 @@ class suratKeluarController extends Controller
     public function show($id)
     {
         //
-        $data = SuratMasuk::where('rinku', $id)->first();
-        $data['subbid'] = $data->subbid->rinku;
+        $data = SuratKeluar::where('rinku', $id)->first();
+        $data['asalSuratId'] = $data->subbid->rinku;
         if ($data->file) {
             $data['filePath'] = '/zaFail/' . $data->file;
         } else {
@@ -171,22 +171,22 @@ class suratKeluarController extends Controller
     public function destroy($id)
     {
         //
-        $data = SuratMasuk::where("rinku", $id)->first();
+        $data = SuratKeluar::where("rinku", $id)->first();
         $data->update([
             'sutattsu' => '0'
         ]);
         $pagination = 5;
-        $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
             $items['potonganPerihal'] = substr($items['perihal'], 0, 30) . " . . .";
-            $items['tujuan'] = $items->subbid->asm;
+            $items['asalSuratText'] = $items->subbid->asm;
             if ($items['tanggalSurat']) {
                 $items['tanggalSuratText'] = date("d F Y", strtotime($items['tanggalSurat']));
             }
-            if ($items['tanggalTurun']) {
-                $items['tanggalTurunText'] = date("d F Y", strtotime($items['tanggalTurun']));
+            if ($items['tanggalKirim']) {
+                $items['tanggalKirimText'] = date("d F Y", strtotime($items['tanggalKirim']));
             }
             $count++;
         }
@@ -201,50 +201,48 @@ class suratKeluarController extends Controller
         $data = $request->request->all();
         // dd($data);
         $file = $request->files->all();
-        $subbid = AlhuqulAlfareia::where('rinku', $data['turunKe'])->first();
-        $suratMasuk = SuratMasuk::where('rinku', $data['rinku'])->first();
+        $subbid = AlhuqulAlfareia::where('rinku', $data['asalSurat'])->first();
+        $suratKeluar = SuratKeluar::where('rinku', $data['rinku'])->first();
         if ($file) {
             $file = $request->file('file');
             $fileExt = $file->getClientOriginalExtension();
-            $fileName = "SuratMasuk_" . str_replace(' ', '', $subbid->asm) . "_" . date('YmdHis') . ".$fileExt";
+            $fileName = "SuratKeluar_" . str_replace(' ', '', $subbid->asm) . "_" . date('YmdHis') . ".$fileExt";
             $request->file('file')->move("zaFail", $fileName);
-            $suratMasuk->update([
-                'asalSurat' => $data['asalSurat'],
+            $suratKeluar->update([
                 'nomorSurat' => $data['nomorSurat'],
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
-                'tanggalNaik' => $data['tanggalNaik'],
+                'tanggalKirim' => $data['tanggalKirim'],
                 'subbid_id' => $subbid->id,
-                'tanggalTurun' => $data['tanggalTurun'],
+                'tujuanSurat' => $data['tujuanSurat'],
                 'kodeBerkas' => $data['kodeBerkas'],
                 'file' => $fileName,
                 'user_id' => Auth::user()->id
             ]);
         } else {
-            $suratMasuk->update([
-                'asalSurat' => $data['asalSurat'],
+            $suratKeluar->update([
                 'nomorSurat' => $data['nomorSurat'],
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
-                'tanggalNaik' => $data['tanggalNaik'],
+                'tanggalKirim' => $data['tanggalKirim'],
                 'subbid_id' => $subbid->id,
-                'tanggalTurun' => $data['tanggalTurun'],
+                'tujuanSurat' => $data['tujuanSurat'],
                 'kodeBerkas' => $data['kodeBerkas'],
                 'user_id' => Auth::user()->id
             ]);
         }
         $pagination = 5;
-        $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
             $items['potonganPerihal'] = substr($items['perihal'], 0, 30) . " . . .";
-            $items['tujuan'] = $items->subbid->asm;
+            $items['asalSuratText'] = $items->subbid->asm;
             if ($items['tanggalSurat']) {
                 $items['tanggalSuratText'] = date("d F Y", strtotime($items['tanggalSurat']));
             }
-            if ($items['tanggalTurun']) {
-                $items['tanggalTurunText'] = date("d F Y", strtotime($items['tanggalTurun']));
+            if ($items['tanggalKirim']) {
+                $items['tanggalKirimText'] = date("d F Y", strtotime($items['tanggalKirim']));
             }
             $count++;
         }

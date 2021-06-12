@@ -246,47 +246,17 @@ class DashboardIndex extends Component {
                                                     {this.state.totalPosts}
                                                 </div>
                                                 <div className="label">
-                                                    Total Posts
+                                                    Total Surat Masuk
                                                 </div>
                                             </a>
                                         </div>
                                         <div className="col-sm-2">
                                             <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorGreen">
                                                 <div className="value">
-                                                    {this.state.totalNovels}
+                                                    0
                                                 </div>
                                                 <div className="label">
-                                                    Total Novels
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div className="col-sm-2">
-                                            <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorYellow">
-                                                <div className="value">
-                                                    {this.state.totalFollowers}
-                                                </div>
-                                                <div className="label">
-                                                    Total Followers
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div className="col-sm-2">
-                                            <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorPurple">
-                                                <div className="value">
-                                                    {this.state.totalGenres}
-                                                </div>
-                                                <div className="label">
-                                                    Total Genres
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div className="col-sm-3">
-                                            <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorOrange">
-                                                <div className="value">
-                                                    {this.state.totalTags}
-                                                </div>
-                                                <div className="label">
-                                                    Total Tags
+                                                    Total Surat Keluar
                                                 </div>
                                             </a>
                                         </div>
@@ -299,10 +269,10 @@ class DashboardIndex extends Component {
                                         <div className="col-sm-12">
                                             <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorRed">
                                                 <div className="value">
-                                                    {this.state.totalVisitors}
+                                                    0
                                                 </div>
                                                 <div className="label">
-                                                    Total Visitors
+                                                    Total Surat
                                                 </div>
                                             </a>
                                         </div>
@@ -315,20 +285,20 @@ class DashboardIndex extends Component {
                                         {/* content here */}
                                         <div className="element-box">
                                             <h5 className="form-header">
-                                                Translation's Dashboard
+                                                Dashboard
                                             </h5>
                                             <div className="form-desc">
-                                                Manajemen Data Dashboard
+                                                Manajemen Dashboard
                                             </div>
                                             <div className="os-tabs-w">
                                                 <div className="os-tabs-controls">
                                                     <ul className="nav nav-tabs smaller">
                                                         <li className="nav-item">
-                                                            <a className="nav-link active" data-toggle="tab">Visitor</a>
+                                                            <a className="nav-link active" data-toggle="tab">TotalSurat</a>
                                                         </li>
                                                     </ul>
                                                     <ul className="nav nav-pills smaller d-none d-md-flex">
-                                                        <li className="nav-item">
+                                                        {/* <li className="nav-item">
                                                             <a className="nav-link active masariuman_cursorPointer" data-toggle="tab" onClick={this.changeGetData.bind(this, 7)}>7 Days</a>
                                                         </li>
                                                         <li className="nav-item">
@@ -336,14 +306,14 @@ class DashboardIndex extends Component {
                                                         </li>
                                                         <li className="nav-item">
                                                             <a className="nav-link masariuman_cursorPointer" data-toggle="tab" onClick={this.changeGetData.bind(this, 30)}>30 Days</a>
-                                                        </li>
+                                                        </li> */}
                                                     </ul>
                                                 </div>
                                                 <div className="tab-content">
                                                     <div className="tab-pane active" id="tab_overview">
                                                         <div className="el-tablo bigger">
                                                             <div className="label">
-                                                                Translation Visitors
+                                                                Surat
                                                             </div>
                                                             <div className="value">
                                                                 {this.state.total}

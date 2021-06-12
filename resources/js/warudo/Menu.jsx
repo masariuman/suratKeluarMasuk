@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
+import swal from 'sweetalert';
 
 class Menu extends Component {
     constructor(props) {
@@ -8,8 +9,153 @@ class Menu extends Component {
             uuzaaMei: "",
             reberu: "",
             sashin: "",
+            file: null,
+            filePath: null,
+            fileUrl: null,
         };
         this.renderSashin = this.renderSashin.bind(this);
+        this.handleButtonLogout = this.handleButtonLogout.bind(this);
+        this.handleEditButton = this.handleEditButton.bind(this);
+        this.modalPengaturanUser = this.modalPengaturanUser.bind(this);
+        this.handleChangeFile = this.handleChangeFile.bind(this);
+        this.handleButtonFile = this.handleButtonFile.bind(this);
+    }
+
+    handleButtonFile(e) {
+        this.refs.fileUploader.click();
+        // console.log(e.target.value);
+    }
+
+    handleChangeFile(e) {
+        // console.log(e.target.files[0]);
+        this.setState({
+            file: e.target.files[0],
+            filePath: e.target.value,
+            fileUrl: e.target.value,
+        });
+    }
+
+    modalPengaturanUser() {
+        return (
+            <div aria-hidden="true" className="onboarding-modal modal fade animated" id="pengaturanUserModal" role="dialog" tabIndex="-1">
+                <div className="modal-dialog modal-centered" role="document">
+                    <div className="modal-content text-center">
+                        <button aria-label="Close" className="close" data-dismiss="modal" type="button"><span className="os-icon os-icon-close"></span></button>
+                        <div className="onboarding-media">
+                            <img alt="" src="img/bigicon5.png" width="200px" />
+                        </div>
+                        <div className="onboarding-content with-gradient">
+                            <h4 className="onboarding-title">
+                                Ubah Informasi Akun
+                            </h4>
+                            <div className="onboarding-text">
+                                <table className="masariuman_width100percent">
+                                    <tbody>
+                                        <tr>
+                                            <td className="text-center">
+                                                {this.renderSashin()}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div className="col-sm-12">
+                                                    <div className="form-group">
+                                                        <input
+                                                            onChange={this.handleChangeFile}
+                                                            title="File"
+                                                            placeholder="File.."
+                                                            type="file"
+                                                            className="form-control masariuman_displayNone"
+                                                            ref="fileUploader"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-12">
+                                                    <div className="form-group">
+                                                        <button className="mr-2 mb-2 btn btn-primary" type="button" onClick={this.handleButtonFile} >Upload Foto Baru</button>
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <a target="_blank" href={this.state.fileUrl}>{this.state.filePath}</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <form>
+                                <div className="row">
+                                    <div className="col-sm-12">
+                                        <div className="form-group">
+                                            <input
+                                                onChange={this.handleChangeKodeBerkas}
+                                                value={this.state.kodeBerkas}
+                                                title="Password Lama"
+                                                placeholder="Masukkan Password Lama.."
+                                                type="text"
+                                                className="form-control"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="form-group">
+                                            <input
+                                                onChange={this.handleChangeKodeBerkas}
+                                                value={this.state.kodeBerkas}
+                                                title="Password Lama"
+                                                placeholder="Masukkan Password Lama.."
+                                                type="text"
+                                                className="form-control"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="form-group">
+                                            <input
+                                                onChange={this.handleChangeKodeBerkas}
+                                                value={this.state.kodeBerkas}
+                                                title="Password Baru"
+                                                placeholder="Masukkan Password Baru.."
+                                                type="text"
+                                                className="form-control"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    handleEditButton() {
+        axios.get("/getUuzaa").then((response) => {
+            this.setState({
+                uuzaaMei: response.data.data.name,
+                reberu: response.data.data.level,
+                sashin: response.data.data.sashin,
+                rinku: response.data.data.rinku,
+            });
+        });
+    }
+
+    handleButtonLogout() {
+        swal({
+            title: `Apakah Anda Yakin Ingin Logout/Keluar Dari Aplikasi ?`,
+            text: "Anda Perlu Melakukan Login Ulang Setelah Logout/Keluar Dari Aplikasi Apabila Ingin Menggunakan Aplikasi Kembali",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = '/logout'
+            } else {
+            //   swal("Data Tidak Terhapus!");
+            }
+          });
     }
 
     getUuzaa() {
@@ -17,7 +163,8 @@ class Menu extends Component {
             this.setState({
                 uuzaaMei: response.data.data.name,
                 reberu: response.data.data.level,
-                sashin: response.data.data.sashin
+                sashin: response.data.data.sashin,
+                rinku: response.data.data.rinku,
             });
         });
     }
@@ -75,8 +222,11 @@ class Menu extends Component {
                                 <i className="os-icon os-icon-wallet-loaded"></i>
                             </div>
                             <ul>
-                                <li>
-                                    <a href="/logout"><i className="os-icon os-icon-signs-11"></i><span>Logout</span></a>
+                                <li id="pengaturanUser">
+                                    <a data-target="#pengaturanUserModal" data-toggle="modal" onClick={this.handleEditButton}><i className="os-icon os-icon-signs-11"></i><span>Pengaturan User</span></a>
+                                </li>
+                                <li id="logout">
+                                    <a onClick={this.handleButtonLogout}><i className="os-icon os-icon-signs-11"></i><span>Logout</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -247,6 +397,7 @@ class Menu extends Component {
                         </div>
                     </li>
                 </ul>
+                {this.modalPengaturanUser()}
             </div>
         );
     }

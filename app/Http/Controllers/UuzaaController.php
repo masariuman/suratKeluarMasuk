@@ -298,4 +298,10 @@ class UuzaaController extends Controller
             'data' => $data
         ]);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
 }

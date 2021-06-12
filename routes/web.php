@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::get('/logout', 'UuzaaController@logout');
+
 Route::get('/getUuzaa', 'UuzaaController@getUuzaa');
 
 Route::post('/kanrisha/masuk/deeta/update', 'suratMasukCOntroller@apdet');

@@ -369,7 +369,22 @@ class Masuk extends Component {
                         'next #buttonTambahModal' : 'Untuk Menambah Data Baru, Tekan Tombol Tambah Surat Masuk Baru'
                     },
                     {
-                        'next #1' : 'Untuk Mengubah Data Baru, Tekan Tombol Tambah Surat Masuk Baru'
+                        'next #ubah1' : 'Untuk Mengubah Data, Tekan Tombol Ubah Berikut'
+                    },
+                    {
+                        'next #hapus1' : 'Untuk Menghapus Data, Tekan Hapus Berikut'
+                    },
+                    {
+                        'next #detail1' : 'Untuk Menghapus Data, Tekan Hapus Berikut'
+                    },
+                    {
+                        'next #downloadButton' : "Apabila Anda Ada Melakukan Upload Data Ketika Menambahkan Data Baru <br> Atau Mengubah Data Baru, Maka Akan Muncul <br> Tombol <button class='mr-2 mb-2 btn btn-outline-secondary'>Download</button> Yang Dapat Digunakan Untuk Mendownload/Mengunduh Data"
+                    },
+                    {
+                        'next #cari' : 'Untuk Mencari Data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
+                    },
+                    {
+                        'next #pagination' : 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
                     }
                     ];
                     enjoyhint_instance.set(enjoyhint_script_steps);
@@ -443,18 +458,18 @@ class Masuk extends Component {
                         {data.tujuan}<br />
                         <small>{data.tanggalTurunText}</small>
                     </td>
-                    <td>
+                    <td id="downloadButton">
                         <div className="text-center">
                             {data.file ? (
                                 <a href={`/zaFail/${data.file}`} className="mr-2 mb-2 btn btn-outline-secondary">Download</a>
                             ) : (
                                 <span></span>
                             )}
-                            <button data-target="#detailModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-info" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Detail</button>
+                            <button data-target="#detailModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-info" type="button" onClick={this.handleEditButton.bind(this, data.rinku)} id={'detail'+data.nomor}>Detail</button>
                         </div>
                         <div className="text-center">
-                            <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)} id={data.nomor}>Ubah</button>
-                            <button className="mr-2 mb-2 btn btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button>
+                            <button data-target="#editModal" data-toggle="modal" className="mr-2 mb-2 btn btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)} id={'ubah'+data.nomor}>Ubah</button>
+                            <button className="mr-2 mb-2 btn btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)} id={'hapus'+data.nomor}>Hapus</button>
                         </div>
                     </td>
                 </tr>
@@ -976,7 +991,7 @@ class Masuk extends Component {
                                     </div>
                                     <div>
                                         <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal" onClick={this.handleTambahButton}>Tambah Surat Masuk Baru</button>
-                                        <div className="col-sm-4 float-right">
+                                        <div className="col-sm-4 float-right" id="cari">
                                             <input type="text" className="form-control" onChange={this.handleChangeCari}
                                                 value={this.state.cari} placeholder="Cari Surat Masuk..."></input>
                                         </div>
@@ -996,7 +1011,7 @@ class Masuk extends Component {
                                             <tbody>{this.renderData()}</tbody>
                                         </table>
                                     </div>
-                                    <div className="d-flex justify-content-center">
+                                    <div className="d-flex justify-content-center" id="pagination">
                                         <Pagination
                                             activePage={this.state.activePage}
                                             itemsCountPerPage={this.state.itemsCountPerPage}

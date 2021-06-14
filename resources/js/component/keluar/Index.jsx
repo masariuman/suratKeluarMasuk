@@ -296,7 +296,7 @@ class Keluar extends Component {
         data.append('tanggalKirim', this.state.tanggalKirim);
         data.append('kodeBerkas', this.state.kodeBerkas);
         data.append('rinku', this.state.url);
-        console.log(data);
+        // console.log(data);
         axios
             .post(`/kanrisha/keluar/deeta/update`, data)
             .then(response => {

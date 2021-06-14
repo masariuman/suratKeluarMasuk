@@ -4217,8 +4217,8 @@ var Keluar = /*#__PURE__*/function (_Component) {
       data.append('tujuanSurat', this.state.tujuanSurat);
       data.append('tanggalKirim', this.state.tanggalKirim);
       data.append('kodeBerkas', this.state.kodeBerkas);
-      data.append('rinku', this.state.url);
-      console.log(data);
+      data.append('rinku', this.state.url); // console.log(data);
+
       axios.post("/kanrisha/keluar/deeta/update", data).then(function (response) {
         _this6.setState({
           data: response.data.data.data,
@@ -7706,6 +7706,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7749,6 +7750,10 @@ var Menu = /*#__PURE__*/function (_Component) {
       uuzaaMei: "",
       reberu: "",
       sashin: "",
+      url: "",
+      newPass: "",
+      newPassConfirm: "",
+      oldPass: "",
       file: null,
       filePath: null,
       fileUrl: null
@@ -7759,10 +7764,69 @@ var Menu = /*#__PURE__*/function (_Component) {
     _this.modalPengaturanUser = _this.modalPengaturanUser.bind(_assertThisInitialized(_this));
     _this.handleChangeFile = _this.handleChangeFile.bind(_assertThisInitialized(_this));
     _this.handleButtonFile = _this.handleButtonFile.bind(_assertThisInitialized(_this));
+    _this.handleChangePassword = _this.handleChangePassword.bind(_assertThisInitialized(_this));
+    _this.handleChangeNewPass = _this.handleChangeNewPass.bind(_assertThisInitialized(_this));
+    _this.handleChangeNewPassConfirm = _this.handleChangeNewPassConfirm.bind(_assertThisInitialized(_this));
+    _this.handleChangeOldPass = _this.handleChangeOldPass.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Menu, [{
+    key: "handleChangeNewPass",
+    value: function handleChangeNewPass(e) {
+      this.setState({
+        newPass: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeNewPassConfirm",
+    value: function handleChangeNewPassConfirm(e) {
+      this.setState({
+        newPassConfirm: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeOldPass",
+    value: function handleChangeOldPass(e) {
+      this.setState({
+        oldPass: e.target.value
+      }); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangePassword",
+    value: function handleChangePassword(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      this.setState({
+        loading: true
+      });
+      axios.put("/kanrisha/changePass/".concat(this.state.url), {
+        newPass: this.state.newPass,
+        newPassConfirm: this.state.newPassConfirm,
+        oldPass: this.state.oldPass
+      }).then(function (response) {
+        _this2.setState({
+          pass: "",
+          oldPass: "",
+          loading: false
+        });
+
+        $("#pengaturanUserModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('body').removeClass('modal-open');
+        $('body').css('padding-right', '');
+        $("#pengaturanUserModal").hide();
+        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Sukses!", "Password Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
+      })["catch"](function (error) {
+        _this2.setState({
+          loading: false
+        });
+
+        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
+      });
+    }
+  }, {
     key: "handleButtonFile",
     value: function handleButtonFile(e) {
       this.refs.fileUploader.click(); // console.log(e.target.value);
@@ -7867,8 +7931,8 @@ var Menu = /*#__PURE__*/function (_Component) {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                       className: "form-group",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                        onChange: this.handleChangeKodeBerkas,
-                        value: this.state.kodeBerkas,
+                        onChange: this.handleChangeOldPass,
+                        value: this.state.oldPass,
                         title: "Password Lama",
                         placeholder: "Masukkan Password Lama..",
                         type: "text",
@@ -7880,25 +7944,38 @@ var Menu = /*#__PURE__*/function (_Component) {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                       className: "form-group",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                        onChange: this.handleChangeKodeBerkas,
-                        value: this.state.kodeBerkas,
+                        onChange: this.handleChangeNewPass,
+                        value: this.state.newPass,
                         title: "Password Lama",
-                        placeholder: "Masukkan Password Lama..",
-                        type: "text",
-                        className: "form-control"
-                      })
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    className: "col-sm-6",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                      className: "form-group",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                        onChange: this.handleChangeKodeBerkas,
-                        value: this.state.kodeBerkas,
-                        title: "Password Baru",
                         placeholder: "Masukkan Password Baru..",
                         type: "text",
                         className: "form-control"
+                      })
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                    className: "col-sm-6",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                      className: "form-group",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                        onChange: this.handleChangeNewPassConfirm,
+                        value: this.state.newPassConfirm,
+                        title: "Password Baru",
+                        placeholder: "Konfirmasi Password Baru..",
+                        type: "text",
+                        className: "form-control"
+                      })
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                    className: "col-sm-12",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                      className: "form-group",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                        className: "mr-2 mb-2 btn btn-warning masariuman_width100percent",
+                        "data-target": "#onboardingWideFormModal",
+                        "data-toggle": "modal",
+                        type: "button",
+                        onClick: this.handleChangePassword,
+                        children: "Ubah Password"
                       })
                     })
                   })]
@@ -7912,10 +7989,10 @@ var Menu = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleEditButton",
     value: function handleEditButton() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/getUuzaa").then(function (response) {
-        _this2.setState({
+        _this3.setState({
           uuzaaMei: response.data.data.name,
           reberu: response.data.data.level,
           sashin: response.data.data.sashin,
@@ -7942,10 +8019,10 @@ var Menu = /*#__PURE__*/function (_Component) {
   }, {
     key: "getUuzaa",
     value: function getUuzaa() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("/getUuzaa").then(function (response) {
-        _this3.setState({
+        _this4.setState({
           uuzaaMei: response.data.data.name,
           reberu: response.data.data.level,
           sashin: response.data.data.sashin,

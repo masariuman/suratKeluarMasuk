@@ -9,6 +9,10 @@ class Menu extends Component {
             uuzaaMei: "",
             reberu: "",
             sashin: "",
+            url: "",
+            newPass: "",
+            newPassConfirm: "",
+            oldPass:"",
             file: null,
             filePath: null,
             fileUrl: null,
@@ -19,6 +23,64 @@ class Menu extends Component {
         this.modalPengaturanUser = this.modalPengaturanUser.bind(this);
         this.handleChangeFile = this.handleChangeFile.bind(this);
         this.handleButtonFile = this.handleButtonFile.bind(this);
+        this.handleChangePassword = this.handleChangePassword.bind(this);
+        this.handleChangeNewPass = this.handleChangeNewPass.bind(this);
+        this.handleChangeNewPassConfirm = this.handleChangeNewPassConfirm.bind(this);
+        this.handleChangeOldPass = this.handleChangeOldPass.bind(this);
+    }
+
+    handleChangeNewPass(e) {
+        this.setState({
+            newPass: e.target.value
+        });
+        // console.log(e.target.value);
+    }
+
+    handleChangeNewPassConfirm(e) {
+        this.setState({
+            newPassConfirm: e.target.value
+        });
+        // console.log(e.target.value);
+    }
+
+    handleChangeOldPass(e) {
+        this.setState({
+            oldPass: e.target.value
+        });
+        // console.log(e.target.value);
+    }
+
+    handleChangePassword(e) {
+        e.preventDefault();
+        this.setState({
+            loading: true
+        });
+        axios
+            .put(`/kanrisha/changePass/${this.state.url}`, {
+                newPass: this.state.newPass,
+                newPassConfirm: this.state.newPassConfirm,
+                oldPass: this.state.oldPass
+            })
+            .then(response => {
+                this.setState({
+                    pass: "",
+                    oldPass: "",
+                    loading: false
+                });
+                $("#pengaturanUserModal").removeClass("in");
+                $(".modal-backdrop").remove();
+                $('body').removeClass('modal-open');
+                $('body').css('padding-right', '');
+                $("#pengaturanUserModal").hide();
+                swal("Sukses!", "Password Berhasil Diubah!", "success");
+                // console.log("from handle sumit", response);
+            })
+            .catch(error => {
+                this.setState({
+                    loading: false
+                });
+                swal("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
+            });
     }
 
     handleButtonFile(e) {
@@ -88,8 +150,8 @@ class Menu extends Component {
                                     <div className="col-sm-12">
                                         <div className="form-group">
                                             <input
-                                                onChange={this.handleChangeKodeBerkas}
-                                                value={this.state.kodeBerkas}
+                                                onChange={this.handleChangeOldPass}
+                                                value={this.state.oldPass}
                                                 title="Password Lama"
                                                 placeholder="Masukkan Password Lama.."
                                                 type="text"
@@ -100,25 +162,30 @@ class Menu extends Component {
                                     <div className="col-sm-6">
                                         <div className="form-group">
                                             <input
-                                                onChange={this.handleChangeKodeBerkas}
-                                                value={this.state.kodeBerkas}
+                                                onChange={this.handleChangeNewPass}
+                                                value={this.state.newPass}
                                                 title="Password Lama"
-                                                placeholder="Masukkan Password Lama.."
-                                                type="text"
-                                                className="form-control"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <div className="form-group">
-                                            <input
-                                                onChange={this.handleChangeKodeBerkas}
-                                                value={this.state.kodeBerkas}
-                                                title="Password Baru"
                                                 placeholder="Masukkan Password Baru.."
                                                 type="text"
                                                 className="form-control"
                                             />
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="form-group">
+                                            <input
+                                                onChange={this.handleChangeNewPassConfirm}
+                                                value={this.state.newPassConfirm}
+                                                title="Password Baru"
+                                                placeholder="Konfirmasi Password Baru.."
+                                                type="text"
+                                                className="form-control"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-12">
+                                        <div className="form-group">
+                                            <button className="mr-2 mb-2 btn btn-warning masariuman_width100percent" data-target="#onboardingWideFormModal" data-toggle="modal" type="button" onClick={this.handleChangePassword}>Ubah Password</button>
                                         </div>
                                     </div>
                                 </div>

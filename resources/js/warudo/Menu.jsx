@@ -9,13 +9,14 @@ class Menu extends Component {
             uuzaaMei: "",
             reberu: "",
             sashin: "",
-            url: "",
+            rinku: "",
             newPass: "",
             newPassConfirm: "",
             oldPass:"",
             file: null,
             filePath: null,
             fileUrl: null,
+            confirmOldPass: null,
         };
         this.renderSashin = this.renderSashin.bind(this);
         this.handleButtonLogout = this.handleButtonLogout.bind(this);
@@ -55,25 +56,33 @@ class Menu extends Component {
         this.setState({
             loading: true
         });
-        axios
-            .put(`/kanrisha/changePass/${this.state.url}`, {
+        if(this.state.newPass != this.state.newPassConfirm) {
+            swal("Error!", "Password Baru dan Konfirmasi Password Baru Tidak Sama", "error");
+        } else {
+            axios
+            .put(`/kanrisha/uuzaa/deeta/${this.state.rinku}`, {
                 newPass: this.state.newPass,
                 newPassConfirm: this.state.newPassConfirm,
                 oldPass: this.state.oldPass
             })
             .then(response => {
-                this.setState({
-                    pass: "",
-                    oldPass: "",
-                    loading: false
-                });
-                $("#pengaturanUserModal").removeClass("in");
-                $(".modal-backdrop").remove();
-                $('body').removeClass('modal-open');
-                $('body').css('padding-right', '');
-                $("#pengaturanUserModal").hide();
-                swal("Sukses!", "Password Berhasil Diubah!", "success");
-                // console.log("from handle sumit", response);
+                console.log(response);
+                if(!response.data.data.data.oldPassConfirm) {
+                    swal("Error!", "Password Lama Salah", "error");
+                } else {
+                    this.setState({
+                        pass: "",
+                        oldPass: "",
+                        loading: false
+                    });
+                    $("#pengaturanUserModal").removeClass("in");
+                    $(".modal-backdrop").remove();
+                    $('body').removeClass('modal-open');
+                    $('body').css('padding-right', '');
+                    $("#pengaturanUserModal").hide();
+                    swal("Sukses!", "Password Berhasil Diubah!", "success");
+                    // console.log("from handle sumit", response);
+                }
             })
             .catch(error => {
                 this.setState({
@@ -81,6 +90,7 @@ class Menu extends Component {
                 });
                 swal("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
             });
+        }
     }
 
     handleButtonFile(e) {
@@ -154,7 +164,7 @@ class Menu extends Component {
                                                 value={this.state.oldPass}
                                                 title="Password Lama"
                                                 placeholder="Masukkan Password Lama.."
-                                                type="text"
+                                                type="password"
                                                 className="form-control"
                                             />
                                         </div>
@@ -164,9 +174,9 @@ class Menu extends Component {
                                             <input
                                                 onChange={this.handleChangeNewPass}
                                                 value={this.state.newPass}
-                                                title="Password Lama"
+                                                title="Password Baru"
                                                 placeholder="Masukkan Password Baru.."
-                                                type="text"
+                                                type="password"
                                                 className="form-control"
                                             />
                                         </div>
@@ -178,7 +188,7 @@ class Menu extends Component {
                                                 value={this.state.newPassConfirm}
                                                 title="Password Baru"
                                                 placeholder="Konfirmasi Password Baru.."
-                                                type="text"
+                                                type="password"
                                                 className="form-control"
                                             />
                                         </div>

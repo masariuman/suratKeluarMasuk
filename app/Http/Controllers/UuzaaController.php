@@ -149,7 +149,9 @@ class UuzaaController extends Controller
     {
         //
         $Uuzaa = Uuzaa::where('rinku', $id)->first();
-        $heya = Heya::where('rinku', $request->heyaMei)->first();
+        if ($request->heyaMei) {
+            $heya = Heya::where('rinku', $request->heyaMei)->first();
+        }
         if ($request->reberu) {
             if ($request->reberu === "nol") {
                 $Uuzaa->update([
@@ -158,6 +160,15 @@ class UuzaaController extends Controller
             } else {
                 $Uuzaa->update([
                     'reberu' => $request->reberu
+                ]);
+            }
+        } else if ($request->newPass) {
+            if (!Hash::check($request->oldPass, $request->user()->password)) {
+                $oldpass = true;
+            } else {
+                $oldpass = false;
+                $Uuzaa->update([
+                    'password' => Hash::make($request->newPass)
                 ]);
             }
         } else {
@@ -183,6 +194,12 @@ class UuzaaController extends Controller
                 $items['level'] = "Legendary Admin";
             }
             $count++;
+        }
+        if ($oldpass === true) {
+            $data['oldPassConfirm'] = false;
+        }
+        if ($oldpass === false) {
+            $data['oldPassConfirm'] = true;
         }
         return response()->json([
             'data' => $data

@@ -7750,13 +7750,14 @@ var Menu = /*#__PURE__*/function (_Component) {
       uuzaaMei: "",
       reberu: "",
       sashin: "",
-      url: "",
+      rinku: "",
       newPass: "",
       newPassConfirm: "",
       oldPass: "",
       file: null,
       filePath: null,
-      fileUrl: null
+      fileUrl: null,
+      confirmOldPass: null
     };
     _this.renderSashin = _this.renderSashin.bind(_assertThisInitialized(_this));
     _this.handleButtonLogout = _this.handleButtonLogout.bind(_assertThisInitialized(_this));
@@ -7801,30 +7802,41 @@ var Menu = /*#__PURE__*/function (_Component) {
       this.setState({
         loading: true
       });
-      axios.put("/kanrisha/changePass/".concat(this.state.url), {
-        newPass: this.state.newPass,
-        newPassConfirm: this.state.newPassConfirm,
-        oldPass: this.state.oldPass
-      }).then(function (response) {
-        _this2.setState({
-          pass: "",
-          oldPass: "",
-          loading: false
-        });
 
-        $("#pengaturanUserModal").removeClass("in");
-        $(".modal-backdrop").remove();
-        $('body').removeClass('modal-open');
-        $('body').css('padding-right', '');
-        $("#pengaturanUserModal").hide();
-        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Sukses!", "Password Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
-      })["catch"](function (error) {
-        _this2.setState({
-          loading: false
-        });
+      if (this.state.newPass != this.state.newPassConfirm) {
+        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Error!", "Password Baru dan Konfirmasi Password Baru Tidak Sama", "error");
+      } else {
+        axios.put("/kanrisha/uuzaa/deeta/".concat(this.state.rinku), {
+          newPass: this.state.newPass,
+          newPassConfirm: this.state.newPassConfirm,
+          oldPass: this.state.oldPass
+        }).then(function (response) {
+          console.log(response);
 
-        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
-      });
+          if (!response.data.data.data.oldPassConfirm) {
+            sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Error!", "Password Lama Salah", "error");
+          } else {
+            _this2.setState({
+              pass: "",
+              oldPass: "",
+              loading: false
+            });
+
+            $("#pengaturanUserModal").removeClass("in");
+            $(".modal-backdrop").remove();
+            $('body').removeClass('modal-open');
+            $('body').css('padding-right', '');
+            $("#pengaturanUserModal").hide();
+            sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Sukses!", "Password Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
+          }
+        })["catch"](function (error) {
+          _this2.setState({
+            loading: false
+          });
+
+          sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Error!", "Gagal Mengubah Data, Silahkan Hubungi Admin!", "error");
+        });
+      }
     }
   }, {
     key: "handleButtonFile",
@@ -7935,7 +7947,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                         value: this.state.oldPass,
                         title: "Password Lama",
                         placeholder: "Masukkan Password Lama..",
-                        type: "text",
+                        type: "password",
                         className: "form-control"
                       })
                     })
@@ -7946,9 +7958,9 @@ var Menu = /*#__PURE__*/function (_Component) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                         onChange: this.handleChangeNewPass,
                         value: this.state.newPass,
-                        title: "Password Lama",
+                        title: "Password Baru",
                         placeholder: "Masukkan Password Baru..",
-                        type: "text",
+                        type: "password",
                         className: "form-control"
                       })
                     })
@@ -7961,7 +7973,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                         value: this.state.newPassConfirm,
                         title: "Password Baru",
                         placeholder: "Konfirmasi Password Baru..",
-                        type: "text",
+                        type: "password",
                         className: "form-control"
                       })
                     })

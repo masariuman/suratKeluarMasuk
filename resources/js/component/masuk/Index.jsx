@@ -494,7 +494,7 @@ class Masuk extends Component {
                         <div className="onboarding-media">
                         <img alt="" src="/iconModal/tagplus.png" width="200px" />
                         </div>
-                        <div className="onboarding-content with-gradient">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
                             Tambah Surat Masuk Baru
                         </h4>
@@ -664,7 +664,7 @@ class Masuk extends Component {
                         <div className="onboarding-media">
                         <img alt="" src="/iconModal/tagEdit.png" width="200px" />
                         </div>
-                        <div className="onboarding-content with-gradient">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
                             Ubah Data Surat Masuk
                         </h4>

@@ -334,4 +334,30 @@ class UuzaaController extends Controller
             'data' => $data
         ]);
     }
+
+    public function sashinUuzaa(Request $request)
+    {
+        //
+        // dd($data);
+        $data = $request->request->all();
+        $file = $request->files->all();
+        $uuzaa = Uuzaa::where('rinku', $data['url'])->first();
+        // dd($uuzaa);
+        $file = $request->file('file');
+        $fileExt = $file->getClientOriginalExtension();
+        $fileName = $uuzaa['juugyouinBangou'] . "_" . date('YmdHis') . ".$fileExt";
+
+        $destinationPath = public_path('/sashin');
+        $img = Image::make($file->path());
+        $img->resize(220, 220)->save($destinationPath . '/' . $fileName);
+
+        // $request->file('file')->move("sashin", $fileName);
+        $uuzaa->update([
+            'sashin' => $fileName
+        ]);
+        $data['data'] = $uuzaa;
+        return response()->json([
+            'data' => $data
+        ]);
+    }
 }

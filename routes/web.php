@@ -25,6 +25,7 @@ Route::post('/kanrisha/masuk/deeta/update', 'suratMasukCOntroller@apdet');
 Route::post('/kanrisha/keluar/deeta/update', 'suratKeluarController@apdet');
 
 Route::post('/kanrisha/uuzaa/sashin', 'UuzaaController@sashin');
+Route::post('/kanrisha/uuzaa/sashinUuzaa', 'UuzaaController@sashinUuzaa');
 Route::get('/kanrisha/uuzaa/resetPasswordUser/{id}', 'UuzaaController@resetPassword');
 
 

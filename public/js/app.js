@@ -2490,7 +2490,7 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Tambah Sub Bidang Baru"
@@ -2578,7 +2578,7 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Ubah Nama Sub Bidang"
@@ -3596,7 +3596,7 @@ var Heya = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Tambah Bidang Baru"
@@ -3676,7 +3676,7 @@ var Heya = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Ubah Nama Bidang"
@@ -4461,7 +4461,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Tambah Surat Keluar Baru"
@@ -4679,7 +4679,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Ubah Data Surat Keluar"
@@ -5757,7 +5757,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Tambah Surat Masuk Baru"
@@ -5979,7 +5979,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Ubah Data Surat Masuk"
@@ -6533,6 +6533,7 @@ var User = /*#__PURE__*/function (_Component) {
       name: "",
       dataEditInput: "",
       cari: "",
+      sashinUuzaa: "",
       url: null,
       loading: true
     };
@@ -6551,10 +6552,40 @@ var User = /*#__PURE__*/function (_Component) {
     _this.handleChangeName = _this.handleChangeName.bind(_assertThisInitialized(_this));
     _this.handleChangeNip = _this.handleChangeNip.bind(_assertThisInitialized(_this));
     _this.handleChangeLevel = _this.handleChangeLevel.bind(_assertThisInitialized(_this));
+    _this.handleButtonFile = _this.handleButtonFile.bind(_assertThisInitialized(_this));
+    _this.handleChangeFile = _this.handleChangeFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(User, [{
+    key: "handleButtonFile",
+    value: function handleButtonFile(e) {
+      this.refs.fileUploader.click(); // console.log(e.target.value);
+    }
+  }, {
+    key: "handleChangeFile",
+    value: function handleChangeFile(e) {
+      var _this2 = this;
+
+      var data = new FormData();
+      data.append('file', e.target.files[0]);
+      data.append('url', this.state.uuzaNoRinku);
+      axios.post("/kanrisha/uuzaa/sashinUuzaa/", data).then(function (response) {
+        _this2.setState({
+          sashinUuzaa: response.data.data.data.sashin
+        });
+
+        console.log(response);
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Foto Berhasi Diubah!", "success");
+      })["catch"](function (error) {
+        _this2.setState({
+          loading: false
+        });
+
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Gagal Mengubah Foto, Silahkan Hubungi Admin!", "error");
+      });
+    }
+  }, {
     key: "handleChangeLevel",
     value: function handleChangeLevel(e) {
       this.setState({
@@ -6586,7 +6617,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleChangeCari",
     value: function handleChangeCari(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.setState({
         cari: e.target.value
@@ -6595,7 +6626,7 @@ var User = /*#__PURE__*/function (_Component) {
         cari: e.target.value
       }).then(function (response) {
         // console.log(response.data);
-        _this2.setState({
+        _this3.setState({
           data: response.data.deeta_data.data,
           loading: false,
           activePage: response.data.deeta_data.current_page,
@@ -6609,7 +6640,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleDeleteButton",
     value: function handleDeleteButton(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()({
@@ -6620,21 +6651,21 @@ var User = /*#__PURE__*/function (_Component) {
           dangerMode: true
         }).then(function (willDelete) {
           if (willDelete) {
-            _this3.setState({
+            _this4.setState({
               loading: true
             });
 
             axios["delete"]("/kanrisha/uuzaa/deeta/".concat(e), {
               rinku: ""
             }).then(function (response) {
-              _this3.setState({
+              _this4.setState({
                 data: response.data.data.data,
                 loading: false
               });
 
               sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Dihapus!", "success"); // console.log("from handle sumit", response);
             })["catch"](function (error) {
-              _this3.setState({
+              _this4.setState({
                 loading: false
               });
 
@@ -6651,7 +6682,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleResetPasswordButton",
     value: function handleResetPasswordButton(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()({
@@ -6662,21 +6693,21 @@ var User = /*#__PURE__*/function (_Component) {
           dangerMode: true
         }).then(function (willDelete) {
           if (willDelete) {
-            _this4.setState({
+            _this5.setState({
               loading: true
             });
 
             axios.get("/kanrisha/uuzaa/resetPasswordUser/".concat(e), {
               rinku: ""
             }).then(function (response) {
-              _this4.setState({
+              _this5.setState({
                 data: response.data.data.data,
                 loading: false
               });
 
               sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Password Berhasil Di Reset Ulang!", "success"); // console.log("from handle sumit", response);
             })["catch"](function (error) {
-              _this4.setState({
+              _this5.setState({
                 loading: false
               });
 
@@ -6692,13 +6723,14 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleEditButton",
     value: function handleEditButton(e) {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
-        _this5.setState({
+        _this6.setState({
           heyaMei: response.data.data.heyaRinku,
           nip: response.data.data.juugyouinBangou,
           uuzaNoRinku: response.data.data.rinku,
+          sashinUuzaa: response.data.data.sashin,
           name: response.data.data.name
         });
       })["catch"](function (error) {
@@ -6708,10 +6740,10 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleLevelButton",
     value: function handleLevelButton(e) {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
-        _this6.setState({
+        _this7.setState({
           level: response.data.data.reberu,
           uuzaNoRinku: response.data.data.rinku
         });
@@ -6736,7 +6768,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this7 = this;
+      var _this8 = this;
 
       e.preventDefault();
       this.setState({
@@ -6747,8 +6779,8 @@ var User = /*#__PURE__*/function (_Component) {
         nip: this.state.nip,
         name: this.state.name
       }).then(function (response) {
-        _this7.setState({
-          data: [response.data.data].concat(_toConsumableArray(_this7.state.data)),
+        _this8.setState({
+          data: [response.data.data].concat(_toConsumableArray(_this8.state.data)),
           nip: "",
           name: "",
           loading: false
@@ -6761,7 +6793,7 @@ var User = /*#__PURE__*/function (_Component) {
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#tambahModal").hide();
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Baru Berhasil Ditambahkan!", "success"); // console.log("from handle sumit", response);
       })["catch"](function (error) {
-        _this7.setState({
+        _this8.setState({
           loading: false
         });
 
@@ -6771,7 +6803,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleEditSubmit",
     value: function handleEditSubmit(e) {
-      var _this8 = this;
+      var _this9 = this;
 
       e.preventDefault();
       this.setState({
@@ -6782,7 +6814,7 @@ var User = /*#__PURE__*/function (_Component) {
         nip: this.state.nip,
         name: this.state.name
       }).then(function (response) {
-        _this8.setState({
+        _this9.setState({
           data: response.data.data.data,
           nip: "",
           name: "",
@@ -6796,7 +6828,7 @@ var User = /*#__PURE__*/function (_Component) {
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#editModal").hide();
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
       })["catch"](function (error) {
-        _this8.setState({
+        _this9.setState({
           loading: false
         });
 
@@ -6806,7 +6838,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleLevelSubmit",
     value: function handleLevelSubmit(e) {
-      var _this9 = this;
+      var _this10 = this;
 
       e.preventDefault();
       this.setState({
@@ -6815,7 +6847,7 @@ var User = /*#__PURE__*/function (_Component) {
       axios.put("/kanrisha/uuzaa/deeta/".concat(this.state.uuzaNoRinku), {
         reberu: this.state.level
       }).then(function (response) {
-        _this9.setState({
+        _this10.setState({
           data: response.data.data.data,
           level: "3",
           loading: false
@@ -6828,7 +6860,7 @@ var User = /*#__PURE__*/function (_Component) {
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#levelModal").hide();
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
       })["catch"](function (error) {
-        _this9.setState({
+        _this10.setState({
           loading: false
         });
 
@@ -6838,10 +6870,10 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "getHeya",
     value: function getHeya() {
-      var _this10 = this;
+      var _this11 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/create").then(function (response) {
-        _this10.setState({
+        _this11.setState({
           heya: response.data.data.heya,
           heyaMei: response.data.data.heya[0].rinku
         });
@@ -6850,14 +6882,14 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "getData",
     value: function getData() {
-      var _this11 = this;
+      var _this12 = this;
 
       this.setState({
         loading: true
       });
       axios.get("/kanrisha/uuzaa/deeta").then(function (response) {
         // console.log(response.data.data.data);
-        _this11.setState({
+        _this12.setState({
           data: response.data.data.data,
           loading: false,
           activePage: response.data.data.current_page,
@@ -6868,7 +6900,7 @@ var User = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! ", "error");
 
-        _this11.setState({
+        _this12.setState({
           loading: false
         });
       });
@@ -6876,13 +6908,13 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handlePageChange",
     value: function handlePageChange(pageNumber) {
-      var _this12 = this;
+      var _this13 = this;
 
       this.setState({
         loading: true
       });
       axios.get('/masariuman_tag?page=' + pageNumber).then(function (response) {
-        _this12.setState({
+        _this13.setState({
           data: response.data.deeta_data.data,
           loading: false,
           activePage: response.data.deeta_data.current_page,
@@ -6893,7 +6925,7 @@ var User = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
 
-        _this12.setState({
+        _this13.setState({
           loading: false
         });
       });
@@ -6926,9 +6958,20 @@ var User = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "renderSashin",
+    value: function renderSashin() {
+      return !this.state.sashinUuzaa || this.state.sashinUuzaa === "" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+        alt: "",
+        src: "/warudo/dist/img/avatar.jpg"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+        alt: "",
+        src: "/sashin/" + this.state.sashinUuzaa
+      });
+    }
+  }, {
     key: "renderData",
     value: function renderData() {
-      var _this13 = this;
+      var _this14 = this;
 
       return !this.state.data.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -6961,24 +7004,24 @@ var User = /*#__PURE__*/function (_Component) {
               "data-toggle": "modal",
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
               type: "button",
-              onClick: _this13.handleEditButton.bind(_this13, data.rinku),
-              children: "Ubah"
+              onClick: _this14.handleEditButton.bind(_this14, data.rinku),
+              children: "Ubah Data/Foto"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
               type: "button",
-              onClick: _this13.handleDeleteButton.bind(_this13, data.rinku),
+              onClick: _this14.handleDeleteButton.bind(_this14, data.rinku),
               children: "Hapus"
             }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               "data-target": "#levelModal",
               "data-toggle": "modal",
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary",
               type: "button",
-              onClick: _this13.handleLevelButton.bind(_this13, data.rinku),
+              onClick: _this14.handleLevelButton.bind(_this14, data.rinku),
               children: "Level"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-success",
               type: "button",
-              onClick: _this13.handleResetPasswordButton.bind(_this13, data.rinku),
+              onClick: _this14.handleResetPasswordButton.bind(_this14, data.rinku),
               children: "Reset Password"
             })]
           })]
@@ -7020,7 +7063,7 @@ var User = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Tambah User Baru"
@@ -7110,21 +7153,32 @@ var User = /*#__PURE__*/function (_Component) {
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
               className: "onboarding-side-by-side",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                 className: "onboarding-media",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-                  alt: "",
-                  src: "/iconModal/tagEdit.png",
-                  width: "200px"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
-                  children: "Ubah Nama User"
+                  children: "Ubah Foto"
+                }), this.renderSashin(), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                  className: "mr-2 mb-2 btn btn-primary",
+                  type: "button",
+                  onClick: this.handleButtonFile,
+                  children: "Upload Foto Baru"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+                  onChange: this.handleChangeFile,
+                  title: "File",
+                  placeholder: "File..",
+                  type: "file",
+                  className: "form-control masariuman_displayNone",
+                  ref: "fileUploader"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                className: "onboarding-content with-gradient masariuman_width100percent",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
+                  className: "onboarding-title",
+                  children: "Ubah data User"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "onboarding-text",
-                  children: "Masukkan nama User baru."
+                  children: "Masukkan data User baru."
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("form", {
                   onSubmit: this.handleEditSubmit,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -7216,7 +7270,7 @@ var User = /*#__PURE__*/function (_Component) {
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                className: "onboarding-content with-gradient",
+                className: "onboarding-content with-gradient masariuman_width100percent",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
                   className: "onboarding-title",
                   children: "Ubah Level User"

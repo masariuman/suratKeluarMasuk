@@ -303,7 +303,7 @@ class alhuqulAlfareia extends Component {
                         <div className="onboarding-media">
                         <img alt="" src="/iconModal/tagplus.png" width="200px" />
                         </div>
-                        <div className="onboarding-content with-gradient">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
                             Tambah Sub Bidang Baru
                         </h4>
@@ -358,7 +358,7 @@ class alhuqulAlfareia extends Component {
                         <div className="onboarding-media">
                         <img alt="" src="/iconModal/tagEdit.png" width="200px" />
                         </div>
-                        <div className="onboarding-content with-gradient">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
                             Ubah Nama Sub Bidang
                         </h4>

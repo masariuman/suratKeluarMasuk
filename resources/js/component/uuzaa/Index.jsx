@@ -21,6 +21,7 @@ class User extends Component {
             name : "",
             dataEditInput: "",
             cari: "",
+            sashinUuzaa : "",
             url: null,
             loading: true
         };
@@ -39,6 +40,34 @@ class User extends Component {
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeNip = this.handleChangeNip.bind(this);
         this.handleChangeLevel = this.handleChangeLevel.bind(this);
+        this.handleButtonFile = this.handleButtonFile.bind(this);
+        this.handleChangeFile = this.handleChangeFile.bind(this);
+    }
+
+    handleButtonFile(e) {
+        this.refs.fileUploader.click();
+        // console.log(e.target.value);
+    }
+
+    handleChangeFile(e) {
+        const data = new FormData();
+        data.append('file', e.target.files[0]);
+        data.append('url', this.state.uuzaNoRinku);
+        axios
+            .post(`/kanrisha/uuzaa/sashinUuzaa/`, data)
+            .then((response) => {
+                this.setState({
+                    sashinUuzaa: response.data.data.data.sashin
+                });
+                console.log(response);
+                swal("Sukses!", "Foto Berhasi Diubah!", "success");
+            })
+            .catch(error => {
+                this.setState({
+                    loading: false
+                });
+                swal("Error!", "Gagal Mengubah Foto, Silahkan Hubungi Admin!", "error");
+            });
     }
 
     handleChangeLevel(e) {
@@ -184,6 +213,7 @@ class User extends Component {
                     heyaMei : response.data.data.heyaRinku,
                     nip : response.data.data.juugyouinBangou,
                     uuzaNoRinku : response.data.data.rinku,
+                    sashinUuzaa : response.data.data.sashin,
                     name : response.data.data.name
                 });
             })
@@ -400,6 +430,10 @@ class User extends Component {
         ));
     }
 
+    renderSashin() {
+        return !this.state.sashinUuzaa || this.state.sashinUuzaa === "" ? <img alt="" src="/warudo/dist/img/avatar.jpg" /> : <img alt="" src={"/sashin/"+this.state.sashinUuzaa} />;
+    }
+
     renderData() {
         return !this.state.data.length ? <tr><td colSpan="6" className="text-center">Data Tidak Ditemukan</td></tr> :
             this.state.data.map(data => (
@@ -410,7 +444,7 @@ class User extends Component {
                     <td className="text-center">{data.heyaMei}</td>
                     <td className="text-center">{data.level}</td>
                     <td className="text-center">
-                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
+                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah Data/Foto</button>
                         <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button> <br />
                         <button data-target="#levelModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary" type="button" onClick={this.handleLevelButton.bind(this, data.rinku)}>Level</button>
                         <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-success" type="button" onClick={this.handleResetPasswordButton.bind(this, data.rinku)}>Reset Password</button>
@@ -429,7 +463,7 @@ class User extends Component {
                         <div className="onboarding-media">
                         <img alt="" src="/iconModal/tagplus.png" width="200px" />
                         </div>
-                        <div className="onboarding-content with-gradient">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
                             Tambah User Baru
                         </h4>
@@ -492,14 +526,26 @@ class User extends Component {
                     <button aria-label="Close" className="close" data-dismiss="modal" type="button"><span className="close-label">Tutup</span><span className="os-icon os-icon-close"></span></button>
                     <div className="onboarding-side-by-side">
                         <div className="onboarding-media">
-                        <img alt="" src="/iconModal/tagEdit.png" width="200px" />
+                            <h4 className="onboarding-title">
+                                Ubah Foto
+                            </h4>
+                            {this.renderSashin()} <br /><br />
+                            <button className="mr-2 mb-2 btn btn-primary" type="button" onClick={this.handleButtonFile} >Upload Foto Baru</button>
+                            <input
+                                onChange={this.handleChangeFile}
+                                title="File"
+                                placeholder="File.."
+                                type="file"
+                                className="form-control masariuman_displayNone"
+                                ref="fileUploader"
+                            />
                         </div>
-                        <div className="onboarding-content with-gradient">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
-                            Ubah Nama User
+                            Ubah data User
                         </h4>
                         <div className="onboarding-text">
-                            Masukkan nama User baru.
+                            Masukkan data User baru.
                         </div>
                         <form onSubmit={this.handleEditSubmit}>
                             <div className="row">
@@ -559,7 +605,7 @@ class User extends Component {
                         <div className="onboarding-media">
                         <img alt="" src="/iconModal/tagEdit.png" width="200px" />
                         </div>
-                        <div className="onboarding-content with-gradient">
+                        <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
                             Ubah Level User
                         </h4>

@@ -29,10 +29,16 @@ return [
     */
 
     'disks' => [
+        'sashin' => [
+            'driver' => 'local',
+            'root' => public_path('sashin'),
+        ],
+
         'masuk' => [
             'driver' => 'local',
             'root' => public_path('zaFail'),
         ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

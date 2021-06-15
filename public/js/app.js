@@ -6649,12 +6649,53 @@ var User = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
-    key: "handleEditButton",
-    value: function handleEditButton(e) {
+    key: "handleResetPasswordButton",
+    value: function handleResetPasswordButton(e) {
       var _this4 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
-        _this4.setState({
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()({
+          title: "Apakah Anda Yakin ingin mereset password dengan NIP ".concat(response.data.data.juugyouinBangou, " yang bernama ").concat(response.data.data.name),
+          text: "Setelah Direset, Password Akan Kembali Menjadi NIP Sebagai Password!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true
+        }).then(function (willDelete) {
+          if (willDelete) {
+            _this4.setState({
+              loading: true
+            });
+
+            axios.get("/kanrisha/uuzaa/resetPasswordUser/".concat(e), {
+              rinku: ""
+            }).then(function (response) {
+              _this4.setState({
+                data: response.data.data.data,
+                loading: false
+              });
+
+              sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Password Berhasil Di Reset Ulang!", "success"); // console.log("from handle sumit", response);
+            })["catch"](function (error) {
+              _this4.setState({
+                loading: false
+              });
+
+              sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Password Gagal Direset Ulang!", "error");
+            });
+          } else {//   swal("Data Tidak Terhapus!");
+          }
+        });
+      })["catch"](function (error) {
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
+      });
+    }
+  }, {
+    key: "handleEditButton",
+    value: function handleEditButton(e) {
+      var _this5 = this;
+
+      axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
+        _this5.setState({
           heyaMei: response.data.data.heyaRinku,
           nip: response.data.data.juugyouinBangou,
           uuzaNoRinku: response.data.data.rinku,
@@ -6667,10 +6708,10 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleLevelButton",
     value: function handleLevelButton(e) {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/".concat(e)).then(function (response) {
-        _this5.setState({
+        _this6.setState({
           level: response.data.data.reberu,
           uuzaNoRinku: response.data.data.rinku
         });
@@ -6695,7 +6736,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this6 = this;
+      var _this7 = this;
 
       e.preventDefault();
       this.setState({
@@ -6706,8 +6747,8 @@ var User = /*#__PURE__*/function (_Component) {
         nip: this.state.nip,
         name: this.state.name
       }).then(function (response) {
-        _this6.setState({
-          data: [response.data.data].concat(_toConsumableArray(_this6.state.data)),
+        _this7.setState({
+          data: [response.data.data].concat(_toConsumableArray(_this7.state.data)),
           nip: "",
           name: "",
           loading: false
@@ -6720,7 +6761,7 @@ var User = /*#__PURE__*/function (_Component) {
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#tambahModal").hide();
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Baru Berhasil Ditambahkan!", "success"); // console.log("from handle sumit", response);
       })["catch"](function (error) {
-        _this6.setState({
+        _this7.setState({
           loading: false
         });
 
@@ -6730,7 +6771,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleEditSubmit",
     value: function handleEditSubmit(e) {
-      var _this7 = this;
+      var _this8 = this;
 
       e.preventDefault();
       this.setState({
@@ -6741,7 +6782,7 @@ var User = /*#__PURE__*/function (_Component) {
         nip: this.state.nip,
         name: this.state.name
       }).then(function (response) {
-        _this7.setState({
+        _this8.setState({
           data: response.data.data.data,
           nip: "",
           name: "",
@@ -6755,7 +6796,7 @@ var User = /*#__PURE__*/function (_Component) {
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#editModal").hide();
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
       })["catch"](function (error) {
-        _this7.setState({
+        _this8.setState({
           loading: false
         });
 
@@ -6765,7 +6806,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleLevelSubmit",
     value: function handleLevelSubmit(e) {
-      var _this8 = this;
+      var _this9 = this;
 
       e.preventDefault();
       this.setState({
@@ -6774,7 +6815,7 @@ var User = /*#__PURE__*/function (_Component) {
       axios.put("/kanrisha/uuzaa/deeta/".concat(this.state.uuzaNoRinku), {
         reberu: this.state.level
       }).then(function (response) {
-        _this8.setState({
+        _this9.setState({
           data: response.data.data.data,
           level: "3",
           loading: false
@@ -6787,7 +6828,7 @@ var User = /*#__PURE__*/function (_Component) {
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#levelModal").hide();
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
       })["catch"](function (error) {
-        _this8.setState({
+        _this9.setState({
           loading: false
         });
 
@@ -6797,10 +6838,10 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "getHeya",
     value: function getHeya() {
-      var _this9 = this;
+      var _this10 = this;
 
       axios.get("/kanrisha/uuzaa/deeta/create").then(function (response) {
-        _this9.setState({
+        _this10.setState({
           heya: response.data.data.heya,
           heyaMei: response.data.data.heya[0].rinku
         });
@@ -6809,14 +6850,14 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "getData",
     value: function getData() {
-      var _this10 = this;
+      var _this11 = this;
 
       this.setState({
         loading: true
       });
       axios.get("/kanrisha/uuzaa/deeta").then(function (response) {
         // console.log(response.data.data.data);
-        _this10.setState({
+        _this11.setState({
           data: response.data.data.data,
           loading: false,
           activePage: response.data.data.current_page,
@@ -6827,7 +6868,7 @@ var User = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! ", "error");
 
-        _this10.setState({
+        _this11.setState({
           loading: false
         });
       });
@@ -6835,13 +6876,13 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "handlePageChange",
     value: function handlePageChange(pageNumber) {
-      var _this11 = this;
+      var _this12 = this;
 
       this.setState({
         loading: true
       });
       axios.get('/masariuman_tag?page=' + pageNumber).then(function (response) {
-        _this11.setState({
+        _this12.setState({
           data: response.data.deeta_data.data,
           loading: false,
           activePage: response.data.deeta_data.current_page,
@@ -6852,7 +6893,7 @@ var User = /*#__PURE__*/function (_Component) {
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
 
-        _this11.setState({
+        _this12.setState({
           loading: false
         });
       });
@@ -6887,7 +6928,7 @@ var User = /*#__PURE__*/function (_Component) {
   }, {
     key: "renderData",
     value: function renderData() {
-      var _this12 = this;
+      var _this13 = this;
 
       return !this.state.data.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -6920,20 +6961,25 @@ var User = /*#__PURE__*/function (_Component) {
               "data-toggle": "modal",
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning",
               type: "button",
-              onClick: _this12.handleEditButton.bind(_this12, data.rinku),
+              onClick: _this13.handleEditButton.bind(_this13, data.rinku),
               children: "Ubah"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger",
               type: "button",
-              onClick: _this12.handleDeleteButton.bind(_this12, data.rinku),
+              onClick: _this13.handleDeleteButton.bind(_this13, data.rinku),
               children: "Hapus"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+            }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               "data-target": "#levelModal",
               "data-toggle": "modal",
               className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary",
               type: "button",
-              onClick: _this12.handleLevelButton.bind(_this12, data.rinku),
+              onClick: _this13.handleLevelButton.bind(_this13, data.rinku),
               children: "Level"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+              className: "mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-success",
+              type: "button",
+              onClick: _this13.handleResetPasswordButton.bind(_this13, data.rinku),
+              children: "Reset Password"
             })]
           })]
         }, data.rinku);
@@ -7846,11 +7892,33 @@ var Menu = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleChangeFile",
     value: function handleChangeFile(e) {
+      var _this3 = this;
+
       // console.log(e.target.files[0]);
-      this.setState({
-        file: e.target.files[0],
-        filePath: e.target.value,
-        fileUrl: e.target.value
+      // this.setState({
+      //     file: e.target.files[0],
+      //     filePath: e.target.value,
+      //     fileUrl: e.target.value,
+      // });
+      var data = new FormData();
+      data.append('file', e.target.files[0]);
+      axios.post("/kanrisha/uuzaa/sashin", data).then(function (response) {
+        // console.log(response.data.data.data);
+        axios.get("/getUuzaa").then(function (response) {
+          _this3.setState({
+            uuzaaMei: response.data.data.name,
+            reberu: response.data.data.level,
+            sashin: response.data.data.sashin,
+            rinku: response.data.data.rinku
+          });
+        });
+        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Sukses!", "Foto Berhasi Diubah!", "success"); // console.log("from handle sumit", response);
+      })["catch"](function (error) {
+        _this3.setState({
+          loading: false
+        });
+
+        sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("Error!", "Gagal Mengubah Foto, Silahkan Hubungi Admin!", "error");
       });
     }
   }, {
@@ -7935,7 +8003,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                     })]
                   })
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("form", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("form", {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "row",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -8001,10 +8069,10 @@ var Menu = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleEditButton",
     value: function handleEditButton() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("/getUuzaa").then(function (response) {
-        _this3.setState({
+        _this4.setState({
           uuzaaMei: response.data.data.name,
           reberu: response.data.data.level,
           sashin: response.data.data.sashin,
@@ -8031,10 +8099,10 @@ var Menu = /*#__PURE__*/function (_Component) {
   }, {
     key: "getUuzaa",
     value: function getUuzaa() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get("/getUuzaa").then(function (response) {
-        _this4.setState({
+        _this5.setState({
           uuzaaMei: response.data.data.name,
           reberu: response.data.data.level,
           sashin: response.data.data.sashin,

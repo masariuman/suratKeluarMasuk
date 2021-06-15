@@ -132,6 +132,50 @@ class User extends Component {
             });
     }
 
+    handleResetPasswordButton(e) {
+        axios
+            .get(`/kanrisha/uuzaa/deeta/${e}`)
+            .then(response => {
+                swal({
+                    title: `Apakah Anda Yakin ingin mereset password dengan NIP ${response.data.data.juugyouinBangou} yang bernama ${response.data.data.name}`,
+                    text: "Setelah Direset, Password Akan Kembali Menjadi NIP Sebagai Password!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                  })
+                  .then((willDelete) => {
+                    if (willDelete) {
+                        this.setState({
+                            loading: true
+                        });
+                        axios
+                            .get(`/kanrisha/uuzaa/resetPasswordUser/${e}`, {
+                                rinku: ""
+                            })
+                            .then(response => {
+                                this.setState({
+                                    data: response.data.data.data,
+                                    loading: false
+                                });
+                                swal("Sukses!", "Password Berhasil Di Reset Ulang!", "success");
+                                // console.log("from handle sumit", response);
+                            })
+                            .catch(error => {
+                                this.setState({
+                                    loading: false
+                                });
+                                swal("Error!", "Password Gagal Direset Ulang!", "error");
+                            });
+                    } else {
+                    //   swal("Data Tidak Terhapus!");
+                    }
+                  });
+            })
+            .catch(error => {
+                swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
+            });
+    }
+
     handleEditButton(e) {
         axios
             .get(`/kanrisha/uuzaa/deeta/${e}`)
@@ -367,8 +411,9 @@ class User extends Component {
                     <td className="text-center">{data.level}</td>
                     <td className="text-center">
                         <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
-                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button> <br />
                         <button data-target="#levelModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary" type="button" onClick={this.handleLevelButton.bind(this, data.rinku)}>Level</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-success" type="button" onClick={this.handleResetPasswordButton.bind(this, data.rinku)}>Reset Password</button>
                     </td>
                 </tr>
             ));

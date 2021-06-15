@@ -24,6 +24,10 @@ Route::get('/getUuzaa', 'UuzaaController@getUuzaa');
 Route::post('/kanrisha/masuk/deeta/update', 'suratMasukCOntroller@apdet');
 Route::post('/kanrisha/keluar/deeta/update', 'suratKeluarController@apdet');
 
+Route::post('/kanrisha/uuzaa/sashin', 'UuzaaController@sashin');
+Route::get('/kanrisha/uuzaa/resetPasswordUser/{id}', 'UuzaaController@resetPassword');
+
+
 Route::resources([
     'kanrisha/heya/deeta' => 'HeyaController',
     'kanrisha/uuzaa/deeta' => 'UuzaaController',

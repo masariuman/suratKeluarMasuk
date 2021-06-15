@@ -8,6 +8,7 @@ use App\Models\Heya;
 use Uuid;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Image;
 
 class UuzaaController extends Controller
 {
@@ -256,49 +257,6 @@ class UuzaaController extends Controller
         // ]);
     }
 
-    public function volume()
-    {
-        //
-        // $parent = Volume::where("status", "1")->where('novel_id', 1)->orderBy("name", "ASC")->get();
-        // $parents = [];
-        // $x = 0;
-        // foreach ($parent as $toc) {
-        //     $parents['novel_parent'][$x]['name'] = $toc->name;
-        //     $parents['novel_parent'][$x]['url'] = $toc->url;
-        //     $x = $x + 1;
-        // }
-        // if (count($parent) === 0) {
-        //     $parents['novel_parent'][0]['name'] = "";
-        //     $parents['novel_parent'][0]['url'] = "";
-        // }
-        // // dd($parent);
-        // return response()->json([
-        //     'data' => $parents
-        // ]);
-    }
-
-    public function volumeOnChange($url)
-    {
-        //
-        // $toc = Novel::where('url', $url)->first();
-        // $parent = Volume::where("status", "1")->where('novel_id', $toc['id'])->orderBy("name", "ASC")->get();
-        // $parents = [];
-        // $x = 0;
-        // foreach ($parent as $toc) {
-        //     $parents['novel_parent'][$x]['name'] = $toc->name;
-        //     $parents['novel_parent'][$x]['url'] = $toc->url;
-        //     $x = $x + 1;
-        // }
-        // if (count($parent) === 0) {
-        //     $parents['novel_parent'][0]['name'] = "";
-        //     $parents['novel_parent'][0]['url'] = "";
-        // }
-        // // dd($parents);
-        // return response()->json([
-        //     'data' => $parents
-        // ]);
-    }
-
     public function getUuzaa()
     {
         $data = Auth::user();
@@ -320,5 +278,60 @@ class UuzaaController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function sashin(Request $request)
+    {
+        //
+        // dd($data);
+        $file = $request->files->all();
+        $user = Auth::user();
+        $uuzaa = Uuzaa::where('rinku', $user['rinku'])->first();
+        $file = $request->file('file');
+        $fileExt = $file->getClientOriginalExtension();
+        $fileName = $uuzaa['juugyouinBangou'] . "_" . date('YmdHis') . ".$fileExt";
+
+        $destinationPath = public_path('/sashin');
+        $img = Image::make($file->path());
+        $img->resize(220, 220)->save($destinationPath . '/' . $fileName);
+
+        // $request->file('file')->move("sashin", $fileName);
+        $uuzaa->update([
+            'sashin' => $fileName
+        ]);
+        $data['data'] = Auth::user();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+
+    public function resetPassword($id)
+    {
+        //
+        // dd('bisa');
+        $novel = Uuzaa::where("rinku", $id)->first();
+        $novel->update([
+            'password' => Hash::make($novel->juugyouinBangou)
+        ]);
+        $pagination = 5;
+        $data = Uuzaa::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $items['heyaMei'] = $items->heya->heyaMei;
+            if ($items['reberu'] === "3") {
+                $items['level'] = "User";
+            } else if ($items['reberu'] === "2") {
+                $items['level'] = "Administrator";
+            } else if ($items['reberu'] === "1") {
+                $items['level'] = "Super Admin";
+            } else {
+                $items['level'] = "Legendary Admin";
+            }
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 }

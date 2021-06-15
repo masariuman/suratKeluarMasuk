@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Loading from "../../warudo/Loading";
 import swal from 'sweetalert';
 import Pagination from "react-js-pagination";
+import Highlighter from "react-highlight-words";
 
 
 class Masuk extends Component {
@@ -146,7 +147,7 @@ class Masuk extends Component {
             cari: e.target.value
         });
         axios
-            .post(`/kanrisha/masuk/deeta/search`, {
+            .post(`/masuk/search`, {
                 cari: e.target.value
             })
             .then(response => {
@@ -385,6 +386,15 @@ class Masuk extends Component {
                     },
                     {
                         'next #pagination' : 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+                    },
+                    {
+                        'mouseover #userSetting' : 'Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User.'
+                    },
+                    {
+                        'next #pengaturanUser' : 'Tekan Tombol Ini Untuk Melakukan Pengaturan User dan Mengubah Password Atau Mengubah Foto Profil.'
+                    },
+                    {
+                        'next #logout' : 'Tekan Tombol Ini Untuk Keluar Dari Aplikasi / Logout.'
                     }
                     ];
                     enjoyhint_instance.set(enjoyhint_script_steps);
@@ -448,14 +458,40 @@ class Masuk extends Component {
             this.state.data.map(data => (
                 <tr key={data.rinku}>
                     <th scope="row">{data.nomor}</th>
-                    <td>{data.asalSurat}</td>
                     <td>
-                        {data.nomorSurat}<br />
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.asalSurat}
+                        />
+                    </td>
+                    <td>
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.nomorSurat}
+                        />
+                        <br />
                         <small>{data.tanggalSuratText}</small>
                     </td>
-                    <td>{data.potonganPerihal}</td>
                     <td>
-                        {data.tujuan}<br />
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.potonganPerihal}
+                        />
+                    </td>
+                    <td>
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.tujuan}
+                        />
+                        <br />
                         <small>{data.tanggalTurunText}</small>
                     </td>
                     <td id="downloadButton">

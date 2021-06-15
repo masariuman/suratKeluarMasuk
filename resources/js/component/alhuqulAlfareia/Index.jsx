@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Loading from "../../warudo/Loading";
 import swal from 'sweetalert';
 import Pagination from "react-js-pagination";
+import Highlighter from "react-highlight-words";
 
 
 class alhuqulAlfareia extends Component {
@@ -44,17 +45,17 @@ class alhuqulAlfareia extends Component {
             cari: e.target.value
         });
         axios
-            .post(`/masariuman_tag/search`, {
+            .post(`/alhuqulAlfareia/search`, {
                 cari: e.target.value
             })
             .then(response => {
                 // console.log(response.data);
                 this.setState({
-                    data: response.data.deeta_data.data,
+                    data: response.data.data.data,
                     loading: false,
-                    activePage: response.data.deeta_data.current_page,
-                    itemsCountPerPage: response.data.deeta_data.per_page,
-                    totalItemsCount: response.data.deeta_data.total,
+                    activePage: response.data.data.current_page,
+                    itemsCountPerPage: response.data.data.per_page,
+                    totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
                 // console.log(this.state.tag);
@@ -226,6 +227,28 @@ class alhuqulAlfareia extends Component {
                     totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
+                $('#petunjuk').on('click',function() {
+                    var enjoyhint_instance = new EnjoyHint({});
+                    var enjoyhint_script_steps = [
+                    {
+                        'next #buttonTambahModal' : 'Untuk Menambah Data Baru, Tekan Tombol Tambah Surat Masuk Baru'
+                    },
+                    {
+                        'next #ubah1' : 'Untuk Mengubah Data, Tekan Tombol Ubah Berikut'
+                    },
+                    {
+                        'next #hapus1' : 'Untuk Menghapus Data, Tekan Hapus Berikut'
+                    },
+                    {
+                        'next #cari' : 'Untuk Mencari data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
+                    },
+                    {
+                        'next #pagination' : 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+                    }
+                    ];
+                    enjoyhint_instance.set(enjoyhint_script_steps);
+                    enjoyhint_instance.run();
+                });
             })
             .catch(error => {
                 swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! Code Error : GD", "error");
@@ -284,10 +307,17 @@ class alhuqulAlfareia extends Component {
             this.state.data.map(data => (
                 <tr key={data.id}>
                     <th scope="row">{data.nomor}</th>
-                    <td>{data.asm}</td>
                     <td>
-                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah</button>
-                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button>
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.asm}
+                        />
+                    </td>
+                    <td>
+                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)} id={'ubah'+data.nomor}>Ubah</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)} id={'hapus'+data.nomor}>Hapus</button>
                     </td>
                 </tr>
             ));
@@ -445,7 +475,7 @@ class alhuqulAlfareia extends Component {
                                     </div>
                                     <div>
                                         <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal">Tambah Sub Bidang Baru</button>
-                                        <div className="col-sm-4 float-right">
+                                        <div className="col-sm-4 float-right" id="cari">
                                             <input type="text" className="form-control" onChange={this.handleChangeCari}
                                                 value={this.state.cari} placeholder="Cari Sub Bidang..."></input>
                                         </div>
@@ -462,7 +492,7 @@ class alhuqulAlfareia extends Component {
                                             <tbody>{this.renderData()}</tbody>
                                         </table>
                                     </div>
-                                    <div className="d-flex justify-content-center">
+                                    <div className="d-flex justify-content-center" id="pagination">
                                         <Pagination
                                             activePage={this.state.activePage}
                                             itemsCountPerPage={this.state.itemsCountPerPage}

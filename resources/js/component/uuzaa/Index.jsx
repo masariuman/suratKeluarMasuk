@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Loading from "../../warudo/Loading";
 import swal from 'sweetalert';
 import Pagination from "react-js-pagination";
+import Highlighter from "react-highlight-words";
 
 
 class User extends Component {
@@ -377,6 +378,31 @@ class User extends Component {
                     totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
+                $('#petunjuk').on('click',function() {
+                    var enjoyhint_instance = new EnjoyHint({});
+                    var enjoyhint_script_steps = [
+                    {
+                        'next #buttonTambahModal' : 'Untuk Menambah Data Baru, Tekan Tombol Tambah Surat Masuk Baru'
+                    },
+                    {
+                        'next #ubah1' : 'Untuk Mengubah Data dan Foto, Tekan Tombol Ubah Data/Foto Berikut'
+                    },
+                    {
+                        'next #level1' : 'Untuk Mengubah Level User Dalam Menggunakan Aplikasi, Tekan Tombol Level Berikut. <br /><br />Level Normal User Tidak Dapat Login. <br /><br /> Level Admin Bidang Adalah Level Untuk Pegawai Yang Memanajemen Data Surat Sesuai <br /> Dengan Bidangnya Masing, Masing. Level Admin Bidang Hanya <br /> Bisa Melihat Surat Dari Bidangnya Dan Tidak Memiliki Akses Untuk Manajemen User, <br /> Manajemen Bidang, dan Manajemen Sub Bidang. <br /><br /> Level Super Admin Layaknya Mirip Seperti Level Admin Akan Tetapi <br /> Dapat Melihat Keseluruhan Surat Dari Seluruh Bidang. <br /><br /> Level Legendary Admin Mirip Seperti Level Super Admin Akan Tetapi <br /> Dapat Mengakses Menu Manajemen User, Manajemen Bidang, dan Manajemen Sub Bidang.'
+                    },
+                    {
+                        'next #reset1' : 'Untuk Mereset Password User, Tekan Tombol Reset Password. Password Akan Dikembalikan Ke Password Semula Yaitu NIP dari Pegawai Tersebut.'
+                    },
+                    {
+                        'next #cari' : 'Untuk Mencari data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
+                    },
+                    {
+                        'next #pagination' : 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+                    }
+                    ];
+                    enjoyhint_instance.set(enjoyhint_script_steps);
+                    enjoyhint_instance.run();
+                });
             })
             .catch(error => {
                 swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin! ", "error");
@@ -439,15 +465,29 @@ class User extends Component {
             this.state.data.map(data => (
                 <tr key={data.rinku}>
                     <th scope="row" className="text-center">{data.nomor}</th>
-                    <td className="text-center">{data.juugyouinBangou}</td>
-                    <td className="text-center">{data.name}</td>
+                    <td className="text-center">
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.juugyouinBangou}
+                        />
+                    </td>
+                    <td className="text-center">
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.name}
+                        />
+                    </td>
                     <td className="text-center">{data.heyaMei}</td>
                     <td className="text-center">{data.level}</td>
                     <td className="text-center">
-                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)}>Ubah Data/Foto</button>
-                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)}>Hapus</button> <br />
-                        <button data-target="#levelModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary" type="button" onClick={this.handleLevelButton.bind(this, data.rinku)}>Level</button>
-                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-success" type="button" onClick={this.handleResetPasswordButton.bind(this, data.rinku)}>Reset Password</button>
+                        <button data-target="#editModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-warning" type="button" onClick={this.handleEditButton.bind(this, data.rinku)} id={'ubah'+data.nomor}>Ubah Data/Foto</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-danger" type="button" onClick={this.handleDeleteButton.bind(this, data.rinku)} id={'hapus'+data.nomor}>Hapus</button> <br />
+                        <button data-target="#levelModal" data-toggle="modal" className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-secondary" type="button" onClick={this.handleLevelButton.bind(this, data.rinku)} id={'level'+data.nomor}>Level</button>
+                        <button className="mb-2 mr-2 border-0 btn-transition btn btn-shadow btn-outline-success" type="button" onClick={this.handleResetPasswordButton.bind(this, data.rinku)} id={'reset'+data.nomor}>Reset Password</button>
                     </td>
                 </tr>
             ));
@@ -693,7 +733,7 @@ class User extends Component {
                                     </div>
                                     <div>
                                         <button className="mr-2 mb-2 btn btn-primary" data-target="#tambahModal" data-toggle="modal" type="button" id="buttonTambahModal">Tambah User Baru</button>
-                                        <div className="col-sm-4 float-right">
+                                        <div className="col-sm-4 float-right" id="cari">
                                             <input type="text" className="form-control" onChange={this.handleChangeCari}
                                                 value={this.state.cari} placeholder="Cari User..."></input>
                                         </div>
@@ -713,7 +753,7 @@ class User extends Component {
                                             <tbody>{this.renderData()}</tbody>
                                         </table>
                                     </div>
-                                    <div className="d-flex justify-content-center">
+                                    <div className="d-flex justify-content-center" id="pagination">
                                         <Pagination
                                             activePage={this.state.activePage}
                                             itemsCountPerPage={this.state.itemsCountPerPage}

@@ -245,10 +245,13 @@ class UuzaaController extends Controller
     public function search(Request $request)
     {
         //
+        $cari = $request->cari;
         $pagination = 5;
-        $data = Uuzaa::where("juugyouinBangou", "like", "%" . $request->cari . "%")
-            ->orwhere("name", "like", "%" . $request->cari . "%")
-            ->paginate($pagination);
+        $data = Uuzaa::where("sutattsu", "1")
+            ->where(function ($query) use ($cari) {
+                $query->where("juugyouinBangou", "like", "%" . $cari . "%")
+                    ->orWhere("name", "like", "%" . $cari . "%");
+            })->orderBy("id", "DESC")->paginate($pagination);
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;

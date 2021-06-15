@@ -154,4 +154,19 @@ class alhuqulAlfareiaController extends Controller
             'data' => $data
         ]);
     }
+
+    public function search(Request $request)
+    {
+        //
+        $pagination = 5;
+        $data = AlhuqulAlfareia::where("asm", "like", "%" . $request->cari . "%")->where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
+    }
 }

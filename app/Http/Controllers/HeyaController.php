@@ -144,7 +144,7 @@ class HeyaController extends Controller
     {
         //
         $pagination = 5;
-        $data = Heya::where("heyaMei", "like", "%" . $request->cari . "%")->paginate($pagination);
+        $data = Heya::where("heyaMei", "like", "%" . $request->cari . "%")->where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;

@@ -289,7 +289,7 @@ class Menu extends Component {
                         </div>
                     </a>
                 </div>
-                <div className="logged-user-w avatar-inline">
+                <div className="logged-user-w avatar-inline" id="userSetting">
                     <div className="logged-user-i">
                         <div className="avatar-w">
                             {this.renderSashin()}

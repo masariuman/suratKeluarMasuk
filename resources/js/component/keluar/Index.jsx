@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Loading from "../../warudo/Loading";
 import swal from 'sweetalert';
 import Pagination from "react-js-pagination";
+import Highlighter from "react-highlight-words";
 
 
 class Keluar extends Component {
@@ -135,7 +136,7 @@ class Keluar extends Component {
             cari: e.target.value
         });
         axios
-            .post(`/kanrisha/masuk/deeta/search`, {
+            .post(`/keluar/search`, {
                 cari: e.target.value
             })
             .then(response => {
@@ -431,15 +432,41 @@ class Keluar extends Component {
         return !this.state.data.length ? <tr><td colSpan="6" className="text-center">Data Tidak Ditemukan</td></tr> :
             this.state.data.map(data => (
                 <tr key={data.rinku}>
-                    <th scope="row">{data.nomor}</th>
+                    <th scope="row">
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.nomor}
+                        />
+                    </th>
                     <td>{data.asalSuratText}</td>
                     <td>
-                        {data.nomorSurat}<br />
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.nomorSurat}
+                        />
+                        <br />
                         <small>{data.tanggalSuratText}</small>
                     </td>
-                    <td>{data.potonganPerihal}</td>
                     <td>
-                        {data.tujuanSurat}<br />
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.potonganPerihal}
+                        />
+                    </td>
+                    <td>
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={[this.state.cari]}
+                            autoEscape={true}
+                            textToHighlight={data.tujuanSurat}
+                        />
+                        <br />
                         <small>{data.tanggalKirimText}</small>
                     </td>
                     <td id="downloadButton">

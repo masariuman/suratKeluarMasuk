@@ -250,4 +250,33 @@ class suratKeluarController extends Controller
             'data' => $data
         ]);
     }
+
+    public function search(Request $request)
+    {
+        //
+        $cari = $request->cari;
+        $pagination = 5;
+        $data = SuratKeluar::where("sutattsu", "1")
+            ->where(function ($query) use ($cari) {
+                $query->where("tujuanSurat", "like", "%" . $cari . "%")
+                    ->orWhere("nomorSurat", "like", "%" . $cari . "%")
+                    ->orWhere("perihal", "like", "%" . $cari . "%");
+            })->orderBy("id", "DESC")->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $items['potonganPerihal'] = substr($items['perihal'], 0, 30) . " . . .";
+            $items['asalSuratText'] = $items->subbid->asm;
+            if ($items['tanggalSurat']) {
+                $items['tanggalSuratText'] = date("d F Y", strtotime($items['tanggalSurat']));
+            }
+            if ($items['tanggalKirim']) {
+                $items['tanggalKirimText'] = date("d F Y", strtotime($items['tanggalKirim']));
+            }
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
+    }
 }

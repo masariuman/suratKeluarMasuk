@@ -100,17 +100,17 @@ class User extends Component {
             cari: e.target.value
         });
         axios
-            .post(`/masariuman_tag/search`, {
+            .post(`/uuzaa/search`, {
                 cari: e.target.value
             })
             .then(response => {
                 // console.log(response.data);
                 this.setState({
-                    data: response.data.deeta_data.data,
+                    data: response.data.data.data,
                     loading: false,
-                    activePage: response.data.deeta_data.current_page,
-                    itemsCountPerPage: response.data.deeta_data.per_page,
-                    totalItemsCount: response.data.deeta_data.total,
+                    activePage: response.data.data.current_page,
+                    itemsCountPerPage: response.data.data.per_page,
+                    totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
                 // console.log(this.state.tag);

@@ -245,16 +245,28 @@ class UuzaaController extends Controller
     public function search(Request $request)
     {
         //
-        // $pagination = 5;
-        // $data = Uuzaa::where("title", "like", "%" . $request->cari . "%")->paginate($pagination);
-        // $count = $data->CurrentPage() * $pagination - ($pagination - 1);
-        // foreach ($data as $datas) {
-        //     $datas['nomor'] = $count;
-        //     $count++;
-        // }
-        // return response()->json([
-        //     'data' => $data
-        // ]);
+        $pagination = 5;
+        $data = Uuzaa::where("juugyouinBangou", "like", "%" . $request->cari . "%")
+            ->orwhere("name", "like", "%" . $request->cari . "%")
+            ->paginate($pagination);
+        $count = $data->CurrentPage() * $pagination - ($pagination - 1);
+        foreach ($data as $items) {
+            $items['nomor'] = $count;
+            $items['heyaMei'] = $items->heya->heyaMei;
+            if ($items['reberu'] === "3") {
+                $items['level'] = "User";
+            } else if ($items['reberu'] === "2") {
+                $items['level'] = "Admin";
+            } else if ($items['reberu'] === "1") {
+                $items['level'] = "Super Admin";
+            } else {
+                $items['level'] = "Legendary Admin";
+            }
+            $count++;
+        }
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     public function getUuzaa()

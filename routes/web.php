@@ -28,6 +28,8 @@ Route::post('/kanrisha/uuzaa/sashin', 'UuzaaController@sashin');
 Route::post('/kanrisha/uuzaa/sashinUuzaa', 'UuzaaController@sashinUuzaa');
 Route::get('/kanrisha/uuzaa/resetPasswordUser/{id}', 'UuzaaController@resetPassword');
 
+Route::post('/uuzaa/search', 'UuzaaController@search');
+
 
 Route::resources([
     'kanrisha/heya/deeta' => 'HeyaController',

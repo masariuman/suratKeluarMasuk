@@ -447,3 +447,11 @@ html {
     font-variant: normal;
     text-transform: none;
 }
+
+.masariuman_displayFlex {
+    display: flex;
+}
+
+.masariuman_paddingBottom0 {
+    padding-bottom: 0;
+}

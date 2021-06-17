@@ -239,18 +239,18 @@ class DashboardIndex extends Component {
                         <div className="content-box">
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <div className="element-wrapper">
-                                        <div className="col-sm-3">
+                                    <div className="element-wrapper masariuman_displayFlex masariuman_paddingBottom0">
+                                        <div className="col-sm-6">
                                             <a className="element-box el-tablo centered trend-in-corner padded bold-label">
                                                 <div className="value">
-                                                    {this.state.totalPosts}
+                                                    0
                                                 </div>
                                                 <div className="label">
                                                     Total Surat Masuk
                                                 </div>
                                             </a>
                                         </div>
-                                        <div className="col-sm-2">
+                                        <div className="col-sm-6">
                                             <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorGreen">
                                                 <div className="value">
                                                     0
@@ -265,7 +265,7 @@ class DashboardIndex extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <div className="element-wrapper">
+                                    <div className="element-wrapper masariuman_paddingBottom0">
                                         <div className="col-sm-12">
                                             <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorRed">
                                                 <div className="value">
@@ -281,7 +281,7 @@ class DashboardIndex extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <div className="element-wrapper">
+                                    <div className="element-wrapper masariuman_paddingBottom0">
                                         {/* content here */}
                                         <div className="element-box">
                                             <h5 className="form-header">

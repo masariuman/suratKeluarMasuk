@@ -16,6 +16,8 @@ class CreateTableSuratKeluar extends Migration
         Schema::create('keluar', function (Blueprint $table) {
             $table->id();
             $table->string('rinku')->nullable();
+            $table->unsignedBigInteger('heya_id');
+            $table->foreign('heya_id')->references('id')->on('heya');
             $table->unsignedBigInteger('subbid_id');
             $table->foreign('subbid_id')->references('id')->on('alhuqulAlfareia');
             $table->string('tujuanSurat')->nullable();

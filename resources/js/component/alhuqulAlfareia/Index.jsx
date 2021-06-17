@@ -240,10 +240,16 @@ class alhuqulAlfareia extends Component {
                         'next #hapus1' : 'Untuk Menghapus Data, Tekan Hapus Berikut'
                     },
                     {
+                        'next #pagination' : 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+                    },
+                    {
                         'next #cari' : 'Untuk Mencari data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
                     },
                     {
-                        'next #pagination' : 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+                        'next #userSetting' : "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
+                    },
+                    {
+                        'next #meno' : 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
                     }
                     ];
                     enjoyhint_instance.set(enjoyhint_script_steps);

@@ -3,12 +3,9 @@ import React, { Component } from "react";
 class Empatkosongempat extends Component {
     render() {
         return (
-            <div className="empatkosongempatbody">
-                <img
-                    src="/hbxcphyevn/404/images/label.png"
-                    className="w3l-logo4"
-                />
-                <div className="wrap4">
+            <div className="content-w masariuman-minheight100vh">
+                <div className="masariuman_404"></div>
+                {/* <div className="wrap4">
                     <div className="logo4">
                         <img
                             src="/hbxcphyevn/404/images/woody-404.png"
@@ -20,7 +17,7 @@ class Empatkosongempat extends Component {
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

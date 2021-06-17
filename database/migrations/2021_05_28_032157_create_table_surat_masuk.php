@@ -22,6 +22,8 @@ class CreateTableSuratMasuk extends Migration
             $table->string('perihal')->nullable();
             $table->date('tanggalNaik')->nullable();
             $table->date('tanggalTurun')->nullable();
+            $table->unsignedBigInteger('heya_id');
+            $table->foreign('heya_id')->references('id')->on('heya');
             $table->unsignedBigInteger('subbid_id');
             $table->foreign('subbid_id')->references('id')->on('alhuqulAlfareia');
             $table->unsignedBigInteger('user_id');

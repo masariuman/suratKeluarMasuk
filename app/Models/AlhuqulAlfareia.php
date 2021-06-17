@@ -20,4 +20,14 @@ class AlhuqulAlfareia extends Model
     {
         return $this->belongsTo('App\Models\Heya');
     }
+
+    public function masuk()
+    {
+        return $this->hasMany('App\Models\SuratMasuk', 'subbid_id');
+    }
+
+    public function keluar()
+    {
+        return $this->hasMany('App\Models\SuratKeluar', 'subbid_id');
+    }
 }

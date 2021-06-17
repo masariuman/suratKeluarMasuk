@@ -15,12 +15,18 @@ class SuratMasuk extends Model
         'perihal',
         'tanggalNaik',
         'tanggalTurun',
+        'heya_id',
         'subbid_id',
         'file',
         'user_id',
         'kodeBerkas',
         'sutattsu'
     ];
+
+    public function heya()
+    {
+        return $this->belongsTo('App\Models\Heya', 'heya_id');
+    }
 
     public function subbid()
     {

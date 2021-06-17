@@ -24,4 +24,14 @@ class Heya extends Model
     {
         return $this->hasMany('App\Models\AlhuqulAlfareia', 'heya_id');
     }
+
+    public function masuk()
+    {
+        return $this->hasMany('App\Models\SuratMasuk', 'heya_id');
+    }
+
+    public function keluar()
+    {
+        return $this->hasMany('App\Models\SuratKeluar', 'heya_id');
+    }
 }

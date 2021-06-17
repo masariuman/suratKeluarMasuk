@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MasariuMan Management</title>
+        <title>Manajemen Surat</title>
         @include('template.meta')
         <link rel="icon" href="/masariuman/favicon.png" type="image/png" sizes="16x16">
         <link href="apple-touch-icon.png" rel="apple-touch-icon">

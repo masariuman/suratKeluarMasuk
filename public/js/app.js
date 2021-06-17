@@ -1946,24 +1946,11 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _warudo_MobileMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./warudo/MobileMenu */ "./resources/js/warudo/MobileMenu.jsx");
-/* harmony import */ var _warudo_Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./warudo/Menu */ "./resources/js/warudo/Menu.jsx");
-/* harmony import */ var _warudo_Empatkosongempat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./warudo/Empatkosongempat */ "./resources/js/warudo/Empatkosongempat.jsx");
-/* harmony import */ var _component_dashboard_Index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./component/dashboard/Index */ "./resources/js/component/dashboard/Index.jsx");
-/* harmony import */ var _component_keluar_Index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./component/keluar/Index */ "./resources/js/component/keluar/Index.jsx");
-/* harmony import */ var _component_masuk_Index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./component/masuk/Index */ "./resources/js/component/masuk/Index.jsx");
-/* harmony import */ var _component_uuzaa_Index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./component/uuzaa/Index */ "./resources/js/component/uuzaa/Index.jsx");
-/* harmony import */ var _component_heya_Index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./component/heya/Index */ "./resources/js/component/heya/Index.jsx");
-/* harmony import */ var _component_alhuqulAlfareia_Index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./component/alhuqulAlfareia/Index */ "./resources/js/component/alhuqulAlfareia/Index.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _reactRoute__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reactRoute */ "./resources/js/reactRoute.jsx");
+/* harmony import */ var _warudo_MobileMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./warudo/MobileMenu */ "./resources/js/warudo/MobileMenu.jsx");
+/* harmony import */ var _warudo_Menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./warudo/Menu */ "./resources/js/warudo/Menu.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -1974,36 +1961,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (document.getElementById("root")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.BrowserRouter, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "layout-w",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_warudo_MobileMenu__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_warudo_Menu__WEBPACK_IMPORTED_MODULE_3__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
-          exact: true,
-          path: "/",
-          component: _component_dashboard_Index__WEBPACK_IMPORTED_MODULE_5__.default
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
-          exact: true,
-          path: "/surat-keluar",
-          component: _component_keluar_Index__WEBPACK_IMPORTED_MODULE_6__.default
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
-          exact: true,
-          path: "/surat-masuk",
-          component: _component_masuk_Index__WEBPACK_IMPORTED_MODULE_7__.default
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
-          exact: true,
-          path: "/kanrisha/uuzaa",
-          component: _component_uuzaa_Index__WEBPACK_IMPORTED_MODULE_8__.default
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
-          exact: true,
-          path: "/kanrisha/heya",
-          component: _component_heya_Index__WEBPACK_IMPORTED_MODULE_9__.default
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
-          exact: true,
-          path: "/kanrisha/subBidang",
-          component: _component_alhuqulAlfareia_Index__WEBPACK_IMPORTED_MODULE_10__.default
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_warudo_Empatkosongempat__WEBPACK_IMPORTED_MODULE_4__.default, {})]
-      })]
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_warudo_MobileMenu__WEBPACK_IMPORTED_MODULE_3__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_warudo_Menu__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_reactRoute__WEBPACK_IMPORTED_MODULE_2__.default, {})]
     })
   }), document.getElementById("root"));
 }
@@ -2372,9 +2333,13 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
           }, {
             'next #hapus1': 'Untuk Menghapus Data, Tekan Hapus Berikut'
           }, {
+            'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+          }, {
             'next #cari': 'Untuk Mencari data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
           }, {
-            'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+            'next #userSetting': "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
+          }, {
+            'next #meno': 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
           }];
           enjoyhint_instance.set(enjoyhint_script_steps);
           enjoyhint_instance.run();
@@ -3518,9 +3483,13 @@ var Heya = /*#__PURE__*/function (_Component) {
           }, {
             'next #hapus1': 'Untuk Menghapus Data, Tekan Hapus Berikut'
           }, {
+            'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+          }, {
             'next #cari': 'Untuk Mencari data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
           }, {
-            'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+            'next #userSetting': "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
+          }, {
+            'next #meno': 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
           }];
           enjoyhint_instance.set(enjoyhint_script_steps);
           enjoyhint_instance.run();
@@ -4001,6 +3970,9 @@ var Keluar = /*#__PURE__*/function (_Component) {
       kodeBerkas: "",
       dataEditInput: "",
       cari: "",
+      uploader: "",
+      uploaderNip: "",
+      uploaderSashin: "",
       url: null,
       file: null,
       filePath: null,
@@ -4016,6 +3988,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
     _this.modalTambah = _this.modalTambah.bind(_assertThisInitialized(_this));
     _this.modalUbah = _this.modalUbah.bind(_assertThisInitialized(_this));
     _this.modalDetail = _this.modalDetail.bind(_assertThisInitialized(_this));
+    _this.modalUser = _this.modalUser.bind(_assertThisInitialized(_this));
     _this.handleChangeCari = _this.handleChangeCari.bind(_assertThisInitialized(_this));
     _this.handleChangeAsalSurat = _this.handleChangeAsalSurat.bind(_assertThisInitialized(_this));
     _this.handleChangeTujuanSurat = _this.handleChangeTujuanSurat.bind(_assertThisInitialized(_this));
@@ -4027,6 +4000,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
     _this.handleChangeFile = _this.handleChangeFile.bind(_assertThisInitialized(_this));
     _this.handleButtonFile = _this.handleButtonFile.bind(_assertThisInitialized(_this));
     _this.handleTambahButton = _this.handleTambahButton.bind(_assertThisInitialized(_this));
+    _this.renderSashinDetail = _this.renderSashinDetail.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -4187,14 +4161,18 @@ var Keluar = /*#__PURE__*/function (_Component) {
           perihal: response.data.data.perihal,
           tujuanSurat: response.data.data.tujuanSurat,
           tanggalKirim: response.data.data.tanggalKirim,
-          asalSurat: response.data.data.asalSuratId.rinku,
+          asalSurat: response.data.data.asalSuratId,
           asalSuratName: response.data.data.subbid.asm,
           kodeBerkas: response.data.data.kodeBerkas,
           url: e,
+          uploader: response.data.data.uploader,
+          uploaderNip: response.data.data.uploaderNip,
+          uploaderSashin: response.data.data.uploaderSashin,
           filePath: response.data.data.filePath,
           fileUrl: response.data.data.filePath,
           file: null
-        });
+        }); // console.log(response.data.data.uploaderSashin);
+
       })["catch"](function (error) {
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
       });
@@ -4340,9 +4318,13 @@ var Keluar = /*#__PURE__*/function (_Component) {
           }, {
             'next #downloadButton': "Apabila Anda Ada Melakukan Upload Data Ketika Menambahkan Data Baru <br> Atau Mengubah Data Baru, Maka Akan Muncul <br> Tombol <button class='mr-2 mb-2 btn btn-outline-secondary'>Download</button> Yang Dapat Digunakan Untuk Mendownload/Mengunduh Data"
           }, {
+            'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+          }, {
             'next #cari': 'Untuk Mencari data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
           }, {
-            'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+            'next #userSetting': "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
+          }, {
+            'next #meno': 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
           }];
           enjoyhint_instance.set(enjoyhint_script_steps);
           enjoyhint_instance.run();
@@ -4505,6 +4487,17 @@ var Keluar = /*#__PURE__*/function (_Component) {
           value: data.rinku,
           children: data.asm
         }, data.rinku);
+      });
+    }
+  }, {
+    key: "renderSashinDetail",
+    value: function renderSashinDetail() {
+      return !this.state.uploaderSashin || this.state.uploaderSashin === "" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+        alt: "",
+        src: "/warudo/dist/img/avatar.jpg"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+        alt: "",
+        src: "/sashin/" + this.state.uploaderSashin
       });
     }
   }, {
@@ -4991,7 +4984,6 @@ var Keluar = /*#__PURE__*/function (_Component) {
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tbody", {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
-                            className: "masariuman_width200px",
                             children: "Asal Surat"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                             className: "titikDua",
@@ -5054,6 +5046,21 @@ var Keluar = /*#__PURE__*/function (_Component) {
                             className: "form-group masariuman_tdwarp",
                             children: this.state.kodeBerkas
                           })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                            children: "Oleh"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                            children: ":"
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
+                            className: "form-group masariuman_tdwarp",
+                            children: [this.state.uploader, " \xA0\xA0", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
+                              "data-target": "#detailUserModal",
+                              "data-toggle": "modal",
+                              className: "mr-2 mb-2 btn btn-success",
+                              type: "button",
+                              children: "Info"
+                            })]
+                          })]
                         })]
                       })
                     }), this.state.filePath ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("a", {
@@ -5063,6 +5070,71 @@ var Keluar = /*#__PURE__*/function (_Component) {
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {})]
                   })
                 })]
+              })]
+            })]
+          })
+        })
+      });
+    }
+  }, {
+    key: "modalUser",
+    value: function modalUser() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+        "aria-hidden": "true",
+        className: "onboarding-modal modal fade animated",
+        id: "detailUserModal",
+        role: "dialog",
+        tabIndex: "-1",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+          className: "modal-dialog modal-centered",
+          role: "document",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+            className: "modal-content text-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
+              "aria-label": "Close",
+              className: "close",
+              "data-dismiss": "modal",
+              type: "button",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+                className: "os-icon os-icon-close"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+              className: "onboarding-media",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+                alt: "",
+                src: "img/bigicon5.png",
+                width: "200px"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+              className: "onboarding-content with-gradient",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
+                className: "onboarding-title",
+                children: "Informasi User"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+                className: "onboarding-text",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("table", {
+                  className: "masariuman_width100percent",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tbody", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tr", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                        className: "text-center",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("b", {
+                          children: this.renderSashinDetail()
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tr", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                        className: "masariuman_namaNip",
+                        children: this.state.uploader
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tr", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
+                        className: "masariuman_namaNip",
+                        children: ["NIP. ", this.state.uploaderNip]
+                      })
+                    })]
+                  })
+                })
               })]
             })]
           })
@@ -5199,7 +5271,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_warudo_DarkMode__WEBPACK_IMPORTED_MODULE_3__.default, {})]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_warudo_Footer__WEBPACK_IMPORTED_MODULE_2__.default, {}), this.modalTambah(), this.modalUbah(), this.modalDetail()]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_warudo_Footer__WEBPACK_IMPORTED_MODULE_2__.default, {}), this.modalTambah(), this.modalUbah(), this.modalDetail(), this.modalUser()]
       });
     }
   }]);
@@ -5306,6 +5378,9 @@ var Masuk = /*#__PURE__*/function (_Component) {
       dataEditInput: "",
       buttonTambahModal: "",
       cari: "",
+      uploader: "",
+      uploaderNip: "",
+      uploaderSashin: "",
       url: null,
       file: null,
       filePath: null,
@@ -5322,6 +5397,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
     _this.modalTambah = _this.modalTambah.bind(_assertThisInitialized(_this));
     _this.modalUbah = _this.modalUbah.bind(_assertThisInitialized(_this));
     _this.modalDetail = _this.modalDetail.bind(_assertThisInitialized(_this));
+    _this.modalUser = _this.modalUser.bind(_assertThisInitialized(_this));
     _this.handleChangeCari = _this.handleChangeCari.bind(_assertThisInitialized(_this));
     _this.handleChangeAsalSurat = _this.handleChangeAsalSurat.bind(_assertThisInitialized(_this));
     _this.handleChangeNomorSurat = _this.handleChangeNomorSurat.bind(_assertThisInitialized(_this));
@@ -5334,10 +5410,22 @@ var Masuk = /*#__PURE__*/function (_Component) {
     _this.handleChangeFile = _this.handleChangeFile.bind(_assertThisInitialized(_this));
     _this.handleButtonFile = _this.handleButtonFile.bind(_assertThisInitialized(_this));
     _this.handleTambahButton = _this.handleTambahButton.bind(_assertThisInitialized(_this));
+    _this.renderSashinDetail = _this.renderSashinDetail.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Masuk, [{
+    key: "renderSashinDetail",
+    value: function renderSashinDetail() {
+      return !this.state.uploaderSashin || this.state.uploaderSashin === "" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+        alt: "",
+        src: "/warudo/dist/img/avatar.jpg"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+        alt: "",
+        src: "/sashin/" + this.state.uploaderSashin
+      });
+    }
+  }, {
     key: "handleTambahButton",
     value: function handleTambahButton(e) {
       this.setState({
@@ -5506,6 +5594,9 @@ var Masuk = /*#__PURE__*/function (_Component) {
           turunKeName: response.data.data.subbid.asm,
           kodeBerkas: response.data.data.kodeBerkas,
           url: e,
+          uploader: response.data.data.uploader,
+          uploaderNip: response.data.data.uploaderNip,
+          uploaderSashin: response.data.data.uploaderSashin,
           filePath: response.data.data.filePath,
           fileUrl: response.data.data.filePath,
           file: null
@@ -5660,15 +5751,13 @@ var Masuk = /*#__PURE__*/function (_Component) {
           }, {
             'next #downloadButton': "Apabila Anda Ada Melakukan Upload Data Ketika Menambahkan Data Baru <br> Atau Mengubah Data Baru, Maka Akan Muncul <br> Tombol <button class='mr-2 mb-2 btn btn-outline-secondary'>Download</button> Yang Dapat Digunakan Untuk Mendownload/Mengunduh Data"
           }, {
-            'next #cari': 'Untuk Mencari Data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
-          }, {
             'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
           }, {
-            'mouseover #userSetting': 'Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User.'
+            'next #cari': 'Untuk Mencari Data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
           }, {
-            'next #pengaturanUser': 'Tekan Tombol Ini Untuk Melakukan Pengaturan User dan Mengubah Password Atau Mengubah Foto Profil.'
+            'next #userSetting': "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
           }, {
-            'next #logout': 'Tekan Tombol Ini Untuk Keluar Dari Aplikasi / Logout.'
+            'next #meno': 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
           }];
           enjoyhint_instance.set(enjoyhint_script_steps);
           enjoyhint_instance.run();
@@ -6326,7 +6415,6 @@ var Masuk = /*#__PURE__*/function (_Component) {
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tbody", {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
                             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
-                              className: "masariuman_width200px",
                               children: "Asal Surat"
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                               className: "titikDua",
@@ -6398,6 +6486,21 @@ var Masuk = /*#__PURE__*/function (_Component) {
                               className: "form-group masariuman_tdwarp",
                               children: this.state.kodeBerkas
                             })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                              children: "Oleh"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                              children: ":"
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
+                              className: "form-group masariuman_tdwarp",
+                              children: [this.state.uploader, " \xA0\xA0", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
+                                "data-target": "#detailUserModal",
+                                "data-toggle": "modal",
+                                className: "mr-2 mb-2 btn btn-success",
+                                type: "button",
+                                children: "Info"
+                              })]
+                            })]
                           })]
                         })
                       })
@@ -6408,6 +6511,71 @@ var Masuk = /*#__PURE__*/function (_Component) {
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {})]
                   })
                 })]
+              })]
+            })]
+          })
+        })
+      });
+    }
+  }, {
+    key: "modalUser",
+    value: function modalUser() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+        "aria-hidden": "true",
+        className: "onboarding-modal modal fade animated",
+        id: "detailUserModal",
+        role: "dialog",
+        tabIndex: "-1",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+          className: "modal-dialog modal-centered",
+          role: "document",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+            className: "modal-content text-center",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
+              "aria-label": "Close",
+              className: "close",
+              "data-dismiss": "modal",
+              type: "button",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+                className: "os-icon os-icon-close"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+              className: "onboarding-media",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+                alt: "",
+                src: "img/bigicon5.png",
+                width: "200px"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+              className: "onboarding-content with-gradient",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
+                className: "onboarding-title",
+                children: "Informasi User"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+                className: "onboarding-text",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("table", {
+                  className: "masariuman_width100percent",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tbody", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tr", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                        className: "text-center",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("b", {
+                          children: this.renderSashinDetail()
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tr", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                        className: "masariuman_namaNip",
+                        children: this.state.uploader
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tr", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
+                        className: "masariuman_namaNip",
+                        children: ["NIP. ", this.state.uploaderNip]
+                      })
+                    })]
+                  })
+                })
               })]
             })]
           })
@@ -6544,7 +6712,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_warudo_DarkMode__WEBPACK_IMPORTED_MODULE_3__.default, {})]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_warudo_Footer__WEBPACK_IMPORTED_MODULE_2__.default, {}), this.modalTambah(), this.modalUbah(), this.modalDetail()]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_warudo_Footer__WEBPACK_IMPORTED_MODULE_2__.default, {}), this.modalTambah(), this.modalUbah(), this.modalDetail(), this.modalUser()]
       });
     }
   }]);
@@ -7022,9 +7190,13 @@ var User = /*#__PURE__*/function (_Component) {
           }, {
             'next #reset1': 'Untuk Mereset Password User, Tekan Tombol Reset Password. Password Akan Dikembalikan Ke Password Semula Yaitu NIP dari Pegawai Tersebut.'
           }, {
+            'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+          }, {
             'next #cari': 'Untuk Mencari data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
           }, {
-            'next #pagination': 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
+            'next #userSetting': "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
+          }, {
+            'next #meno': 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
           }];
           enjoyhint_instance.set(enjoyhint_script_steps);
           enjoyhint_instance.run();
@@ -7612,6 +7784,148 @@ var User = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/reactRoute.jsx":
+/*!*************************************!*\
+  !*** ./resources/js/reactRoute.jsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _warudo_Empatkosongempat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./warudo/Empatkosongempat */ "./resources/js/warudo/Empatkosongempat.jsx");
+/* harmony import */ var _component_dashboard_Index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component/dashboard/Index */ "./resources/js/component/dashboard/Index.jsx");
+/* harmony import */ var _component_keluar_Index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./component/keluar/Index */ "./resources/js/component/keluar/Index.jsx");
+/* harmony import */ var _component_masuk_Index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./component/masuk/Index */ "./resources/js/component/masuk/Index.jsx");
+/* harmony import */ var _component_uuzaa_Index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./component/uuzaa/Index */ "./resources/js/component/uuzaa/Index.jsx");
+/* harmony import */ var _component_heya_Index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./component/heya/Index */ "./resources/js/component/heya/Index.jsx");
+/* harmony import */ var _component_alhuqulAlfareia_Index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./component/alhuqulAlfareia/Index */ "./resources/js/component/alhuqulAlfareia/Index.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ReactRoute = /*#__PURE__*/function (_Component) {
+  _inherits(ReactRoute, _Component);
+
+  var _super = _createSuper(ReactRoute);
+
+  function ReactRoute(props) {
+    var _this;
+
+    _classCallCheck(this, ReactRoute);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      level: ""
+    };
+    return _this;
+  }
+
+  _createClass(ReactRoute, [{
+    key: "getUuzaa",
+    value: function getUuzaa() {
+      var _this2 = this;
+
+      axios.get("/getUuzaa").then(function (response) {
+        _this2.setState({
+          level: response.data.data.reberu
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getUuzaa();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return this.state.level === "0" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/",
+          component: _component_dashboard_Index__WEBPACK_IMPORTED_MODULE_2__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/surat-keluar",
+          component: _component_keluar_Index__WEBPACK_IMPORTED_MODULE_3__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/surat-masuk",
+          component: _component_masuk_Index__WEBPACK_IMPORTED_MODULE_4__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/kanrisha/uuzaa",
+          component: _component_uuzaa_Index__WEBPACK_IMPORTED_MODULE_5__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/kanrisha/heya",
+          component: _component_heya_Index__WEBPACK_IMPORTED_MODULE_6__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/kanrisha/subBidang",
+          component: _component_alhuqulAlfareia_Index__WEBPACK_IMPORTED_MODULE_7__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_warudo_Empatkosongempat__WEBPACK_IMPORTED_MODULE_1__.default, {})]
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/",
+          component: _component_dashboard_Index__WEBPACK_IMPORTED_MODULE_2__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/surat-keluar",
+          component: _component_keluar_Index__WEBPACK_IMPORTED_MODULE_3__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          exact: true,
+          path: "/surat-masuk",
+          component: _component_masuk_Index__WEBPACK_IMPORTED_MODULE_4__.default
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_warudo_Empatkosongempat__WEBPACK_IMPORTED_MODULE_1__.default, {})]
+      });
+    }
+  }]);
+
+  return ReactRoute;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ReactRoute);
+
+/***/ }),
+
 /***/ "./resources/js/warudo/DarkMode.jsx":
 /*!******************************************!*\
   !*** ./resources/js/warudo/DarkMode.jsx ***!
@@ -7721,7 +8035,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var Empatkosongempat = /*#__PURE__*/function (_Component) {
   _inherits(Empatkosongempat, _Component);
 
@@ -7736,29 +8049,11 @@ var Empatkosongempat = /*#__PURE__*/function (_Component) {
   _createClass(Empatkosongempat, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "empatkosongempatbody",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-          src: "/hbxcphyevn/404/images/label.png",
-          className: "w3l-logo4"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "wrap4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "logo4",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-              src: "/hbxcphyevn/404/images/woody-404.png",
-              className: "w3l-logo14"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "sub4",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                  href: "#",
-                  children: "SALAH ALAMAT WOE"
-                })
-              })
-            })]
-          })
-        })]
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "content-w masariuman-minheight100vh",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "masariuman_404"
+        })
       });
     }
   }]);
@@ -8001,6 +8296,7 @@ var Menu = /*#__PURE__*/function (_Component) {
       rinku: "",
       newPass: "",
       newPassConfirm: "",
+      level: "",
       oldPass: "",
       file: null,
       filePath: null,
@@ -8008,6 +8304,7 @@ var Menu = /*#__PURE__*/function (_Component) {
       confirmOldPass: null
     };
     _this.renderSashin = _this.renderSashin.bind(_assertThisInitialized(_this));
+    _this.renderLegendMenu = _this.renderLegendMenu.bind(_assertThisInitialized(_this));
     _this.handleButtonLogout = _this.handleButtonLogout.bind(_assertThisInitialized(_this));
     _this.handleEditButton = _this.handleEditButton.bind(_assertThisInitialized(_this));
     _this.modalPengaturanUser = _this.modalPengaturanUser.bind(_assertThisInitialized(_this));
@@ -8308,7 +8605,8 @@ var Menu = /*#__PURE__*/function (_Component) {
           uuzaaMei: response.data.data.name,
           reberu: response.data.data.level,
           sashin: response.data.data.sashin,
-          rinku: response.data.data.rinku
+          rinku: response.data.data.rinku,
+          level: response.data.data.reberu
         });
       });
     }
@@ -8327,6 +8625,66 @@ var Menu = /*#__PURE__*/function (_Component) {
         alt: "",
         src: "/sashin/" + this.state.sashin
       });
+    }
+  }, {
+    key: "renderLegendMenu",
+    value: function renderLegendMenu() {
+      return this.state.level === "0" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+        className: " has-sub-menu",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
+          activeClassName: "masariuman-active",
+          to: "/kanrisha",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "icon-w",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "os-icon os-icon-aperture"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            children: "User"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "sub-menu-w",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "sub-menu-header",
+            children: "ADMIN MANAGEMENT"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "sub-menu-icon",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+              className: "os-icon os-icon-aperture"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "sub-menu-i",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+              className: "sub-menu",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+                  to: "/kanrisha/uuzaa",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                    className: "os-icon os-icon-users"
+                  }), " \xA0\xA0\xA0User"]
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+              className: "sub-menu",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+                  to: "/kanrisha/heya",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                    className: "os-icon os-icon-home"
+                  }), " \xA0\xA0\xA0Bidang"]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+                  to: "/kanrisha/subBidang",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                    className: "fa fa-sitemap"
+                  }), " \xA0\xA0\xA0Sub Bidang"]
+                })
+              })]
+            })]
+          })]
+        })]
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {});
     }
   }, {
     key: "render",
@@ -8415,44 +8773,12 @@ var Menu = /*#__PURE__*/function (_Component) {
               })]
             })]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "menu-actions",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-            className: "top-icon top-settings os-dropdown-trigger os-dropdown-position-right",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-              className: "os-icon os-icon-ui-46"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "os-dropdown",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "icon-w",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                  className: "os-icon os-icon-ui-46"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
-                    href: "users_profile_small.html",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                      className: "os-icon os-icon-ui-49"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                      children: "Profile Settings"
-                    })]
-                  })
-                })
-              })]
-            })]
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "element-search autosuggest-search-activator",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            placeholder: "Start typing to search...",
-            type: "text"
-          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           className: "menu-page-header",
           children: "Page Header"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
           className: "main-menu",
+          id: "meno",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
             className: "sub-header",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
@@ -8543,62 +8869,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                 children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
               })]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-            className: " has-sub-menu",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
-              activeClassName: "masariuman-active",
-              to: "/kanrisha",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "icon-w",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                  className: "os-icon os-icon-aperture"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                children: "User"
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "sub-menu-w",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "sub-menu-header",
-                children: "ADMIN MANAGEMENT"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "sub-menu-icon",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                  className: "os-icon os-icon-aperture"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                className: "sub-menu-i",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-                  className: "sub-menu",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-                      to: "/kanrisha/uuzaa",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        className: "os-icon os-icon-users"
-                      }), " \xA0\xA0\xA0User"]
-                    })
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
-                  className: "sub-menu",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-                      to: "/kanrisha/heya",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        className: "os-icon os-icon-home"
-                      }), " \xA0\xA0\xA0Bidang"]
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-                      to: "/kanrisha/subBidang",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        className: "fa fa-sitemap"
-                      }), " \xA0\xA0\xA0Sub Bidang"]
-                    })
-                  })]
-                })]
-              })]
-            })]
-          })]
+          }), this.renderLegendMenu()]
         }), this.modalPengaturanUser()]
       });
     }

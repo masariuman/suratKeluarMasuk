@@ -12,6 +12,7 @@ class Menu extends Component {
             rinku: "",
             newPass: "",
             newPassConfirm: "",
+            level: "",
             oldPass:"",
             file: null,
             filePath: null,
@@ -19,6 +20,7 @@ class Menu extends Component {
             confirmOldPass: null,
         };
         this.renderSashin = this.renderSashin.bind(this);
+        this.renderLegendMenu = this.renderLegendMenu.bind(this);
         this.handleButtonLogout = this.handleButtonLogout.bind(this);
         this.handleEditButton = this.handleEditButton.bind(this);
         this.modalPengaturanUser = this.modalPengaturanUser.bind(this);
@@ -266,6 +268,7 @@ class Menu extends Component {
                 reberu: response.data.data.level,
                 sashin: response.data.data.sashin,
                 rinku: response.data.data.rinku,
+                level: response.data.data.reberu
             });
         });
     }
@@ -276,6 +279,51 @@ class Menu extends Component {
 
     renderSashin() {
         return !this.state.sashin || this.state.sashin === "" ? <img alt="" src="/warudo/dist/img/avatar.jpg" /> : <img alt="" src={"/sashin/"+this.state.sashin} />;
+    }
+
+    renderLegendMenu() {
+        return this.state.level === "0" ?
+            <li className=" has-sub-menu">
+                <NavLink
+                    activeClassName="masariuman-active"
+                    to={`/kanrisha`}
+                >
+                    <div className="icon-w">
+                        <div className="os-icon os-icon-aperture"></div>
+                    </div>
+                    <span>User</span>
+                </NavLink>
+                <div className="sub-menu-w">
+                    <div className="sub-menu-header">
+                        ADMIN MANAGEMENT
+                    </div>
+                    <div className="sub-menu-icon">
+                        <i className="os-icon os-icon-aperture"></i>
+                    </div>
+                    <div className="sub-menu-i">
+                        <ul className="sub-menu">
+                            <li>
+                                <Link to={`/kanrisha/uuzaa`}>
+                                    <i className="os-icon os-icon-users"></i> &nbsp;&nbsp;&nbsp;User
+                                </Link>
+                            </li>
+                        </ul>
+                        <ul className="sub-menu">
+                            <li>
+                                <Link to={`/kanrisha/heya`}>
+                                    <i className="os-icon os-icon-home"></i> &nbsp;&nbsp;&nbsp;Bidang
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={`/kanrisha/subBidang`}>
+                                    <i className="fa fa-sitemap"></i> &nbsp;&nbsp;&nbsp;Sub Bidang
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        : <li></li>;
     }
 
     render() {
@@ -333,9 +381,9 @@ class Menu extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="menu-actions">
+                {/* <div className="menu-actions"> */}
                     {/* START - Settings Link in secondary top menu */}
-                    <div className="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
+                    {/* <div className="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
                         <i className="os-icon os-icon-ui-46"></i>
                         <div className="os-dropdown">
                             <div className="icon-w">
@@ -347,16 +395,16 @@ class Menu extends Component {
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> */}
                     {/* END - Settings Link in secondary top menu */}
-                </div>
-                <div className="element-search autosuggest-search-activator">
+                {/* </div> */}
+                {/* <div className="element-search autosuggest-search-activator">
                     <input placeholder="Start typing to search..." type="text" />
-                </div>
+                </div> */}
                 <h1 className="menu-page-header">
                     Page Header
                 </h1>
-                <ul className="main-menu">
+                <ul className="main-menu" id="meno">
                     <li className="sub-header">
                         <span>Layouts</span>
                     </li>
@@ -457,46 +505,7 @@ class Menu extends Component {
                             </div>
                         </div>
                     </li>
-                    <li className=" has-sub-menu">
-                        <NavLink
-                            activeClassName="masariuman-active"
-                            to={`/kanrisha`}
-                        >
-                            <div className="icon-w">
-                                <div className="os-icon os-icon-aperture"></div>
-                            </div>
-                            <span>User</span>
-                        </NavLink>
-                        <div className="sub-menu-w">
-                            <div className="sub-menu-header">
-                                ADMIN MANAGEMENT
-                            </div>
-                            <div className="sub-menu-icon">
-                                <i className="os-icon os-icon-aperture"></i>
-                            </div>
-                            <div className="sub-menu-i">
-                                <ul className="sub-menu">
-                                    <li>
-                                        <Link to={`/kanrisha/uuzaa`}>
-                                            <i className="os-icon os-icon-users"></i> &nbsp;&nbsp;&nbsp;User
-                                        </Link>
-                                    </li>
-                                </ul>
-                                <ul className="sub-menu">
-                                    <li>
-                                        <Link to={`/kanrisha/heya`}>
-                                            <i className="os-icon os-icon-home"></i> &nbsp;&nbsp;&nbsp;Bidang
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to={`/kanrisha/subBidang`}>
-                                            <i className="fa fa-sitemap"></i> &nbsp;&nbsp;&nbsp;Sub Bidang
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
+                    {this.renderLegendMenu()}
                 </ul>
                 {this.modalPengaturanUser()}
             </div>

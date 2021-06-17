@@ -21,8 +21,13 @@ class suratKeluarController extends Controller
     public function index()
     {
         //
+        $user = Auth::user();
         $pagination = 5;
-        $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        if ($user['reberu'] === "0" || $user['reberu'] === "1") {
+            $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        } elseif ($user['reberu'] === "2") {
+            $data = $user->heya->keluar()->where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        }
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
@@ -84,6 +89,7 @@ class suratKeluarController extends Controller
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalKirim' => $data['tanggalKirim'],
+                'heya_id' => $subbid->heya->id,
                 'subbid_id' => $subbid->id,
                 'tujuanSurat' => $data['tujuanSurat'],
                 'file' => $fileName,
@@ -97,6 +103,7 @@ class suratKeluarController extends Controller
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalKirim' => $data['tanggalKirim'],
+                'heya_id' => $subbid->heya->id,
                 'subbid_id' => $subbid->id,
                 'tujuanSurat' => $data['tujuanSurat'],
                 'kodeBerkas' => $data['kodeBerkas'],
@@ -129,6 +136,10 @@ class suratKeluarController extends Controller
         //
         $data = SuratKeluar::where('rinku', $id)->first();
         $data['asalSuratId'] = $data->subbid->rinku;
+        $data['uploader'] = $data->user->name;
+        $data['uploaderNip'] = $data->user->juugyouinBangou;
+        $data['uploaderSashin'] = $data->user->sashin;
+        // dd($data);
         if ($data->file) {
             $data['filePath'] = '/zaFail/' . $data->file;
         } else {
@@ -175,8 +186,13 @@ class suratKeluarController extends Controller
         $data->update([
             'sutattsu' => '0'
         ]);
+        $user = Auth::user();
         $pagination = 5;
-        $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        if ($user['reberu'] === "0" || $user['reberu'] === "1") {
+            $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        } elseif ($user['reberu'] === "2") {
+            $data = $user->heya->keluar()->where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        }
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
@@ -213,6 +229,7 @@ class suratKeluarController extends Controller
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalKirim' => $data['tanggalKirim'],
+                'heya_id' => $subbid->heya->id,
                 'subbid_id' => $subbid->id,
                 'tujuanSurat' => $data['tujuanSurat'],
                 'kodeBerkas' => $data['kodeBerkas'],
@@ -225,14 +242,20 @@ class suratKeluarController extends Controller
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalKirim' => $data['tanggalKirim'],
+                'heya_id' => $subbid->heya->id,
                 'subbid_id' => $subbid->id,
                 'tujuanSurat' => $data['tujuanSurat'],
                 'kodeBerkas' => $data['kodeBerkas'],
                 'user_id' => Auth::user()->id
             ]);
         }
+        $user = Auth::user();
         $pagination = 5;
-        $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        if ($user['reberu'] === "0" || $user['reberu'] === "1") {
+            $data = SuratKeluar::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        } elseif ($user['reberu'] === "2") {
+            $data = $user->heya->keluar()->where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        }
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
@@ -255,13 +278,23 @@ class suratKeluarController extends Controller
     {
         //
         $cari = $request->cari;
+        $user = Auth::user();
         $pagination = 5;
-        $data = SuratKeluar::where("sutattsu", "1")
-            ->where(function ($query) use ($cari) {
-                $query->where("tujuanSurat", "like", "%" . $cari . "%")
-                    ->orWhere("nomorSurat", "like", "%" . $cari . "%")
-                    ->orWhere("perihal", "like", "%" . $cari . "%");
-            })->orderBy("id", "DESC")->paginate($pagination);
+        if ($user['reberu'] === "0" || $user['reberu'] === "1") {
+            $data = SuratKeluar::where("sutattsu", "1")
+                ->where(function ($query) use ($cari) {
+                    $query->where("tujuanSurat", "like", "%" . $cari . "%")
+                        ->orWhere("nomorSurat", "like", "%" . $cari . "%")
+                        ->orWhere("perihal", "like", "%" . $cari . "%");
+                })->orderBy("id", "DESC")->paginate($pagination);
+        } elseif ($user['reberu'] === "2") {
+            $data = $user->heya->keluar()->where("sutattsu", "1")
+                ->where(function ($query) use ($cari) {
+                    $query->where("tujuanSurat", "like", "%" . $cari . "%")
+                        ->orWhere("nomorSurat", "like", "%" . $cari . "%")
+                        ->orWhere("perihal", "like", "%" . $cari . "%");
+                })->orderBy("id", "DESC")->paginate($pagination);
+        }
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;

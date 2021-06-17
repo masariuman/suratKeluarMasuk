@@ -27,6 +27,9 @@ class Masuk extends Component {
             dataEditInput: "",
             buttonTambahModal: "",
             cari: "",
+            uploader:"",
+            uploaderNip:"",
+            uploaderSashin:"",
             url: null,
             file: null,
             filePath: null,
@@ -43,6 +46,7 @@ class Masuk extends Component {
         this.modalTambah = this.modalTambah.bind(this);
         this.modalUbah = this.modalUbah.bind(this);
         this.modalDetail = this.modalDetail.bind(this);
+        this.modalUser = this.modalUser.bind(this);
         this.handleChangeCari = this.handleChangeCari.bind(this);
         this.handleChangeAsalSurat = this.handleChangeAsalSurat.bind(this);
         this.handleChangeNomorSurat = this.handleChangeNomorSurat.bind(this);
@@ -55,6 +59,11 @@ class Masuk extends Component {
         this.handleChangeFile = this.handleChangeFile.bind(this);
         this.handleButtonFile = this.handleButtonFile.bind(this);
         this.handleTambahButton = this.handleTambahButton.bind(this);
+        this.renderSashinDetail = this.renderSashinDetail.bind(this);
+    }
+
+    renderSashinDetail() {
+        return !this.state.uploaderSashin || this.state.uploaderSashin === "" ? <img alt="" src="/warudo/dist/img/avatar.jpg" /> : <img alt="" src={"/sashin/"+this.state.uploaderSashin} />;
     }
 
     handleTambahButton(e) {
@@ -223,6 +232,9 @@ class Masuk extends Component {
                     turunKeName : response.data.data.subbid.asm,
                     kodeBerkas: response.data.data.kodeBerkas,
                     url: e,
+                    uploader: response.data.data.uploader,
+                    uploaderNip: response.data.data.uploaderNip,
+                    uploaderSashin: response.data.data.uploaderSashin,
                     filePath: response.data.data.filePath,
                     fileUrl: response.data.data.filePath,
                     file: null
@@ -382,19 +394,16 @@ class Masuk extends Component {
                         'next #downloadButton' : "Apabila Anda Ada Melakukan Upload Data Ketika Menambahkan Data Baru <br> Atau Mengubah Data Baru, Maka Akan Muncul <br> Tombol <button class='mr-2 mb-2 btn btn-outline-secondary'>Download</button> Yang Dapat Digunakan Untuk Mendownload/Mengunduh Data"
                     },
                     {
-                        'next #cari' : 'Untuk Mencari Data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
-                    },
-                    {
                         'next #pagination' : 'Untuk Melihat Data Berikutnya, Pilih Pada Angka Berikut Untuk Melihat Data Pada Halaman Selanjutnya'
                     },
                     {
-                        'mouseover #userSetting' : 'Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User.'
+                        'next #cari' : 'Untuk Mencari Data, Ketikkan Pada Kolom Berikut Dan Tunggu Hasilnya Keluar'
                     },
                     {
-                        'next #pengaturanUser' : 'Tekan Tombol Ini Untuk Melakukan Pengaturan User dan Mengubah Password Atau Mengubah Foto Profil.'
+                        'next #userSetting' : "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
                     },
                     {
-                        'next #logout' : 'Tekan Tombol Ini Untuk Keluar Dari Aplikasi / Logout.'
+                        'next #meno' : 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
                     }
                     ];
                     enjoyhint_instance.set(enjoyhint_script_steps);
@@ -880,7 +889,7 @@ class Masuk extends Component {
                                         <table className="masariuman_tableLabelTanggal table table-striped">
                                             <tbody>
                                                 <tr>
-                                                    <td className="masariuman_width200px">
+                                                    <td>
                                                         Asal Surat
                                                     </td>
                                                     <td className="titikDua">
@@ -967,6 +976,17 @@ class Masuk extends Component {
                                                         {this.state.kodeBerkas}
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        Oleh
+                                                    </td>
+                                                    <td>
+                                                        :
+                                                    </td>
+                                                    <td className="form-group masariuman_tdwarp">
+                                                        {this.state.uploader} &nbsp;&nbsp;<button data-target="#detailUserModal" data-toggle="modal" className="mr-2 mb-2 btn btn-success" type="button">Info</button>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -979,6 +999,47 @@ class Masuk extends Component {
                             </div>
                         </div>
                     </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    modalUser() {
+        return (
+            <div aria-hidden="true" className="onboarding-modal modal fade animated" id="detailUserModal" role="dialog" tabIndex="-1">
+                <div className="modal-dialog modal-centered" role="document">
+                    <div className="modal-content text-center">
+                        <button aria-label="Close" className="close" data-dismiss="modal" type="button"><span className="os-icon os-icon-close"></span></button>
+                        <div className="onboarding-media">
+                            <img alt="" src="img/bigicon5.png" width="200px" />
+                        </div>
+                        <div className="onboarding-content with-gradient">
+                            <h4 className="onboarding-title">
+                                Informasi User
+                            </h4>
+                            <div className="onboarding-text">
+                                <table className="masariuman_width100percent">
+                                    <tbody>
+                                        <tr>
+                                            <td className="text-center">
+                                                <b>{this.renderSashinDetail()}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="masariuman_namaNip">
+                                                {this.state.uploader}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="masariuman_namaNip">
+                                                NIP. {this.state.uploaderNip}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1066,6 +1127,7 @@ class Masuk extends Component {
                 {this.modalTambah()}
                 {this.modalUbah()}
                 {this.modalDetail()}
+                {this.modalUser()}
             </div>
         );
     }

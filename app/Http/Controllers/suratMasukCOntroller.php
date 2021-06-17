@@ -20,8 +20,13 @@ class suratMasukCOntroller extends Controller
     public function index()
     {
         //
+        $user = Auth::user();
         $pagination = 5;
-        $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        if ($user['reberu'] === "0" || $user['reberu'] === "1") {
+            $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        } elseif ($user['reberu'] === "2") {
+            $data = $user->heya->masuk()->where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        }
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
@@ -84,6 +89,7 @@ class suratMasukCOntroller extends Controller
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalNaik' => $data['tanggalNaik'],
+                'heya_id' => $subbid->heya->id,
                 'subbid_id' => $subbid->id,
                 'tanggalTurun' => $data['tanggalTurun'],
                 'file' => $fileName,
@@ -98,6 +104,7 @@ class suratMasukCOntroller extends Controller
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalNaik' => $data['tanggalNaik'],
+                'heya_id' => $subbid->heya->id,
                 'subbid_id' => $subbid->id,
                 'tanggalTurun' => $data['tanggalTurun'],
                 'kodeBerkas' => $data['kodeBerkas'],
@@ -130,6 +137,9 @@ class suratMasukCOntroller extends Controller
         //
         $data = SuratMasuk::where('rinku', $id)->first();
         $data['subbid'] = $data->subbid->rinku;
+        $data['uploader'] = $data->user->name;
+        $data['uploaderNip'] = $data->user->juugyouinBangou;
+        $data['uploaderSashin'] = $data->user->sashin;
         if ($data->file) {
             $data['filePath'] = '/zaFail/' . $data->file;
         } else {
@@ -176,8 +186,13 @@ class suratMasukCOntroller extends Controller
         $data->update([
             'sutattsu' => '0'
         ]);
+        $user = Auth::user();
         $pagination = 5;
-        $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        if ($user['reberu'] === "0" || $user['reberu'] === "1") {
+            $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        } elseif ($user['reberu'] === "2") {
+            $data = $user->heya->masuk()->where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        }
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
@@ -215,6 +230,7 @@ class suratMasukCOntroller extends Controller
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalNaik' => $data['tanggalNaik'],
+                'heya_id' => $subbid->heya->id,
                 'subbid_id' => $subbid->id,
                 'tanggalTurun' => $data['tanggalTurun'],
                 'kodeBerkas' => $data['kodeBerkas'],
@@ -228,14 +244,20 @@ class suratMasukCOntroller extends Controller
                 'tanggalSurat' => $data['tanggalSurat'],
                 'perihal' => $data['perihal'],
                 'tanggalNaik' => $data['tanggalNaik'],
+                'heya_id' => $subbid->heya->id,
                 'subbid_id' => $subbid->id,
                 'tanggalTurun' => $data['tanggalTurun'],
                 'kodeBerkas' => $data['kodeBerkas'],
                 'user_id' => Auth::user()->id
             ]);
         }
+        $user = Auth::user();
         $pagination = 5;
-        $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        if ($user['reberu'] === "0" || $user['reberu'] === "1") {
+            $data = SuratMasuk::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        } elseif ($user['reberu'] === "2") {
+            $data = $user->heya->masuk()->where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);
+        }
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;
@@ -258,13 +280,24 @@ class suratMasukCOntroller extends Controller
     {
         //
         $cari = $request->cari;
+        $user = Auth::user();
         $pagination = 5;
-        $data = SuratMasuk::where("sutattsu", "1")
-            ->where(function ($query) use ($cari) {
-                $query->where("asalSurat", "like", "%" . $cari . "%")
-                    ->orWhere("nomorSurat", "like", "%" . $cari . "%")
-                    ->orWhere("perihal", "like", "%" . $cari . "%");
-            })->orderBy("id", "DESC")->paginate($pagination);
+
+        if ($user['reberu'] === "0" || $user['reberu'] === "1") {
+            $data = SuratMasuk::where("sutattsu", "1")
+                ->where(function ($query) use ($cari) {
+                    $query->where("asalSurat", "like", "%" . $cari . "%")
+                        ->orWhere("nomorSurat", "like", "%" . $cari . "%")
+                        ->orWhere("perihal", "like", "%" . $cari . "%");
+                })->orderBy("id", "DESC")->paginate($pagination);
+        } elseif ($user['reberu'] === "2") {
+            $data = $user->heya->masuk()->where("sutattsu", "1")
+                ->where(function ($query) use ($cari) {
+                    $query->where("asalSurat", "like", "%" . $cari . "%")
+                        ->orWhere("nomorSurat", "like", "%" . $cari . "%")
+                        ->orWhere("perihal", "like", "%" . $cari . "%");
+                })->orderBy("id", "DESC")->paginate($pagination);
+        }
         $count = $data->CurrentPage() * $pagination - ($pagination - 1);
         foreach ($data as $items) {
             $items['nomor'] = $count;

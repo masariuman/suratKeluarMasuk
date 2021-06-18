@@ -21,156 +21,100 @@ class DashboardIndex extends Component {
             total: 0,
             data: [],
             date: [],
-            totalVisitors: 0,
-            totalNovels: 0,
-            totalPosts: 0,
-            totalGenres: 0,
-            totalTags: 0,
-            totalFollowers: 0,
+            totalSuratMasuk: 0,
+            totalSuratKeluar: 0,
+            totalSurat: 0,
+            totalSurat30HariTerakhir : 0,
+            dateSuratMasuk: [],
+            dateSuratKeluar: [],
+            dataSuratMasukPerDay: [],
+            dataSuratKeluarPerDay: [],
             loading: true
         };
     }
 
-    // getData() {
-    //     this.setState({
-    //         loading: true
-    //     });
-    //     axios
-    //         .get("/translation/data")
-    //         .then(response => {
-    //             // console.log(response);
-    //             this.setState({
-    //                 total: response.data.data.total,
-    //                 data: response.data.data.dataPerDay,
-    //                 date: response.data.data.visitor,
-    //                 totalVisitors: response.data.data.totalVisitors,
-    //                 totalNovels: response.data.data.totalNovels,
-    //                 totalPosts: response.data.data.totalPosts,
-    //                 totalGenres: response.data.data.totalGenres,
-    //                 totalTags: response.data.data.totalTags,
-    //                 totalFollowers: response.data.data.totalFollowers,
-    //                 loading: false
-    //             });
-    //             // console.log(this.state);
-    //             if ($("#translationChart").length) {
-    //                 var translationChart = $("#translationChart"); // line chart data
-
-    //                 var lineData = {
-    //                   labels: this.state.date,
-    //                   datasets: [{
-    //                     label: "Total Pengunjung",
-    //                     fill: false,
-    //                     lineTension: 0.3,
-    //                     backgroundColor: "#fff",
-    //                     borderColor: "#047bf8",
-    //                     borderCapStyle: 'butt',
-    //                     borderDash: [],
-    //                     borderDashOffset: 0.0,
-    //                     borderJoinStyle: 'miter',
-    //                     pointBorderColor: "#fff",
-    //                     pointBackgroundColor: "#141E41",
-    //                     pointBorderWidth: 3,
-    //                     pointHoverRadius: 10,
-    //                     pointHoverBackgroundColor: "#FC2055",
-    //                     pointHoverBorderColor: "#fff",
-    //                     pointHoverBorderWidth: 3,
-    //                     pointRadius: 5,
-    //                     pointHitRadius: 10,
-    //                     data: this.state.data,
-    //                     spanGaps: false,
-    //                     responsive: true
-    //                   }]
-    //                 }; // line chart init
-
-    //                 var mytranslationChart = new Chart(translationChart, {
-    //                   type: 'line',
-    //                   data: lineData,
-    //                   options: {
-    //                     legend: {
-    //                       display: false
-    //                     },
-    //                     scales: {
-    //                       xAxes: [{
-    //                         ticks: {
-    //                           fontSize: '11',
-    //                           fontColor: '#969da5'
-    //                         },
-    //                         gridLines: {
-    //                           color: 'rgba(0,0,0,0.05)',
-    //                           zeroLineColor: 'rgba(0,0,0,0.05)'
-    //                         }
-    //                       }],
-    //                       yAxes: [{
-    //                         display: false,
-    //                         ticks: {
-    //                           beginAtZero: true
-    //                         }
-    //                       }]
-    //                     }
-    //                   }
-    //                 });
-    //               } // init donut chart if element exists
-    //               $('#petunjuk').on('click',function() {
-    //                 var enjoyhint_instance = new EnjoyHint({});
-    //                 var enjoyhint_script_steps = [
-    //                 {
-    //                     'next #test' : 'Click the "New" button to start creating your project'
-    //                 }
-    //                 ];
-    //                 enjoyhint_instance.set(enjoyhint_script_steps);
-    //                 enjoyhint_instance.run();
-    //             });
-    //         });
-    // }
-
-    changeGetData(e) {
+    getData() {
+        this.setState({
+            loading: true
+        });
         axios
-            .post(`/translation/data`, {
-                day: e
-            })
+            .get("/kanrisha/dashboard/deeta")
             .then(response => {
                 // console.log(response);
                 this.setState({
-                    total: response.data.data.total,
-                    data: response.data.data.dataPerDay,
-                    date: response.data.data.visitor
+                    totalSuratMasuk: response.data.data.totalSuratMasuk,
+                    totalSuratKeluar: response.data.data.totalSuratKeluar,
+                    totalSurat: response.data.data.totalSurat,
+                    totalSurat30HariTerakhir : response.data.data.totalSurat30HariTerakhir,
+                    dateSuratMasuk: response.data.data.dateSuratMasuk,
+                    dateSuratKeluar: response.data.data.dateSuratKeluar,
+                    dataSuratMasukPerDay: response.data.data.dataSuratMasukPerDay,
+                    dataSuratKeluarPerDay: response.data.data.dataSuratKeluarPerDay,
+                    loading: false
                 });
                 // console.log(this.state);
                 if ($("#translationChart").length) {
                     var translationChart = $("#translationChart"); // line chart data
 
                     var lineData = {
-                      labels: this.state.date,
-                      datasets: [{
-                        label: "Total Pengunjung",
-                        fill: false,
-                        lineTension: 0.3,
-                        backgroundColor: "#fff",
-                        borderColor: "#047bf8",
-                        borderCapStyle: 'butt',
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor: "#141E41",
-                        pointBorderWidth: 3,
-                        pointHoverRadius: 10,
-                        pointHoverBackgroundColor: "#FC2055",
-                        pointHoverBorderColor: "#fff",
-                        pointHoverBorderWidth: 3,
-                        pointRadius: 5,
-                        pointHitRadius: 10,
-                        data: this.state.data,
-                        spanGaps: false
-                      }]
+                      labels: this.state.dateSuratMasuk,
+                      datasets: [
+                        {
+                            label: "Total Surat Masuk",
+                            fill: false,
+                            lineTension: 0.3,
+                            backgroundColor: "#fff",
+                            borderColor: "#047bf8",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "#fff",
+                            pointBackgroundColor: "#141E41",
+                            pointBorderWidth: 3,
+                            pointHoverRadius: 10,
+                            pointHoverBackgroundColor: "#FC2055",
+                            pointHoverBorderColor: "#fff",
+                            pointHoverBorderWidth: 3,
+                            pointRadius: 5,
+                            pointHitRadius: 10,
+                            data: this.state.dataSuratMasukPerDay,
+                            spanGaps: false,
+                            responsive: true
+                        },
+                        {
+                            label: "Total Surat Keluar",
+                            fill: false,
+                            lineTension: 0.3,
+                            backgroundColor: "#fff",
+                            borderColor: "#fc1433",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "#fff",
+                            pointBackgroundColor: "#141E41",
+                            pointBorderWidth: 3,
+                            pointHoverRadius: 10,
+                            pointHoverBackgroundColor: "#FC2055",
+                            pointHoverBorderColor: "#fff",
+                            pointHoverBorderWidth: 3,
+                            pointRadius: 5,
+                            pointHitRadius: 10,
+                            data: this.state.dataSuratKeluarPerDay,
+                            spanGaps: false,
+                            responsive: true
+                        }
+                      ]
                     }; // line chart init
 
                     var mytranslationChart = new Chart(translationChart, {
                       type: 'line',
                       data: lineData,
                       options: {
+                        responsive: true,
                         legend: {
-                          display: false
+                            position: 'top',
                         },
                         scales: {
                           xAxes: [{
@@ -178,32 +122,47 @@ class DashboardIndex extends Component {
                               fontSize: '11',
                               fontColor: '#969da5'
                             },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Tanggal'
+                            },
                             gridLines: {
                               color: 'rgba(0,0,0,0.05)',
                               zeroLineColor: 'rgba(0,0,0,0.05)'
                             }
                           }],
                           yAxes: [{
-                            display: false,
+                            display: true,
                             ticks: {
                               beginAtZero: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Jumlah'
                             }
                           }]
                         }
                       }
                     });
                   } // init donut chart if element exists
-            })
-            .catch(error => {
-                swal("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
+                  $('#petunjuk').on('click',function() {
+                    var enjoyhint_instance = new EnjoyHint({});
+                    var enjoyhint_script_steps = [
+                        {
+                            'next #userSetting' : "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
+                        },
+                        {
+                            'next #meno' : 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
+                        }
+                    ];
+                    enjoyhint_instance.set(enjoyhint_script_steps);
+                    enjoyhint_instance.run();
+                });
             });
     }
 
     componentDidMount() {
-        // this.getData();
-        this.setState({
-            loading: false
-        });
+        this.getData();
     }
 
     render() {
@@ -243,7 +202,7 @@ class DashboardIndex extends Component {
                                         <div className="col-sm-6">
                                             <a className="element-box el-tablo centered trend-in-corner padded bold-label">
                                                 <div className="value">
-                                                    0
+                                                    {this.state.totalSuratMasuk}
                                                 </div>
                                                 <div className="label">
                                                     Total Surat Masuk
@@ -253,7 +212,7 @@ class DashboardIndex extends Component {
                                         <div className="col-sm-6">
                                             <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorGreen">
                                                 <div className="value">
-                                                    0
+                                                {this.state.totalSuratKeluar}
                                                 </div>
                                                 <div className="label">
                                                     Total Surat Keluar
@@ -269,7 +228,7 @@ class DashboardIndex extends Component {
                                         <div className="col-sm-12">
                                             <a className="element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorRed">
                                                 <div className="value">
-                                                    0
+                                                {this.state.totalSurat}
                                                 </div>
                                                 <div className="label">
                                                     Total Surat
@@ -294,7 +253,7 @@ class DashboardIndex extends Component {
                                                 <div className="os-tabs-controls">
                                                     <ul className="nav nav-tabs smaller">
                                                         <li className="nav-item">
-                                                            <a className="nav-link active" data-toggle="tab">TotalSurat</a>
+                                                            <a className="nav-link active" data-toggle="tab">Total Surat 30 Hari Terakhir</a>
                                                         </li>
                                                     </ul>
                                                     <ul className="nav nav-pills smaller d-none d-md-flex">
@@ -313,10 +272,10 @@ class DashboardIndex extends Component {
                                                     <div className="tab-pane active" id="tab_overview">
                                                         <div className="el-tablo bigger">
                                                             <div className="label">
-                                                                Surat
+                                                                Total Surat 30 Hari Terakhir
                                                             </div>
                                                             <div className="value">
-                                                                {this.state.total}
+                                                                {this.state.totalSurat30HariTerakhir}
                                                             </div>
                                                         </div>
                                                         <div className="el-chart-w">

@@ -15,6 +15,7 @@ class Uuzaa extends Model
         'sashin',
         'reberu',
         'heya_id',
+        'login',
         'password',
         'sutattsu'
     ];

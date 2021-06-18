@@ -101,7 +101,7 @@ class HeyaController extends Controller
         //
         $data = Heya::where("rinku", $id)->first();
         $data->update([
-            'heyaMei' => $request->content
+            'heyaMei' => $request->heyaMei
         ]);
         $pagination = 5;
         $data = Heya::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);

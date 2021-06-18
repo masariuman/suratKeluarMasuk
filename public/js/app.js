@@ -2825,119 +2825,39 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
       total: 0,
       data: [],
       date: [],
-      totalVisitors: 0,
-      totalNovels: 0,
-      totalPosts: 0,
-      totalGenres: 0,
-      totalTags: 0,
-      totalFollowers: 0,
+      totalSuratMasuk: 0,
+      totalSuratKeluar: 0,
+      totalSurat: 0,
+      totalSurat30HariTerakhir: 0,
+      dateSuratMasuk: [],
+      dateSuratKeluar: [],
+      dataSuratMasukPerDay: [],
+      dataSuratKeluarPerDay: [],
       loading: true
     };
     return _this;
-  } // getData() {
-  //     this.setState({
-  //         loading: true
-  //     });
-  //     axios
-  //         .get("/translation/data")
-  //         .then(response => {
-  //             // console.log(response);
-  //             this.setState({
-  //                 total: response.data.data.total,
-  //                 data: response.data.data.dataPerDay,
-  //                 date: response.data.data.visitor,
-  //                 totalVisitors: response.data.data.totalVisitors,
-  //                 totalNovels: response.data.data.totalNovels,
-  //                 totalPosts: response.data.data.totalPosts,
-  //                 totalGenres: response.data.data.totalGenres,
-  //                 totalTags: response.data.data.totalTags,
-  //                 totalFollowers: response.data.data.totalFollowers,
-  //                 loading: false
-  //             });
-  //             // console.log(this.state);
-  //             if ($("#translationChart").length) {
-  //                 var translationChart = $("#translationChart"); // line chart data
-  //                 var lineData = {
-  //                   labels: this.state.date,
-  //                   datasets: [{
-  //                     label: "Total Pengunjung",
-  //                     fill: false,
-  //                     lineTension: 0.3,
-  //                     backgroundColor: "#fff",
-  //                     borderColor: "#047bf8",
-  //                     borderCapStyle: 'butt',
-  //                     borderDash: [],
-  //                     borderDashOffset: 0.0,
-  //                     borderJoinStyle: 'miter',
-  //                     pointBorderColor: "#fff",
-  //                     pointBackgroundColor: "#141E41",
-  //                     pointBorderWidth: 3,
-  //                     pointHoverRadius: 10,
-  //                     pointHoverBackgroundColor: "#FC2055",
-  //                     pointHoverBorderColor: "#fff",
-  //                     pointHoverBorderWidth: 3,
-  //                     pointRadius: 5,
-  //                     pointHitRadius: 10,
-  //                     data: this.state.data,
-  //                     spanGaps: false,
-  //                     responsive: true
-  //                   }]
-  //                 }; // line chart init
-  //                 var mytranslationChart = new Chart(translationChart, {
-  //                   type: 'line',
-  //                   data: lineData,
-  //                   options: {
-  //                     legend: {
-  //                       display: false
-  //                     },
-  //                     scales: {
-  //                       xAxes: [{
-  //                         ticks: {
-  //                           fontSize: '11',
-  //                           fontColor: '#969da5'
-  //                         },
-  //                         gridLines: {
-  //                           color: 'rgba(0,0,0,0.05)',
-  //                           zeroLineColor: 'rgba(0,0,0,0.05)'
-  //                         }
-  //                       }],
-  //                       yAxes: [{
-  //                         display: false,
-  //                         ticks: {
-  //                           beginAtZero: true
-  //                         }
-  //                       }]
-  //                     }
-  //                   }
-  //                 });
-  //               } // init donut chart if element exists
-  //               $('#petunjuk').on('click',function() {
-  //                 var enjoyhint_instance = new EnjoyHint({});
-  //                 var enjoyhint_script_steps = [
-  //                 {
-  //                     'next #test' : 'Click the "New" button to start creating your project'
-  //                 }
-  //                 ];
-  //                 enjoyhint_instance.set(enjoyhint_script_steps);
-  //                 enjoyhint_instance.run();
-  //             });
-  //         });
-  // }
-
+  }
 
   _createClass(DashboardIndex, [{
-    key: "changeGetData",
-    value: function changeGetData(e) {
+    key: "getData",
+    value: function getData() {
       var _this2 = this;
 
-      axios.post("/translation/data", {
-        day: e
-      }).then(function (response) {
+      this.setState({
+        loading: true
+      });
+      axios.get("/kanrisha/dashboard/deeta").then(function (response) {
         // console.log(response);
         _this2.setState({
-          total: response.data.data.total,
-          data: response.data.data.dataPerDay,
-          date: response.data.data.visitor
+          totalSuratMasuk: response.data.data.totalSuratMasuk,
+          totalSuratKeluar: response.data.data.totalSuratKeluar,
+          totalSurat: response.data.data.totalSurat,
+          totalSurat30HariTerakhir: response.data.data.totalSurat30HariTerakhir,
+          dateSuratMasuk: response.data.data.dateSuratMasuk,
+          dateSuratKeluar: response.data.data.dateSuratKeluar,
+          dataSuratMasukPerDay: response.data.data.dataSuratMasukPerDay,
+          dataSuratKeluarPerDay: response.data.data.dataSuratKeluarPerDay,
+          loading: false
         }); // console.log(this.state);
 
 
@@ -2945,9 +2865,9 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
           var translationChart = $("#translationChart"); // line chart data
 
           var lineData = {
-            labels: _this2.state.date,
+            labels: _this2.state.dateSuratMasuk,
             datasets: [{
-              label: "Total Pengunjung",
+              label: "Total Surat Masuk",
               fill: false,
               lineTension: 0.3,
               backgroundColor: "#fff",
@@ -2965,8 +2885,31 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
               pointHoverBorderWidth: 3,
               pointRadius: 5,
               pointHitRadius: 10,
-              data: _this2.state.data,
-              spanGaps: false
+              data: _this2.state.dataSuratMasukPerDay,
+              spanGaps: false,
+              responsive: true
+            }, {
+              label: "Total Surat Keluar",
+              fill: false,
+              lineTension: 0.3,
+              backgroundColor: "#fff",
+              borderColor: "#fc1433",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "#141E41",
+              pointBorderWidth: 3,
+              pointHoverRadius: 10,
+              pointHoverBackgroundColor: "#FC2055",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 3,
+              pointRadius: 5,
+              pointHitRadius: 10,
+              data: _this2.state.dataSuratKeluarPerDay,
+              spanGaps: false,
+              responsive: true
             }]
           }; // line chart init
 
@@ -2974,8 +2917,9 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
             type: 'line',
             data: lineData,
             options: {
+              responsive: true,
               legend: {
-                display: false
+                position: 'top'
               },
               scales: {
                 xAxes: [{
@@ -2983,15 +2927,23 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
                     fontSize: '11',
                     fontColor: '#969da5'
                   },
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Tanggal'
+                  },
                   gridLines: {
                     color: 'rgba(0,0,0,0.05)',
                     zeroLineColor: 'rgba(0,0,0,0.05)'
                   }
                 }],
                 yAxes: [{
-                  display: false,
+                  display: true,
                   ticks: {
                     beginAtZero: true
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Jumlah'
                   }
                 }]
               }
@@ -2999,17 +2951,23 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
           });
         } // init donut chart if element exists
 
-      })["catch"](function (error) {
-        sweetalert__WEBPACK_IMPORTED_MODULE_4___default()("Error!", "Terdapat Masalah, Silahkan Hubungi Admin!", "error");
+
+        $('#petunjuk').on('click', function () {
+          var enjoyhint_instance = new EnjoyHint({});
+          var enjoyhint_script_steps = [{
+            'next #userSetting': "Arahkan Mouse Kesini Untuk Membuka Menu Pengaturan User. <br /><br /> <img src='/petunjuk/userSetting.png' class='masariuman_imgUserSetting' /> <br /><br /> Anda Dapat Mengubah Password Dan Mengubah Foto Profil Anda Dengan Menekan Tombol Pengaturan User Untuk Membuka Form <br /> Untuk Mengubah Data Password Atau Foto Profil Anda. <br/> <br/> Untuk Keluar Dari Aplikasi, Anda Dapat Menekan Tombol Logout."
+          }, {
+            'next #meno': 'Pilih Menu Pada Panel Berikut Untuk Membuka Halaman Sesuai Dengan Menu Yang Dipilih.'
+          }];
+          enjoyhint_instance.set(enjoyhint_script_steps);
+          enjoyhint_instance.run();
+        });
       });
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      // this.getData();
-      this.setState({
-        loading: false
-      });
+      this.getData();
     }
   }, {
     key: "render",
@@ -3077,7 +3035,7 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
                       className: "element-box el-tablo centered trend-in-corner padded bold-label",
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                         className: "value",
-                        children: "0"
+                        children: this.state.totalSuratMasuk
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                         className: "label",
                         children: "Total Surat Masuk"
@@ -3089,7 +3047,7 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
                       className: "element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorGreen",
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                         className: "value",
-                        children: "0"
+                        children: this.state.totalSuratKeluar
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                         className: "label",
                         children: "Total Surat Keluar"
@@ -3110,7 +3068,7 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
                       className: "element-box el-tablo centered trend-in-corner padded bold-label masariuman_colorRed",
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                         className: "value",
-                        children: "0"
+                        children: this.state.totalSurat
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                         className: "label",
                         children: "Total Surat"
@@ -3144,7 +3102,7 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
                             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
                               className: "nav-link active",
                               "data-toggle": "tab",
-                              children: "TotalSurat"
+                              children: "Total Surat 30 Hari Terakhir"
                             })
                           })
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
@@ -3159,10 +3117,10 @@ var DashboardIndex = /*#__PURE__*/function (_Component) {
                             className: "el-tablo bigger",
                             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                               className: "label",
-                              children: "Surat"
+                              children: "Total Surat 30 Hari Terakhir"
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                               className: "value",
-                              children: this.state.total
+                              children: this.state.totalSurat30HariTerakhir
                             })]
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                             className: "el-chart-w",
@@ -6854,9 +6812,9 @@ var User = /*#__PURE__*/function (_Component) {
       axios.post("/kanrisha/uuzaa/sashinUuzaa/", data).then(function (response) {
         _this2.setState({
           sashinUuzaa: response.data.data.data.sashin
-        });
+        }); // console.log(response);
 
-        console.log(response);
+
         sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Foto Berhasi Diubah!", "success");
       })["catch"](function (error) {
         _this2.setState({
@@ -6871,8 +6829,7 @@ var User = /*#__PURE__*/function (_Component) {
     value: function handleChangeLevel(e) {
       this.setState({
         level: e.target.value
-      });
-      console.log(this.state.level);
+      }); // console.log(this.state.level);
     }
   }, {
     key: "handleChangeHeya",
@@ -7095,6 +7052,7 @@ var User = /*#__PURE__*/function (_Component) {
         nip: this.state.nip,
         name: this.state.name
       }).then(function (response) {
+        // console.log(response);
         _this9.setState({
           data: response.data.data.data,
           nip: "",
@@ -7102,6 +7060,12 @@ var User = /*#__PURE__*/function (_Component) {
           loading: false
         });
 
+        axios.get("/kanrisha/uuzaa/deeta").then(function (response) {
+          // console.log(response.data.data.data);
+          _this9.setState({
+            data: response.data.data.data
+          });
+        });
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#editModal").removeClass("in");
         jquery__WEBPACK_IMPORTED_MODULE_1___default()(".modal-backdrop").remove();
         jquery__WEBPACK_IMPORTED_MODULE_1___default()('body').removeClass('modal-open');
@@ -7128,18 +7092,26 @@ var User = /*#__PURE__*/function (_Component) {
       axios.put("/kanrisha/uuzaa/deeta/".concat(this.state.uuzaNoRinku), {
         reberu: this.state.level
       }).then(function (response) {
+        // console.log(response);
         _this10.setState({
           data: response.data.data.data,
           level: "3",
           loading: false
         });
 
+        axios.get("/kanrisha/uuzaa/deeta").then(function (response) {
+          // console.log(response.data.data.data);
+          _this10.setState({
+            data: response.data.data.data
+          });
+        });
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#levelModal").removeClass("in");
         jquery__WEBPACK_IMPORTED_MODULE_1___default()(".modal-backdrop").remove();
         jquery__WEBPACK_IMPORTED_MODULE_1___default()('body').removeClass('modal-open');
         jquery__WEBPACK_IMPORTED_MODULE_1___default()('body').css('padding-right', '');
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#levelModal").hide();
-        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Diubah!", "success"); // console.log("from handle sumit", response);
+        sweetalert__WEBPACK_IMPORTED_MODULE_5___default()("Sukses!", "Data Berhasil Diubah!", "success"); // console.log(this.state.data);
+        // console.log("from handle sumit", response);
       })["catch"](function (error) {
         _this10.setState({
           loading: false
@@ -7217,13 +7189,13 @@ var User = /*#__PURE__*/function (_Component) {
       this.setState({
         loading: true
       });
-      axios.get('/masariuman_tag?page=' + pageNumber).then(function (response) {
+      axios.get('/kanrisha/uuzaa/deeta?page=' + pageNumber).then(function (response) {
         _this13.setState({
-          data: response.data.deeta_data.data,
+          data: response.data.data.data,
           loading: false,
-          activePage: response.data.deeta_data.current_page,
-          itemsCountPerPage: response.data.deeta_data.per_page,
-          totalItemsCount: response.data.deeta_data.total,
+          activePage: response.data.data.current_page,
+          itemsCountPerPage: response.data.data.per_page,
+          totalItemsCount: response.data.data.total,
           pageRangeDisplayed: 10
         });
       })["catch"](function (error) {

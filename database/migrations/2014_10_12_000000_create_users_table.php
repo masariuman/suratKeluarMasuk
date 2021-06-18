@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->enum('sutattsu', ['1', '0'])->default('1');
+            $table->enum('login', ['1', '0'])->default('1');
             $table->timestamps();
         });
     }

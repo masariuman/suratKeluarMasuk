@@ -150,17 +150,25 @@ class UuzaaController extends Controller
     {
         //
         $Uuzaa = Uuzaa::where('rinku', $id)->first();
+        $oldpass = false;
         if ($request->heyaMei) {
             $heya = Heya::where('rinku', $request->heyaMei)->first();
         }
         if ($request->reberu) {
             if ($request->reberu === "nol") {
                 $Uuzaa->update([
-                    'reberu' => "0"
+                    'reberu' => "0",
+                    'login' => "1"
+                ]);
+            } else if ($request->reberu === "1" || $request->reberu === "2") {
+                $Uuzaa->update([
+                    'reberu' => $request->reberu,
+                    'login' => "1"
                 ]);
             } else {
                 $Uuzaa->update([
-                    'reberu' => $request->reberu
+                    'reberu' => $request->reberu,
+                    'login' => "0"
                 ]);
             }
         } else if ($request->newPass) {
@@ -188,7 +196,7 @@ class UuzaaController extends Controller
             if ($items['reberu'] === "3") {
                 $items['level'] = "User";
             } else if ($items['reberu'] === "2") {
-                $items['level'] = "Administrator";
+                $items['level'] = "Admin";
             } else if ($items['reberu'] === "1") {
                 $items['level'] = "Super Admin";
             } else {
@@ -218,7 +226,8 @@ class UuzaaController extends Controller
         //
         $novel = Uuzaa::where("rinku", $id)->first();
         $novel->update([
-            'sutattsu' => '0'
+            'sutattsu' => '0',
+            'login' => '0'
         ]);
         $pagination = 5;
         $data = Uuzaa::where("sutattsu", "1")->orderBy("id", "DESC")->paginate($pagination);

@@ -60,7 +60,7 @@ class User extends Component {
                 this.setState({
                     sashinUuzaa: response.data.data.data.sashin
                 });
-                console.log(response);
+                // console.log(response);
                 swal("Sukses!", "Foto Berhasi Diubah!", "success");
             })
             .catch(error => {
@@ -75,7 +75,7 @@ class User extends Component {
         this.setState({
             level: e.target.value,
         });
-        console.log(this.state.level);
+        // console.log(this.state.level);
     }
 
     handleChangeHeya(e) {
@@ -298,12 +298,21 @@ class User extends Component {
                 name : this.state.name
             })
             .then(response => {
+                // console.log(response);
                 this.setState({
                     data: response.data.data.data,
                     nip : "",
                     name : "",
                     loading: false
                 });
+                axios
+                    .get("/kanrisha/uuzaa/deeta")
+                    .then(response => {
+                        // console.log(response.data.data.data);
+                        this.setState({
+                            data: response.data.data.data
+                        });
+                    })
                 $("#editModal").removeClass("in");
                 $(".modal-backdrop").remove();
                 $('body').removeClass('modal-open');
@@ -331,17 +340,27 @@ class User extends Component {
                 reberu : this.state.level
             })
             .then(response => {
+                // console.log(response);
                 this.setState({
                     data: response.data.data.data,
                     level : "3",
                     loading: false
                 });
+                axios
+                    .get("/kanrisha/uuzaa/deeta")
+                    .then(response => {
+                        // console.log(response.data.data.data);
+                        this.setState({
+                            data: response.data.data.data
+                        });
+                    })
                 $("#levelModal").removeClass("in");
                 $(".modal-backdrop").remove();
                 $('body').removeClass('modal-open');
                 $('body').css('padding-right', '');
                 $("#levelModal").hide();
                 swal("Sukses!", "Data Berhasil Diubah!", "success");
+                // console.log(this.state.data);
                 // console.log("from handle sumit", response);
             })
             .catch(error => {
@@ -421,14 +440,14 @@ class User extends Component {
             loading: true
         });
         axios
-            .get('/masariuman_tag?page='+pageNumber)
+            .get('/kanrisha/uuzaa/deeta?page='+pageNumber)
             .then(response => {
                 this.setState({
-                    data: response.data.deeta_data.data,
+                    data: response.data.data.data,
                     loading: false,
-                    activePage: response.data.deeta_data.current_page,
-                    itemsCountPerPage: response.data.deeta_data.per_page,
-                    totalItemsCount: response.data.deeta_data.total,
+                    activePage: response.data.data.current_page,
+                    itemsCountPerPage: response.data.data.per_page,
+                    totalItemsCount: response.data.data.total,
                     pageRangeDisplayed: 10
                 });
             })

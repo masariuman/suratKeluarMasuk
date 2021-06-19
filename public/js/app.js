@@ -2478,7 +2478,7 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagplus.png",
+                  src: "/iconModal/organizationPlus.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -2566,7 +2566,7 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagEdit.png",
+                  src: "/iconModal/organizationEdit.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -2635,7 +2635,7 @@ var alhuqulAlfareia = /*#__PURE__*/function (_Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
               className: "icon-w top-icon masariuman-titlecontent",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                className: "os-icon os-icon-tag"
+                className: "fa fa-sitemap"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
               className: "masariuman-textleft",
@@ -3575,7 +3575,7 @@ var Heya = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagplus.png",
+                  src: "/iconModal/roomPlus.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -3655,7 +3655,7 @@ var Heya = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagEdit.png",
+                  src: "/iconModal/roomEdit.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -3716,7 +3716,7 @@ var Heya = /*#__PURE__*/function (_Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
               className: "icon-w top-icon masariuman-titlecontent",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                className: "os-icon os-icon-tag"
+                className: "os-icon os-icon-home"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
               className: "masariuman-textleft",
@@ -4489,7 +4489,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagplus.png",
+                  src: "/iconModal/mailOutPlus.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -4707,7 +4707,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagEdit.png",
+                  src: "/iconModal/mailOutEdit.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -4925,7 +4925,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagEdit.png",
+                  src: "/iconModal/mailOut.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -5111,7 +5111,7 @@ var Keluar = /*#__PURE__*/function (_Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
               className: "icon-w top-icon masariuman-titlecontent",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                className: "os-icon os-icon-tag"
+                className: "os-icon os-icon-email-forward"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
               className: "masariuman-textleft",
@@ -5910,7 +5910,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagplus.png",
+                  src: "/iconModal/mailPlus.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -6132,7 +6132,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagEdit.png",
+                  src: "/iconModal/mailEdit.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -6354,7 +6354,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagEdit.png",
+                  src: "/iconModal/mail.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -6552,7 +6552,7 @@ var Masuk = /*#__PURE__*/function (_Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
               className: "icon-w top-icon masariuman-titlecontent",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                className: "os-icon os-icon-tag"
+                className: "os-icon os-icon-mail"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
               className: "masariuman-textleft",
@@ -7349,7 +7349,7 @@ var User = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagplus.png",
+                  src: "/iconModal/pegawaiAdd.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -7556,7 +7556,7 @@ var User = /*#__PURE__*/function (_Component) {
                 className: "onboarding-media",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                   alt: "",
-                  src: "/iconModal/tagEdit.png",
+                  src: "/iconModal/pegawaiEdit.png",
                   width: "200px"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -7627,7 +7627,7 @@ var User = /*#__PURE__*/function (_Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
               className: "icon-w top-icon masariuman-titlecontent",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                className: "os-icon os-icon-tag"
+                className: "os-icon os-icon-users"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
               className: "masariuman-textleft",
@@ -8096,7 +8096,7 @@ var Footer = /*#__PURE__*/function (_Component) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
             children: ["Copyright ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
               className: "fa fa-copyright"
-            }), " 2020"]
+            }), " 2021"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
               href: "http://masariuman.com/",
@@ -8286,10 +8286,16 @@ var Menu = /*#__PURE__*/function (_Component) {
     _this.handleChangeNewPass = _this.handleChangeNewPass.bind(_assertThisInitialized(_this));
     _this.handleChangeNewPassConfirm = _this.handleChangeNewPassConfirm.bind(_assertThisInitialized(_this));
     _this.handleChangeOldPass = _this.handleChangeOldPass.bind(_assertThisInitialized(_this));
+    _this.noNav = _this.noNav.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Menu, [{
+    key: "noNav",
+    value: function noNav(e) {
+      e.preventDefault();
+    }
+  }, {
     key: "handleChangeNewPass",
     value: function handleChangeNewPass(e) {
       this.setState({
@@ -8604,6 +8610,7 @@ var Menu = /*#__PURE__*/function (_Component) {
       return this.state.level === "0" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
         className: " has-sub-menu",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
+          onClick: this.noNav,
           activeClassName: "masariuman-active",
           to: "/kanrisha",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -8782,7 +8789,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                 className: "sub-menu-i masariuman_menuDescription",
-                children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                children: "Laman ini adalah laman utama dari aplikasi ini. Laman ini memuat informasi berupa jumlah surat dan memiliki grafik untuk melihat perkembangan surat perharinya."
               })]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
@@ -8810,7 +8817,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                 className: "sub-menu-i masariuman_menuDescription",
-                children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                children: "Laman ini adalah laman untuk memanajemen data dari surat yang masuk ke kantor. Laman ini berisikan informasi surat-surat yang masuk dan file-file surat yang dapat di simpan atau di unduh/download."
               })]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
@@ -8838,7 +8845,7 @@ var Menu = /*#__PURE__*/function (_Component) {
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                 className: "sub-menu-i masariuman_menuDescription",
-                children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                children: "Laman ini adalah laman untuk memanajemen data dari surat yang keluar dari kantor ke kantor lain. Laman ini berisikan informasi surat-surat yang keluar dan file-file surat yang dapat di simpan atau di unduh/download."
               })]
             })]
           }), this.renderLegendMenu()]

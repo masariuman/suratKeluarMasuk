@@ -30,6 +30,11 @@ class Menu extends Component {
         this.handleChangeNewPass = this.handleChangeNewPass.bind(this);
         this.handleChangeNewPassConfirm = this.handleChangeNewPassConfirm.bind(this);
         this.handleChangeOldPass = this.handleChangeOldPass.bind(this);
+        this.noNav = this.noNav.bind(this);
+    }
+
+    noNav(e) {
+        e.preventDefault();
     }
 
     handleChangeNewPass(e) {
@@ -285,6 +290,7 @@ class Menu extends Component {
         return this.state.level === "0" ?
             <li className=" has-sub-menu">
                 <NavLink
+                    onClick={this.noNav}
                     activeClassName="masariuman-active"
                     to={`/kanrisha`}
                 >
@@ -427,7 +433,7 @@ class Menu extends Component {
                                 <i className="os-icon os-icon-layout"></i>
                             </div>
                             <div className="sub-menu-i masariuman_menuDescription">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Laman ini adalah laman utama dari aplikasi ini. Laman ini memuat informasi berupa jumlah surat dan memiliki grafik untuk melihat perkembangan surat perharinya.
                             </div>
                         </div>
                     </li>
@@ -479,7 +485,7 @@ class Menu extends Component {
                                 <i className="os-icon os-icon-mail"></i>
                             </div>
                             <div className="sub-menu-i masariuman_menuDescription">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Laman ini adalah laman untuk memanajemen data dari surat yang masuk ke kantor. Laman ini berisikan informasi surat-surat yang masuk dan file-file surat yang dapat di simpan atau di unduh/download.
                             </div>
                         </div>
                     </li>
@@ -501,7 +507,7 @@ class Menu extends Component {
                                 <i className="os-icon os-icon-email-forward"></i>
                             </div>
                             <div className="sub-menu-i masariuman_menuDescription">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Laman ini adalah laman untuk memanajemen data dari surat yang keluar dari kantor ke kantor lain. Laman ini berisikan informasi surat-surat yang keluar dan file-file surat yang dapat di simpan atau di unduh/download.
                             </div>
                         </div>
                     </li>

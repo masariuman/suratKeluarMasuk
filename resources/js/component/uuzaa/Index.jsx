@@ -526,7 +526,7 @@ class User extends Component {
                     <button aria-label="Close" className="close" data-dismiss="modal" type="button"><span className="close-label">Tutup</span><span className="os-icon os-icon-close"></span></button>
                     <div className="onboarding-side-by-side">
                         <div className="onboarding-media">
-                        <img alt="" src="/iconModal/tagplus.png" width="200px" />
+                        <img alt="" src="/iconModal/pegawaiAdd.png" width="200px" />
                         </div>
                         <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
@@ -668,7 +668,7 @@ class User extends Component {
                     <button aria-label="Close" className="close" data-dismiss="modal" type="button"><span className="close-label">Tutup</span><span className="os-icon os-icon-close"></span></button>
                     <div className="onboarding-side-by-side">
                         <div className="onboarding-media">
-                        <img alt="" src="/iconModal/tagEdit.png" width="200px" />
+                        <img alt="" src="/iconModal/pegawaiEdit.png" width="200px" />
                         </div>
                         <div className="onboarding-content with-gradient masariuman_width100percent">
                         <h4 className="onboarding-title">
@@ -724,7 +724,7 @@ class User extends Component {
                 <div className="top-bar color-scheme-transparent masariuman-height103px">
                     <div className="top-menu-controls masariuman-marginleft30px">
                         <div className="icon-w top-icon masariuman-titlecontent">
-                        <div className="os-icon os-icon-tag"></div>
+                        <div className="os-icon os-icon-users"></div>
                         </div>
                         <div className="masariuman-textleft">
                             <span className="masariuman-bold">User</span> <br/>

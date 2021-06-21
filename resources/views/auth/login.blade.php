@@ -1,48 +1,73 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html lang="zxx">
 
-        <x-jet-validation-errors class="mb-4" />
+<head>
+	<title>Manajemen Surat</title>
+	<!-- Meta-Tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="keywords" content="Manajemen Surat BKPSDM">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
 
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- //Meta-Tags -->
+	<!-- Stylesheets -->
+	<link href="/hando/css/style.css" rel='stylesheet' type='text/css' />
+	<!-- online fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700,700i" rel="stylesheet">
+</head>
+
+<body>
+	<!--  particles  -->
+	<div id="particles-js"></div>
+	<!-- //particles -->
+	<div class="w3ls-pos">
+		<h1>Manajemen Surat</h1>
+        <img src="/hando/images/logo.png"  class="logo"/>
         @if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">
                 {{ session('status') }}
             </div>
         @endif
+		<div class="w3ls-login box">
+			<!-- form starts here -->
+			<form action="{{ route('login') }}" method="post">
+                @csrf
+				<div class="agile-field-txt">
+					<input type="text" name="nip" placeholder="Masukkan NIP" required=""/>
+				</div>
+				<div class="agile-field-txt">
+					<input type="password" name="password" placeholder="Masukkan Password" required="" id="myInput" />
+				</div>
+				<div class="w3ls-bot">
+					<input type="submit" value="LOGIN">
+				</div>
+			</form>
+		</div>
+		<!-- //form ends here -->
+		<!--copyright-->
+		<div class="copy-wthree">
+			<p>© 2021 <a href="http://masariuman.com/" target="_blank">Arif Setiawan</a>. All Rights Reserved</p>
+		</div>
+		<!--//copyright-->
+	</div>
+	<!-- scripts required  for particle effect -->
+	<script src='/hando/js/particles.min.js'></script>
+	<script src="/hando/js/index.js"></script>
+	<!-- //scripts required for particle effect -->
+</body>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-jet-button class="ml-4">
-                    {{ __('Log in') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+</html>

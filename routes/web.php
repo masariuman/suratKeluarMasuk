@@ -45,7 +45,7 @@ Route::resources([
 ]);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/');
 })->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {

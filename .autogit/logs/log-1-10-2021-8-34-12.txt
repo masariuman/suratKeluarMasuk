@@ -1,0 +1,18 @@
+-------------------- Auto-Git Log --------------------
+		Mon Nov 01 2021 08:34:12 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+
+
+Created files:
+* composer
+* public/sashin/123_20211013134623.png
+* public/zaFail/SuratMasuk_bidangsana_20211013134805.jpg
+* public/zaFail/SuratMasuk_superadmin_20211101081831.jasper
+
+
+Deleted files:
+
+
+Renamed files:
